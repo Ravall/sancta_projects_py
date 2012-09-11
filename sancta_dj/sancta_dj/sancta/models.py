@@ -26,6 +26,10 @@ class MfSystemObject(models.Model):
     created_class = models.CharField(max_length=250, blank=True)
     parent_ids = models.TextField(blank=True)
     image = models.CharField(max_length=250, blank=True)
+
+    def __unicode__(self):
+        return "%i" % self.id
+
     class Meta:
         db_table = u'mf_system_object'
         managed = False
@@ -81,4 +85,26 @@ class MfSystemArticle(models.Model):
         objectText = MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text
 
         return objectText.title
+
+# типы связей
+class MfSystemRelationType(models.Model):
+    relation_type = models.CharField(max_length=250, blank=True)
+
+    def __unicode__(self):
+        return self.relation_type
+
+    class Meta:
+        db_table = u'mf_system_relation_type'
+        managed = False
+        app_label = 'sancta'
+
+# сами связи
+class MfSystemRelation(models.Model):
+    object = models.ForeignKey(MfSystemObject)
+    parent = models.ForeignKey(MfSystemObject)
+    type = models.ForeignKey(MfSystemRelationType)
+    class Meta:
+        db_table = u'mf_system_relation'
+        managed = False
+        app_label = 'sancta'
 
