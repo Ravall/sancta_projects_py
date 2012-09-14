@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 from pyramid.config import Configurator
 from pyramid_jinja2 import renderer_factory
 from sancta_pd.models import get_root
+from sancta_pd.config.route import routing
 
 def main(global_config, **settings):
     """ This function returns a WSGI application.
@@ -22,9 +24,7 @@ def main(global_config, **settings):
     config.add_view('sancta_pd.views.event.my_view',
                     context='sancta_pd.models.MyModel',
                     renderer="mytemplate.jinja2")
-
-    config.add_route('event_list', '/event/list')
-    config.add_view('sancta_pd.views.event.list',
-                    renderer="event/list.jinja2",route_name='event_list')
+    # определяем роутинг
+    routing(config)
 
     return config.make_wsgi_app()
