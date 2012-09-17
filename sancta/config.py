@@ -1,1 +1,0 @@
-sqlalchemy_engine = 'mysql://root@localhost/test_database'

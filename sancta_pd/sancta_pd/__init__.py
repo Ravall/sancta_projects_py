@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from pyramid.config import Configurator
 from pyramid_jinja2 import renderer_factory
-from sancta_pd.models import get_root
 from sancta_pd.config.route import routing
+from sqlalchemy import engine_from_config
+from .models import DBSession
 
 def main(global_config, **settings):
     """ This function returns a WSGI application.
@@ -13,7 +14,10 @@ def main(global_config, **settings):
     settings = dict(settings)
     settings.setdefault('jinja2.i18n.domain', 'sancta_pd')
 
-    config = Configurator(root_factory=get_root, settings=settings)
+    engine = engine_from_config(settings, 'sqlalchemy.')
+    DBSession.configure(bind=engine)
+
+    config = Configurator(settings=settings)
     config.add_translation_dirs('locale/')
     config.include('pyramid_jinja2')
     config.add_jinja2_search_path("sancta_pd:templates")
@@ -21,10 +25,7 @@ def main(global_config, **settings):
     config.add_static_view('static', 'static')
 
 
-    config.add_view('sancta_pd.views.event.my_view',
-                    context='sancta_pd.models.MyModel',
-                    renderer="mytemplate.jinja2")
     # определяем роутинг
     routing(config)
-
+    config.scan('sancta_pd')
     return config.make_wsgi_app()
