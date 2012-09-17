@@ -20,6 +20,7 @@ def main(global_config, **settings):
     config = Configurator(settings=settings)
     config.add_translation_dirs('locale/')
     config.include('pyramid_jinja2')
+
     config.add_jinja2_search_path("sancta_pd:templates")
 
     config.add_static_view('static', 'static')
