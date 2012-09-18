@@ -3,7 +3,7 @@ from pyramid.config import Configurator
 from pyramid_jinja2 import renderer_factory
 from sancta_pd.config.route import routing
 from sqlalchemy import engine_from_config
-from .models import DBSession
+from sancta_pd.models.db_models import DBSession
 
 def main(global_config, **settings):
     """ This function returns a WSGI application.
