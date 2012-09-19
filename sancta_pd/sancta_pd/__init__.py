@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pyramid.config import Configurator
 from pyramid_jinja2 import renderer_factory
+import os
 from sancta_pd.config.route import routing
 from sqlalchemy import engine_from_config
 from sancta_pd.models.db_models import DBSession
@@ -12,6 +13,8 @@ def main(global_config, **settings):
     ``paster serve``.
     """
     settings = dict(settings)
+    _home = os.path.dirname(__file__)
+
     settings.setdefault('jinja2.i18n.domain', 'sancta_pd')
 
     engine = engine_from_config(settings, 'sqlalchemy.')
