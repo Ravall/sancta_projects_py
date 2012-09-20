@@ -3,23 +3,8 @@
 <h2>event # {{ id }} </h2>
 
 <div class="page-header">
- <h2>Иконы <small>(<a href='#addIcon' data-toggle="modal">добавить</a> новую икону)</small></h2>
+ <h2>Иконы <small>(<a href='{{'event_add_icon'|route_url(id=id)}}'>добавить</a> новую икону)</small></h2>
 </div>
 
-
-<div class="modal hide" id="addIcon" tabindex="-1" role="dialog" >
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  {{ form.render() | safe }}
-</div>
-
-<script>
-	$('#addIcon').modal({
-  		keyboard: false,
-  		'hide'
-	})
-</script>
 {% endblock %}
 
