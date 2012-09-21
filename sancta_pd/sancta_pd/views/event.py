@@ -28,10 +28,11 @@ def addicon(request):
         controls = request.POST.items()
         try:
             appstruct = form.validate(controls)  # call validate
-            path = AssetResolver()
-            fp = appstruct.get('upload').get('fp')
-            fp_new = open(path.resolve('sancta_pd:static/images/origin/%s.jpg ' % appstruct.get('filename')).abspath(),'w+b')
-            shutil.copyfileobj(fp, fp_new)
+            print appstruct.get('file')
+            #path = AssetResolver()
+            #fp = appstruct.get('upload').get('fp')
+            #fp_new = open(path.resolve('sancta_pd:static/images/origin/%s.jpg ' % appstruct.get('filename')).abspath(),'w+b')
+            #shutil.copyfileobj(fp, fp_new)
         except deform.ValidationFailure, error_form: # catch the exception
             '''
             ошибка в defrom есть сама форма, но заполненная

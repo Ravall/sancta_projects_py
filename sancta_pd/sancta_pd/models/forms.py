@@ -4,7 +4,9 @@
 """
 import deform
 import colander
+import urllib
 from deform.interfaces import FileUploadTempStore
+from pyramid.path import AssetResolver
 
 
 class MemoryTmpStore(dict):
@@ -24,9 +26,21 @@ def form_error(form, key, text):
 
 
 def form_icon_upload(**kwargs):
-    def preparer_alt(value):
-        print value
-        pass;
+    def file_upload_post_process(values):
+        print values
+        #if values.get('upload'):
+         #   node['file'] = values.get('upload').get('fp')
+        #if kw.get('fileurl'):
+         #   node['file'] = values.get('fileurl')
+        values['file'] = 'xxx'
+        return values
+
+
+
+
+    def preparer_fileurl(value):
+        fp = urllib.urlopen(value)
+        return fp
 
     """
     форма загрузки иконы
@@ -43,7 +57,6 @@ def form_icon_upload(**kwargs):
             colander.String(),
             title=u"Название файла",
             description=u'Конечное название jpg файла (транслит)',
-            preparer=preparer_alt,
             widget=deform.widget.TextInputWidget(),
         )
         alt = colander.SchemaNode(
@@ -65,21 +78,29 @@ def form_icon_upload(**kwargs):
             description=u'либо файл грузите либо url давайте',
             widget=deform.widget.TextInputWidget(),
             missing=None,
+            preparer=preparer_fileurl,
         )
 
 
 
     def validator(form, value):
-        if (value.get('fileurl') and value.get('upload')) or (not value.get('fileurl') and not value.get('upload')):
+        if value.get('fileurl') and value.get('upload'):
             raise form_error(form, 'fileurl', 'либо url, либо file. Ты уж определись')
 
-        if not value.get('upload').get('mimetype') == 'image/jpeg':
+        if not value.get('fileurl') and not value.get('upload'):
+            raise form_error(form, 'fileurl', 'либо url, либо file. Введи уж что-нибудь')
+
+        if value.get('upload') and not value.get('upload').get('mimetype') == 'image/jpeg':
             raise form_error(form, 'upload', 'Изображение должно быть загружено в формате jpg')
+
+        if value.get('fileurl') and not value.get('fileurl').info().gettype() == 'image/jpeg':
+            raise form_error(form, 'fileurl', 'Ну ты чо! тут ссылка должна быть на изображение')
+
         pass;
 
 
     return deform.Form(
-        IconUpload(validator=validator),
+        IconUpload(validator=validator,flatten=file_upload_post_process),
         buttons=(
             deform.Button(type='submit',value=u'load',name=u'load'),
         ),
