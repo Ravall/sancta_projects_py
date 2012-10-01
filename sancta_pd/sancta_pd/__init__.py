@@ -13,12 +13,8 @@ def main(global_config, **settings):
     ``paster serve``.
     """
     settings = dict(settings)
-    _home = os.path.dirname(__file__)
-
     settings.setdefault('jinja2.i18n.domain', 'sancta_pd')
 
-    engine = engine_from_config(settings, 'sqlalchemy.')
-    DBSession.configure(bind=engine)
 
     config = Configurator(settings=settings)
     config.add_translation_dirs('locale/')

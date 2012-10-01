@@ -28,7 +28,7 @@ def addicon(request):
         controls = request.POST.items()
         try:
             appstruct = form.validate(controls)  # call validate
-            print appstruct.get('file')
+            print appstruct
             #path = AssetResolver()
             #fp = appstruct.get('upload').get('fp')
             #fp_new = open(path.resolve('sancta_pd:static/images/origin/%s.jpg ' % appstruct.get('filename')).abspath(),'w+b')
