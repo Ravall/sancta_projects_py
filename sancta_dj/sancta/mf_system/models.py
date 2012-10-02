@@ -34,7 +34,10 @@ class MfSystemObject(models.Model):
     texts = models.ManyToManyField(MfSystemText, through='MfSystemObjectText')
     related_objects = models.ManyToManyField("self", through='MfSystemRelation')
     def __unicode__(self):
-        return "%i" % self.id
+        if self.created_class == 'Sancta_Article':
+            objectText = MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text
+            return objectText.title
+        return "%s" % self.created_class
 
     class Meta:
         db_table = u'mf_system_object'
@@ -79,17 +82,21 @@ class MfSystemRelationType(models.Model):
         managed = False
         app_label = 'sancta'
         verbose_name = 'тип связи'
-        verbose_name_plural = 'Типы связей объектов с объектамиs'
+        verbose_name_plural = 'Типы связей объектов с объектами'
 
 # сами связи
 class MfSystemRelation(models.Model):
-    mf_object = models.ForeignKey(MfSystemObject)
-    parent_object = models.ForeignKey(MfSystemObject)
+    mf_object = models.ForeignKey(MfSystemObject, related_name="to_object")
+    parent_object = models.ForeignKey(MfSystemObject, related_name="to_parent_object")
     relation = models.ForeignKey(MfSystemRelationType)
+    def __unicode__(self):
+        return self.relation.relation_name
+
     class Meta:
         db_table = u'mf_system_relation'
         managed = False
         app_label = 'sancta'
+        verbose_name_plural = 'Связанные объекты'
 
 # файлы
 class MfSystemFile(models.Model):

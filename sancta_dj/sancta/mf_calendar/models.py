@@ -15,6 +15,12 @@ class MfCalendarSmartFunction(models.Model):
         managed = False
         app_label = 'sancta'
 
+class MfCalendarIcon(system_model.MfSystemObject):
+    class Meta:
+        db_table = u'mf_calendar_icon'
+        managed = False
+        app_label = 'sancta'
+
 
 # события
 class MfCalendarEvent(system_model.MfSystemObject):
