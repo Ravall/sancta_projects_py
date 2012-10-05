@@ -20,6 +20,7 @@ class MfCalendarIcon(system_model.MfSystemObject):
         db_table = u'mf_calendar_icon'
         managed = False
         app_label = 'sancta'
+        verbose_name = 'Икона'
 
 
 # события

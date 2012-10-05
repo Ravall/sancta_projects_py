@@ -70,6 +70,8 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(_PATH, '../', 'files', 'media')
 ORIGIN_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'origin')
+# в эту папку будет все загружено из вне.
+UPLOAD_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'upload')
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -126,6 +128,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(_PATH, '../', 'templates')
 )
 
 INSTALLED_APPS = (
