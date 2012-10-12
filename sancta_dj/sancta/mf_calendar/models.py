@@ -20,7 +20,8 @@ class MfCalendarIcon(system_model.MfSystemObject):
         db_table = u'mf_calendar_icon'
         managed = False
         app_label = 'sancta'
-        verbose_name = 'Икона'
+        verbose_name = 'икона'
+        verbose_name_plural = 'Иконы'
 
 
 # события
@@ -32,6 +33,8 @@ class MfCalendarEvent(system_model.MfSystemObject):
         db_table = u'mf_calendar_event'
         managed = False
         app_label = 'sancta'
+        verbose_name = 'событие календаря'
+        verbose_name_plural = 'События календаря'
 
     def title(self):
         objectText = system_model.MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text

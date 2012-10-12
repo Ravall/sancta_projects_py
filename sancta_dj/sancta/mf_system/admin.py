@@ -51,7 +51,7 @@ class EventRelatedInline(admin.TabularInline):
     model = calendar_model.MfCalendarEvent.related_objects.through
     fk_name = "parent_object"
     extra = 0
-    verbose_name = 'тип связи'
+
 
 
 
@@ -109,14 +109,15 @@ class IconAdmin(admin.ModelAdmin):
 
 
 class EventAdminForm(forms.ModelForm):
-    title = forms.CharField()
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':'title'}))
     annonce = forms.CharField(widget=forms.Textarea, required=False)
     content = forms.CharField(widget=forms.Textarea)
     exclude=('created_class',)
 
     # для икон. заголовок иконы и сама икона
     icon_file = forms.ImageField(required=False)
-    icon_title = forms.CharField(required=False)
+    icon_title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'title'}), help_text=u"Название иконы")
+    alt_text = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'text'}), help_text=u"пропишется в alt картинки")
 
     def __init__(self, *args, **kwargs):
         super(EventAdminForm, self).__init__(*args, **kwargs)
@@ -126,6 +127,7 @@ class EventAdminForm(forms.ModelForm):
         self.initial['annonce'] = text.annonce
         self.initial['content'] = text.content
         self.initial['icon_title'] = u'Икона '+text.title
+        self.initial['alt_text'] = text.annonce
 
     class Meta:
     	# указываем что эта таблица расширяет EventAdminForm
@@ -144,9 +146,13 @@ class MfCalendarEventAdmin(admin.ModelAdmin):
     	(None, {'fields':('title', 'function', 'periodic')}),
     	('Контент', {'classes': ('collapse',),'fields':('annonce','content')}),
     	('Настройки', {'classes': ('collapse',),'fields':('status', 'created','updated','created_class')}),
-    	('Икона', {'classes': ('collapse',),'fields':('icon_title','icon_file')}),
+    	('Икона', {'classes': ('collapse',),'fields':('icon_title', 'alt_text', 'icon_file')}),
 
     )
+    class Media:
+        css = {
+            "all": ("css/b_forms.css",)
+        }
 
     form = EventAdminForm
 
@@ -165,7 +171,7 @@ class MfCalendarEventAdmin(admin.ModelAdmin):
         icon = calendar_model.MfCalendarIcon(status='active', image=file_name, created_class='MfCalendarIcon')
         icon.save()
         # создаем текст
-        icon_text = system_model.MfSystemText(title=form.cleaned_data['icon_title'])
+        icon_text = system_model.MfSystemText(title=form.cleaned_data['icon_title'],annonce=form.cleaned_data['alt_text'])
         icon_text.save()
         # привязываем текст к объекту
         system_object_text = system_model.MfSystemObjectText(status='active', system_object=icon, system_text=icon_text)

@@ -68,7 +68,7 @@ USE_TZ = True
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(_PATH, '../', 'files', 'media')
+MEDIA_ROOT = os.path.abspath(os.path.join(_PATH, '../', 'files', 'media'))
 ORIGIN_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'origin')
 # в эту папку будет все загружено из вне.
 UPLOAD_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'upload')
@@ -77,11 +77,12 @@ UPLOAD_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'upload')
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 
-STATIC_ROOT = os.path.join(_PATH, '../', 'files', 'static')
+STATIC_ROOT = os.path.abspath(os.path.join(_PATH, '../', 'files', 'collected_static'))
+
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
-
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 # Additional locations of static files
 
