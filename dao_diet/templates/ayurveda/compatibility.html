@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block css %}<link charset='utf-8' href='/static/css/compatibility.css' rel='stylesheet' type='text/css' />{% endblock %}
+
+
+{% block body %}
+<h2>Аюрведа. Совместомость продуктов</h2>
+<h1>совместмость фруктов</h1>
+
+<div id='content'>
+	<div id='food_list'>
+    	<div class='food'>
+        	<img src='/static/images/fruit.jpg' width='100px'>
+        	<a href='#'>фрукты</a>
+    	</div>
+    	<div class='food'>
+        	<img src='/static/images/crops.jpg'  width='100px'>
+        	<a href='#'>зерновые</a>
+    	</div>
+	</div>
+
+	<div id='compatibility'>
+		<div id='fresh_fruit'>
+			<h3>свежие фрукты</h3>
+			<div id='sweet'>
+				<h4>сладкие фрукты</h4>
+				<ul>
+					<li>сочеаются со сладкими фруктами</li>
+					<li>сочеаются со сладким творогом</li>
+					<li>не сочетаются с кислыми фруктами</li>
+					<li>не сочетаются с другими продуктами</li>
+				</ul>
+			</div>
+			<div id='acid'>
+				<h4>кислые фрукты</h4>
+				<ul>
+					<li>сочеаются кислыми фруктами</li>
+					<li>не сочетаются со сладкими фруктами</li>
+					<li>не сочетаются с другими продуктами</li>
+				</ul>
+			</div>
+		</div>
+		<p>
+			Особым рядом стоят: <b>гранат, ананас, лимон (лайм), финики, изюм</b>- они сочетаются с любыми другими продуктами, и так же выделяются <b>арбуз</b> и <b>дыня</b> - они ни с чем не сочетаются. 
+		</p>
+		<div>
+		<h3>приготовленные фрукты</h3>
+				<ul>
+					<li>сочеаются друг с другом вне зависимости от вкуса</li>
+					<li>сочетаются с мучными изделиями</li>
+				</ul>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
