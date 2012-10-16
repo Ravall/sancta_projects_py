@@ -33,6 +33,16 @@ class MfSystemObject(models.Model):
 
     texts = models.ManyToManyField(MfSystemText, through='MfSystemObjectText')
     related_objects = models.ManyToManyField("self", through='MfSystemRelation')
+
+    def get_title(self):
+        objectText = MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text
+        return objectText.title
+
+    def get_annonce(self):
+        objectText = MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text
+        return objectText.annonce
+
+
     def __unicode__(self):
         return "%s" % self.id
 
@@ -48,15 +58,13 @@ class MfSystemObjectText(models.Model):
     status = models.CharField(max_length=18,
     						  choices=TEXT_STATUS_CHOICES)
 
-
-
     class Meta:
         db_table = u'mf_system_object_text'
         managed = False
         app_label = 'sancta'
 
 # статьи
-class MfSystemArticle(models.Model):
+class MfSystemArticle(MfSystemObject):
     class Meta:
         db_table = u'mf_system_article'
         managed = False
@@ -87,6 +95,8 @@ class MfSystemRelation(models.Model):
     parent_object = models.ForeignKey(MfSystemObject, related_name="to_parent_object")
     relation = models.ForeignKey(MfSystemRelationType)
 
+    def xxx(self):
+        return 'xxx'
 
     def __unicode__(self):
         return self.relation.relation_name
