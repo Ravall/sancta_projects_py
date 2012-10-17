@@ -199,7 +199,7 @@ class ObjectAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            "all": ("css/b_forms.css",)
+            "all": ("css/b_forms.css", "css/edit_form.css")
         }
 
 
