@@ -1,0 +1,10 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+<h2>event # {{ id }} </h2>
+
+<div class="page-header">
+ <h2>Иконы <small>(<a href='{{'event_add_icon'|route_url(id=id)}}'>добавить</a> новую икону)</small></h2>
+</div>
+
+{% endblock %}
+

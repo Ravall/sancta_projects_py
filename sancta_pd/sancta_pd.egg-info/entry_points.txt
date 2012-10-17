@@ -1,0 +1,5 @@
+      [paste.app_factory]
+      main = sancta_pd:main
+      [console_scripts]
+      initialize_sancta_pd_db = sancta_pd.scripts.initializedb:main
+      
