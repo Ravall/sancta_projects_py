@@ -541,3 +541,39 @@
 2012-10-12 15:27:52,034 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
 2012-10-12 15:27:52,034 - DaemonLog - INFO - новые файлы :Set([])
 2012-10-12 15:27:52,034 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:08,341 - DaemonLog - INFO - start daemon azazel
+2012-10-16 17:14:08,365 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-16 17:14:08,367 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-16 17:14:08,367 - DaemonLog - INFO - новые файлы :Set(['848945e5-75dd-4059-94d2-7e9335aaa280.jpg'])
+2012-10-16 17:14:08,367 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/848945e5-75dd-4059-94d2-7e9335aaa280.jpg" -resize 150x200 "/home/sancta_py/sancta_dj/files/media/crop/150x200/848945e5-75dd-4059-94d2-7e9335aaa280.jpg"
+2012-10-16 17:14:08,731 - DaemonLog - INFO - 0
+2012-10-16 17:14:08,732 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:08,732 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-16 17:14:08,732 - DaemonLog - INFO - новые файлы :Set(['848945e5-75dd-4059-94d2-7e9335aaa280.jpg'])
+2012-10-16 17:14:08,733 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/848945e5-75dd-4059-94d2-7e9335aaa280.jpg" -resize 20x10 "/home/sancta_py/sancta_dj/files/media/crop/20x10/848945e5-75dd-4059-94d2-7e9335aaa280.jpg"
+2012-10-16 17:14:08,837 - DaemonLog - INFO - 0
+2012-10-16 17:14:08,837 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:08,838 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-16 17:14:08,838 - DaemonLog - INFO - новые файлы :Set(['848945e5-75dd-4059-94d2-7e9335aaa280.jpg'])
+2012-10-16 17:14:08,838 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/848945e5-75dd-4059-94d2-7e9335aaa280.jpg" -resize 800x600 "/home/sancta_py/sancta_dj/files/media/crop/800x600/848945e5-75dd-4059-94d2-7e9335aaa280.jpg"
+2012-10-16 17:14:09,058 - DaemonLog - INFO - 0
+2012-10-16 17:14:09,059 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:09,059 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-16 17:14:09,075 - DaemonLog - INFO - новые файлы :Set(['848945e5-75dd-4059-94d2-7e9335aaa280.jpg'])
+2012-10-16 17:14:09,075 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/848945e5-75dd-4059-94d2-7e9335aaa280.jpg" -resize 100x100 "/home/sancta_py/sancta_dj/files/tmp/100x100/848945e5-75dd-4059-94d2-7e9335aaa280.jpg"
+2012-10-16 17:14:09,182 - DaemonLog - INFO - 0
+2012-10-16 17:14:09,183 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:09,183 - DaemonLog - INFO - обнаружено изменение
+2012-10-16 17:14:09,184 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-16 17:14:09,184 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-16 17:14:09,184 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-16 17:14:09,184 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:09,185 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-16 17:14:09,185 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-16 17:14:09,185 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:09,186 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-16 17:14:09,186 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-16 17:14:09,186 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-16 17:14:09,186 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-16 17:14:09,186 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-16 17:14:09,187 - DaemonLog - INFO - устаревшие файлы:Set([])
