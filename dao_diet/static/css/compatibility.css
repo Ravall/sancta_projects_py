@@ -1,0 +1,129 @@
+/* line 4, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* line 18, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+.bp-reset-element, body, h1, h2, h3, h4, h5, h6, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, blockquote, q, th, td, caption, table,
+div, span, object, iframe, p,
+pre, a, abbr, acronym, address,
+code, del, dfn, em, img,
+dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend,
+caption, tbody, tfoot, thead, tr {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* line 20, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 21, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+blockquote, q {
+  quotes: "" "";
+}
+/* line 67, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+}
+
+/* line 22, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+th, td, caption {
+  float: none !important;
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 23, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+/* line 24, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 13, ../scss/compatibility.scss */
+div#content {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 950px;
+}
+/* line 147, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html div#content {
+  overflow-x: hidden;
+}
+/* line 15, ../scss/compatibility.scss */
+div#content div#food_list {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 150px;
+}
+/* line 147, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html div#content div#food_list {
+  overflow-x: hidden;
+}
+/* line 17, ../scss/compatibility.scss */
+div#content div#food_list div.food {
+  margin-bottom: 30px;
+}
+/* line 22, ../scss/compatibility.scss */
+div#content div#compatibility {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 790px;
+}
+/* line 147, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html div#content div#compatibility {
+  overflow-x: hidden;
+}
+/* line 24, ../scss/compatibility.scss */
+div#content div#compatibility div#fresh_fruit {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 790px;
+}
+/* line 147, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html div#content div#compatibility div#fresh_fruit {
+  overflow-x: hidden;
+}
+/* line 26, ../scss/compatibility.scss */
+div#content div#compatibility div#fresh_fruit div#sweet {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 390px;
+}
+/* line 147, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html div#content div#compatibility div#fresh_fruit div#sweet {
+  overflow-x: hidden;
+}
+/* line 29, ../scss/compatibility.scss */
+div#content div#compatibility div#fresh_fruit div#acid {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 390px;
+}
+/* line 147, ../../../../../.rvm/gems/ruby-1.9.2-p318/gems/compass-0.12.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html div#content div#compatibility div#fresh_fruit div#acid {
+  overflow-x: hidden;
+}
