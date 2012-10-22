@@ -1,0 +1,543 @@
+
+2012-10-12 13:47:38,371 - DaemonLog - INFO - start daemon azazel
+2012-10-12 13:47:38,372 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/temp_cron']
+2012-10-12 13:47:38,373 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:47:38,373 - DaemonLog - INFO - новые файлы :Set(['80316620-0439-4f80-a169-742a20e5e690.jpg', '92fd4d5c-261e-43ba-900c-f65fe6063945.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original', 'Ph4LnbLHNfs.jpg', 'df5a10c7-4996-49a7-9547-991a4d014893.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg', 'f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg', 'fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg', 'Ph4LnbLHNfs_2.jpg', '9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg', 'a8ade348-1f1b-4e5a-8c94-7a419ab5782f', '9WPu1mtj678.jpg', '06671502-4a39-4ae1-8e09-ed23a9b89e68', 'aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg', 'Ph4LnbLHNfs_1.jpg', '6b0aaacb-0e49-4f5b-a22a-26eebecbbea5', 'Ph4LnbLHNfs_3.jpg', '4J9TcNQjo_M.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg'])
+2012-10-12 13:47:38,373 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/80316620-0439-4f80-a169-742a20e5e690.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/80316620-0439-4f80-a169-742a20e5e690.jpg
+2012-10-12 13:47:38,709 - DaemonLog - INFO - 0
+2012-10-12 13:47:38,710 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg
+2012-10-12 13:47:38,750 - DaemonLog - INFO - 0
+2012-10-12 13:47:38,751 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original
+2012-10-12 13:47:38,815 - DaemonLog - INFO - 0
+2012-10-12 13:47:38,816 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs.jpg
+2012-10-12 13:47:38,990 - DaemonLog - INFO - 0
+2012-10-12 13:47:38,990 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/df5a10c7-4996-49a7-9547-991a4d014893.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/df5a10c7-4996-49a7-9547-991a4d014893.jpg
+2012-10-12 13:47:39,034 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,034 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg
+2012-10-12 13:47:39,073 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,074 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg
+2012-10-12 13:47:39,114 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,115 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg
+2012-10-12 13:47:39,155 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,156 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_2.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs_2.jpg
+2012-10-12 13:47:39,332 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,332 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg
+2012-10-12 13:47:39,420 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,420 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg
+2012-10-12 13:47:39,462 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,462 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/a8ade348-1f1b-4e5a-8c94-7a419ab5782f -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/a8ade348-1f1b-4e5a-8c94-7a419ab5782f
+2012-10-12 13:47:39,503 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,504 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9WPu1mtj678.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/9WPu1mtj678.jpg
+2012-10-12 13:47:39,591 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,591 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/06671502-4a39-4ae1-8e09-ed23a9b89e68 -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/06671502-4a39-4ae1-8e09-ed23a9b89e68
+2012-10-12 13:47:39,631 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,631 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg
+2012-10-12 13:47:39,672 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,673 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_1.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs_1.jpg
+2012-10-12 13:47:39,844 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,844 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5 -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5
+2012-10-12 13:47:39,885 - DaemonLog - INFO - 0
+2012-10-12 13:47:39,885 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_3.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs_3.jpg
+2012-10-12 13:47:40,072 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,073 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/4J9TcNQjo_M.jpg
+2012-10-12 13:47:40,151 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,152 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg
+2012-10-12 13:47:40,198 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,199 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:47:40,199 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:47:40,199 - DaemonLog - INFO - новые файлы :Set(['80316620-0439-4f80-a169-742a20e5e690.jpg', '92fd4d5c-261e-43ba-900c-f65fe6063945.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original', 'Ph4LnbLHNfs.jpg', 'df5a10c7-4996-49a7-9547-991a4d014893.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg', 'f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg', 'fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg', 'Ph4LnbLHNfs_2.jpg', '9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg', 'a8ade348-1f1b-4e5a-8c94-7a419ab5782f', '9WPu1mtj678.jpg', '06671502-4a39-4ae1-8e09-ed23a9b89e68', 'aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg', 'Ph4LnbLHNfs_1.jpg', '6b0aaacb-0e49-4f5b-a22a-26eebecbbea5', 'Ph4LnbLHNfs_3.jpg', '4J9TcNQjo_M.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg'])
+2012-10-12 13:47:40,199 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/80316620-0439-4f80-a169-742a20e5e690.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/80316620-0439-4f80-a169-742a20e5e690.jpg
+2012-10-12 13:47:40,322 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,323 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg
+2012-10-12 13:47:40,445 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,446 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original
+2012-10-12 13:47:40,574 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,574 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/Ph4LnbLHNfs.jpg
+2012-10-12 13:47:40,800 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,801 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/df5a10c7-4996-49a7-9547-991a4d014893.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/df5a10c7-4996-49a7-9547-991a4d014893.jpg
+2012-10-12 13:47:40,922 - DaemonLog - INFO - 0
+2012-10-12 13:47:40,923 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg
+2012-10-12 13:47:41,045 - DaemonLog - INFO - 0
+2012-10-12 13:47:41,045 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg
+2012-10-12 13:47:41,166 - DaemonLog - INFO - 0
+2012-10-12 13:47:41,167 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg
+2012-10-12 13:47:41,290 - DaemonLog - INFO - 0
+2012-10-12 13:47:41,290 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_2.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/Ph4LnbLHNfs_2.jpg
+2012-10-12 13:47:41,517 - DaemonLog - INFO - 0
+2012-10-12 13:47:41,517 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg
+2012-10-12 13:47:41,692 - DaemonLog - INFO - 0
+2012-10-12 13:47:41,692 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg
+2012-10-12 13:47:41,812 - DaemonLog - INFO - 0
+2012-10-12 13:47:41,813 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/a8ade348-1f1b-4e5a-8c94-7a419ab5782f -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/a8ade348-1f1b-4e5a-8c94-7a419ab5782f
+2012-10-12 13:47:41,940 - DaemonLog - INFO - 0
+2012-10-12 13:47:41,941 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9WPu1mtj678.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/9WPu1mtj678.jpg
+2012-10-12 13:47:42,115 - DaemonLog - INFO - 0
+2012-10-12 13:47:42,115 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/06671502-4a39-4ae1-8e09-ed23a9b89e68 -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/06671502-4a39-4ae1-8e09-ed23a9b89e68
+2012-10-12 13:47:42,238 - DaemonLog - INFO - 0
+2012-10-12 13:47:42,239 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg
+2012-10-12 13:47:42,363 - DaemonLog - INFO - 0
+2012-10-12 13:47:42,363 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_1.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/Ph4LnbLHNfs_1.jpg
+2012-10-12 13:47:42,620 - DaemonLog - INFO - 0
+2012-10-12 13:47:42,620 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5 -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5
+2012-10-12 13:47:42,746 - DaemonLog - INFO - 0
+2012-10-12 13:47:42,747 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_3.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/Ph4LnbLHNfs_3.jpg
+2012-10-12 13:47:42,981 - DaemonLog - INFO - 0
+2012-10-12 13:47:42,981 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/4J9TcNQjo_M.jpg
+2012-10-12 13:47:43,134 - DaemonLog - INFO - 0
+2012-10-12 13:47:43,134 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg
+2012-10-12 13:47:43,259 - DaemonLog - INFO - 0
+2012-10-12 13:47:43,260 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:47:43,260 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/temp_cron
+2012-10-12 13:47:43,261 - DaemonLog - INFO - новые файлы :Set(['80316620-0439-4f80-a169-742a20e5e690.jpg', '92fd4d5c-261e-43ba-900c-f65fe6063945.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original', 'Ph4LnbLHNfs.jpg', 'df5a10c7-4996-49a7-9547-991a4d014893.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg', 'f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg', 'fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg', 'Ph4LnbLHNfs_2.jpg', '9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg', 'a8ade348-1f1b-4e5a-8c94-7a419ab5782f', '9WPu1mtj678.jpg', '06671502-4a39-4ae1-8e09-ed23a9b89e68', 'aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg', 'Ph4LnbLHNfs_1.jpg', '6b0aaacb-0e49-4f5b-a22a-26eebecbbea5', 'Ph4LnbLHNfs_3.jpg', '4J9TcNQjo_M.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg'])
+2012-10-12 13:47:43,261 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/80316620-0439-4f80-a169-742a20e5e690.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/80316620-0439-4f80-a169-742a20e5e690.jpg
+2012-10-12 13:47:43,285 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,286 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg
+2012-10-12 13:47:43,318 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,319 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original
+2012-10-12 13:47:43,345 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,346 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/Ph4LnbLHNfs.jpg
+2012-10-12 13:47:43,402 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,402 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/df5a10c7-4996-49a7-9547-991a4d014893.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/df5a10c7-4996-49a7-9547-991a4d014893.jpg
+2012-10-12 13:47:43,433 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,434 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg
+2012-10-12 13:47:43,464 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,465 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg
+2012-10-12 13:47:43,500 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,501 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg
+2012-10-12 13:47:43,563 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,564 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_2.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/Ph4LnbLHNfs_2.jpg
+2012-10-12 13:47:43,621 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,622 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg
+2012-10-12 13:47:43,670 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,670 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg
+2012-10-12 13:47:43,695 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,696 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/a8ade348-1f1b-4e5a-8c94-7a419ab5782f -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/a8ade348-1f1b-4e5a-8c94-7a419ab5782f
+2012-10-12 13:47:43,726 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,726 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9WPu1mtj678.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/9WPu1mtj678.jpg
+2012-10-12 13:47:43,773 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,774 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/06671502-4a39-4ae1-8e09-ed23a9b89e68 -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/06671502-4a39-4ae1-8e09-ed23a9b89e68
+2012-10-12 13:47:43,805 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,805 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg
+2012-10-12 13:47:43,842 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,843 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_1.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/Ph4LnbLHNfs_1.jpg
+2012-10-12 13:47:43,902 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,903 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5 -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5
+2012-10-12 13:47:43,931 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,932 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_3.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/Ph4LnbLHNfs_3.jpg
+2012-10-12 13:47:43,991 - DaemonLog - INFO - 256
+2012-10-12 13:47:43,992 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/4J9TcNQjo_M.jpg
+2012-10-12 13:47:44,035 - DaemonLog - INFO - 256
+2012-10-12 13:47:44,036 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg -resize temp_cron /home/sancta_py/sancta_dj/files/tmp/temp_cron/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg
+2012-10-12 13:47:44,066 - DaemonLog - INFO - 256
+2012-10-12 13:47:44,066 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:51:30,383 - DaemonLog - INFO - start daemon azazel
+2012-10-12 13:51:30,384 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:51:30,384 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:51:30,384 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:51:30,385 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:51:30,385 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:51:30,385 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:51:30,385 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:51:30,385 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:51:30,386 - DaemonLog - INFO - новые файлы :Set(['80316620-0439-4f80-a169-742a20e5e690.jpg', '92fd4d5c-261e-43ba-900c-f65fe6063945.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original', 'Ph4LnbLHNfs.jpg', 'df5a10c7-4996-49a7-9547-991a4d014893.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg', 'f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg', 'fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg', 'Ph4LnbLHNfs_2.jpg', '9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg', 'a8ade348-1f1b-4e5a-8c94-7a419ab5782f', '9WPu1mtj678.jpg', '06671502-4a39-4ae1-8e09-ed23a9b89e68', 'aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg', 'Ph4LnbLHNfs_1.jpg', '6b0aaacb-0e49-4f5b-a22a-26eebecbbea5', 'Ph4LnbLHNfs_3.jpg', '4J9TcNQjo_M.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg'])
+2012-10-12 13:51:30,386 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/80316620-0439-4f80-a169-742a20e5e690.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/80316620-0439-4f80-a169-742a20e5e690.jpg
+2012-10-12 13:51:30,441 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,441 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg
+2012-10-12 13:51:30,477 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,477 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original
+2012-10-12 13:51:30,519 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,520 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/Ph4LnbLHNfs.jpg
+2012-10-12 13:51:30,737 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,738 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/df5a10c7-4996-49a7-9547-991a4d014893.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/df5a10c7-4996-49a7-9547-991a4d014893.jpg
+2012-10-12 13:51:30,773 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,773 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg
+2012-10-12 13:51:30,814 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,815 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg
+2012-10-12 13:51:30,856 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,856 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg
+2012-10-12 13:51:30,891 - DaemonLog - INFO - 0
+2012-10-12 13:51:30,892 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_2.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/Ph4LnbLHNfs_2.jpg
+2012-10-12 13:51:31,077 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,077 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg
+2012-10-12 13:51:31,180 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,180 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg
+2012-10-12 13:51:31,214 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,215 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/a8ade348-1f1b-4e5a-8c94-7a419ab5782f -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/a8ade348-1f1b-4e5a-8c94-7a419ab5782f
+2012-10-12 13:51:31,250 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,250 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9WPu1mtj678.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/9WPu1mtj678.jpg
+2012-10-12 13:51:31,352 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,352 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/06671502-4a39-4ae1-8e09-ed23a9b89e68 -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/06671502-4a39-4ae1-8e09-ed23a9b89e68
+2012-10-12 13:51:31,388 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,388 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg
+2012-10-12 13:51:31,423 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,423 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_1.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/Ph4LnbLHNfs_1.jpg
+2012-10-12 13:51:31,607 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,607 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5 -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5
+2012-10-12 13:51:31,650 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,651 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_3.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/Ph4LnbLHNfs_3.jpg
+2012-10-12 13:51:31,832 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,833 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/4J9TcNQjo_M.jpg
+2012-10-12 13:51:31,917 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,918 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg
+2012-10-12 13:51:31,953 - DaemonLog - INFO - 0
+2012-10-12 13:51:31,954 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:55:21,005 - DaemonLog - INFO - start daemon azazel
+2012-10-12 13:55:21,006 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:55:21,006 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:55:21,006 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:21,007 - DaemonLog - INFO - устаревшие файлы:Set(['6b0aaacb-0e49-4f5b-a22a-26eebecbbea5', '9WPu1mtj678.jpg'])
+2012-10-12 13:55:21,007 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5
+2012-10-12 13:55:21,007 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/9WPu1mtj678.jpg
+2012-10-12 13:55:21,008 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:55:21,008 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:21,008 - DaemonLog - INFO - устаревшие файлы:Set(['6b0aaacb-0e49-4f5b-a22a-26eebecbbea5', '9WPu1mtj678.jpg'])
+2012-10-12 13:55:21,009 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5
+2012-10-12 13:55:21,009 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/9WPu1mtj678.jpg
+2012-10-12 13:55:21,009 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:55:21,009 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:21,010 - DaemonLog - INFO - устаревшие файлы:Set(['6b0aaacb-0e49-4f5b-a22a-26eebecbbea5', '9WPu1mtj678.jpg'])
+2012-10-12 13:55:21,010 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/6b0aaacb-0e49-4f5b-a22a-26eebecbbea5
+2012-10-12 13:55:21,010 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/9WPu1mtj678.jpg
+2012-10-12 13:55:21,011 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:55:21,011 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:55:21,011 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:55:21,011 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:21,012 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:55:21,012 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:55:21,012 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:21,012 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:55:21,012 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:55:21,013 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:21,013 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:55:47,113 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:55:47,114 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:55:47,114 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:55:47,114 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:47,115 - DaemonLog - INFO - устаревшие файлы:Set(['92fd4d5c-261e-43ba-900c-f65fe6063945.jpg'])
+2012-10-12 13:55:47,115 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg
+2012-10-12 13:55:47,116 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:55:47,116 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:47,116 - DaemonLog - INFO - устаревшие файлы:Set(['92fd4d5c-261e-43ba-900c-f65fe6063945.jpg'])
+2012-10-12 13:55:47,117 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg
+2012-10-12 13:55:47,117 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:55:47,118 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:55:47,119 - DaemonLog - INFO - устаревшие файлы:Set(['92fd4d5c-261e-43ba-900c-f65fe6063945.jpg'])
+2012-10-12 13:55:47,119 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/92fd4d5c-261e-43ba-900c-f65fe6063945.jpg
+2012-10-12 13:56:21,689 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:56:21,689 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:56:21,690 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:56:21,690 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:56:21,690 - DaemonLog - INFO - устаревшие файлы:Set(['06671502-4a39-4ae1-8e09-ed23a9b89e68'])
+2012-10-12 13:56:21,691 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/06671502-4a39-4ae1-8e09-ed23a9b89e68
+2012-10-12 13:56:21,691 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:56:21,692 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:56:21,692 - DaemonLog - INFO - устаревшие файлы:Set(['06671502-4a39-4ae1-8e09-ed23a9b89e68'])
+2012-10-12 13:56:21,692 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/06671502-4a39-4ae1-8e09-ed23a9b89e68
+2012-10-12 13:56:21,693 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:56:21,694 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:56:21,694 - DaemonLog - INFO - устаревшие файлы:Set(['06671502-4a39-4ae1-8e09-ed23a9b89e68'])
+2012-10-12 13:56:21,694 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/06671502-4a39-4ae1-8e09-ed23a9b89e68
+2012-10-12 13:56:55,650 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:56:55,650 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:56:55,651 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:56:55,651 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:56:55,652 - DaemonLog - INFO - устаревшие файлы:Set(['80316620-0439-4f80-a169-742a20e5e690.jpg'])
+2012-10-12 13:56:55,652 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/80316620-0439-4f80-a169-742a20e5e690.jpg
+2012-10-12 13:56:55,652 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:56:55,653 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:56:55,653 - DaemonLog - INFO - устаревшие файлы:Set(['80316620-0439-4f80-a169-742a20e5e690.jpg'])
+2012-10-12 13:56:55,653 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/80316620-0439-4f80-a169-742a20e5e690.jpg
+2012-10-12 13:56:55,654 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:56:55,654 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:56:55,655 - DaemonLog - INFO - устаревшие файлы:Set(['80316620-0439-4f80-a169-742a20e5e690.jpg'])
+2012-10-12 13:56:55,655 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/80316620-0439-4f80-a169-742a20e5e690.jpg
+2012-10-12 13:57:00,771 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:57:00,771 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:57:00,772 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:57:00,772 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,773 - DaemonLog - INFO - устаревшие файлы:Set(['a8ade348-1f1b-4e5a-8c94-7a419ab5782f'])
+2012-10-12 13:57:00,773 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/a8ade348-1f1b-4e5a-8c94-7a419ab5782f
+2012-10-12 13:57:00,773 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:57:00,774 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,774 - DaemonLog - INFO - устаревшие файлы:Set(['a8ade348-1f1b-4e5a-8c94-7a419ab5782f'])
+2012-10-12 13:57:00,774 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/a8ade348-1f1b-4e5a-8c94-7a419ab5782f
+2012-10-12 13:57:00,775 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:57:00,775 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,775 - DaemonLog - INFO - устаревшие файлы:Set(['a8ade348-1f1b-4e5a-8c94-7a419ab5782f'])
+2012-10-12 13:57:00,776 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/a8ade348-1f1b-4e5a-8c94-7a419ab5782f
+2012-10-12 13:57:00,781 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:57:00,782 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:57:00,782 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:57:00,782 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,783 - DaemonLog - INFO - устаревшие файлы:Set(['aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg'])
+2012-10-12 13:57:00,783 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg
+2012-10-12 13:57:00,784 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:57:00,784 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,784 - DaemonLog - INFO - устаревшие файлы:Set(['aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg'])
+2012-10-12 13:57:00,785 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg
+2012-10-12 13:57:00,785 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:57:00,786 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,786 - DaemonLog - INFO - устаревшие файлы:Set(['aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg'])
+2012-10-12 13:57:00,786 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/aaf1c632-97f6-4a99-8231-53a4505cdbf3.jpg
+2012-10-12 13:57:00,807 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:57:00,808 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:57:00,808 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:57:00,808 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,809 - DaemonLog - INFO - устаревшие файлы:Set(['cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg', 'df5a10c7-4996-49a7-9547-991a4d014893.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg'])
+2012-10-12 13:57:00,810 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original
+2012-10-12 13:57:00,810 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg
+2012-10-12 13:57:00,811 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg
+2012-10-12 13:57:00,811 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/df5a10c7-4996-49a7-9547-991a4d014893.jpg
+2012-10-12 13:57:00,811 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg
+2012-10-12 13:57:00,812 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:57:00,812 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,813 - DaemonLog - INFO - устаревшие файлы:Set(['cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg', 'df5a10c7-4996-49a7-9547-991a4d014893.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg'])
+2012-10-12 13:57:00,813 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original
+2012-10-12 13:57:00,813 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg
+2012-10-12 13:57:00,814 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg
+2012-10-12 13:57:00,814 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/df5a10c7-4996-49a7-9547-991a4d014893.jpg
+2012-10-12 13:57:00,815 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg
+2012-10-12 13:57:00,815 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:57:00,815 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,816 - DaemonLog - INFO - устаревшие файлы:Set(['cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg', 'df5a10c7-4996-49a7-9547-991a4d014893.jpg', 'cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg'])
+2012-10-12 13:57:00,816 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg_original
+2012-10-12 13:57:00,816 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9_old.jpg
+2012-10-12 13:57:00,817 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9_new.jpg
+2012-10-12 13:57:00,818 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/df5a10c7-4996-49a7-9547-991a4d014893.jpg
+2012-10-12 13:57:00,818 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/cf851141-8e43-4a7c-8c65-5655709ab8a9.jpg
+2012-10-12 13:57:00,820 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:57:00,820 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:57:00,821 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:57:00,821 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,821 - DaemonLog - INFO - устаревшие файлы:Set(['f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg'])
+2012-10-12 13:57:00,822 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg
+2012-10-12 13:57:00,822 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:57:00,823 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,823 - DaemonLog - INFO - устаревшие файлы:Set(['f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg'])
+2012-10-12 13:57:00,824 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg
+2012-10-12 13:57:00,824 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:57:00,825 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:00,826 - DaemonLog - INFO - устаревшие файлы:Set(['f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg'])
+2012-10-12 13:57:00,826 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/f969365f-cb88-4ed9-b385-d66b104ba0ea.jpg
+2012-10-12 13:57:07,113 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:57:07,114 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:57:07,114 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:57:07,115 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:07,115 - DaemonLog - INFO - устаревшие файлы:Set(['Ph4LnbLHNfs.jpg'])
+2012-10-12 13:57:07,115 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs.jpg
+2012-10-12 13:57:07,116 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:57:07,116 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:07,116 - DaemonLog - INFO - устаревшие файлы:Set(['Ph4LnbLHNfs.jpg'])
+2012-10-12 13:57:07,117 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/Ph4LnbLHNfs.jpg
+2012-10-12 13:57:07,117 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:57:07,118 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:07,118 - DaemonLog - INFO - устаревшие файлы:Set(['Ph4LnbLHNfs.jpg'])
+2012-10-12 13:57:07,119 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/Ph4LnbLHNfs.jpg
+2012-10-12 13:57:07,119 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:57:07,120 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:57:07,120 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:57:07,121 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:07,121 - DaemonLog - INFO - устаревшие файлы:Set(['Ph4LnbLHNfs_1.jpg', 'Ph4LnbLHNfs_2.jpg'])
+2012-10-12 13:57:07,122 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs_1.jpg
+2012-10-12 13:57:07,122 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs_2.jpg
+2012-10-12 13:57:07,123 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:57:07,124 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:07,124 - DaemonLog - INFO - устаревшие файлы:Set(['Ph4LnbLHNfs_1.jpg', 'Ph4LnbLHNfs_2.jpg'])
+2012-10-12 13:57:07,125 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/Ph4LnbLHNfs_1.jpg
+2012-10-12 13:57:07,125 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/Ph4LnbLHNfs_2.jpg
+2012-10-12 13:57:07,126 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:57:07,127 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 13:57:07,128 - DaemonLog - INFO - устаревшие файлы:Set(['Ph4LnbLHNfs_1.jpg', 'Ph4LnbLHNfs_2.jpg'])
+2012-10-12 13:57:07,134 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/Ph4LnbLHNfs_1.jpg
+2012-10-12 13:57:07,135 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/Ph4LnbLHNfs_2.jpg
+2012-10-12 13:59:31,655 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:59:31,656 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:59:31,656 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:59:31,656 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 13:59:31,657 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M (копия).jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/4J9TcNQjo_M (копия).jpg
+2012-10-12 13:59:31,660 - DaemonLog - INFO - 512
+2012-10-12 13:59:31,661 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:59:31,661 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:59:31,662 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 13:59:31,662 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M (копия).jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/4J9TcNQjo_M (копия).jpg
+2012-10-12 13:59:31,666 - DaemonLog - INFO - 512
+2012-10-12 13:59:31,667 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:59:31,667 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:59:31,668 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 13:59:31,669 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M (копия).jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/4J9TcNQjo_M (копия).jpg
+2012-10-12 13:59:31,672 - DaemonLog - INFO - 512
+2012-10-12 13:59:31,673 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:59:56,308 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 13:59:56,308 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 13:59:56,309 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 13:59:56,309 - DaemonLog - INFO - новые файлы :Set(['4J9.jpg'])
+2012-10-12 13:59:56,310 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/4J9.jpg
+2012-10-12 13:59:56,480 - DaemonLog - INFO - 0
+2012-10-12 13:59:56,482 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:59:56,482 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 13:59:56,483 - DaemonLog - INFO - новые файлы :Set(['4J9.jpg'])
+2012-10-12 13:59:56,483 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9.jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/4J9.jpg
+2012-10-12 13:59:56,670 - DaemonLog - INFO - 0
+2012-10-12 13:59:56,671 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 13:59:56,671 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 13:59:56,672 - DaemonLog - INFO - новые файлы :Set(['4J9.jpg'])
+2012-10-12 13:59:56,672 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9.jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/4J9.jpg
+2012-10-12 13:59:56,775 - DaemonLog - INFO - 0
+2012-10-12 13:59:56,776 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:00:08,986 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 14:00:08,987 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:00:08,987 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:00:08,988 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:00:08,988 - DaemonLog - INFO - устаревшие файлы:Set(['4J9.jpg'])
+2012-10-12 14:00:08,989 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/150x200/4J9.jpg
+2012-10-12 14:00:08,989 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:00:08,990 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:00:08,990 - DaemonLog - INFO - устаревшие файлы:Set(['4J9.jpg'])
+2012-10-12 14:00:08,990 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/media/crop/800x600/4J9.jpg
+2012-10-12 14:00:08,992 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:00:08,992 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:00:08,992 - DaemonLog - INFO - устаревшие файлы:Set(['4J9.jpg'])
+2012-10-12 14:00:08,993 - DaemonLog - INFO - delete /home/sancta_py/sancta_dj/files/tmp/100x100/4J9.jpg
+2012-10-12 14:00:25,358 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 14:00:25,359 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:00:25,359 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:00:25,359 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M.jpg', '9a6b9408-9cc8-49fc-97b2-aaabc520e963 (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 14:00:25,360 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/4J9TcNQjo_M.jpg
+2012-10-12 14:00:25,514 - DaemonLog - INFO - 0
+2012-10-12 14:00:25,515 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963 (копия).jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/9a6b9408-9cc8-49fc-97b2-aaabc520e963 (копия).jpg
+2012-10-12 14:00:25,519 - DaemonLog - INFO - 512
+2012-10-12 14:00:25,520 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:00:25,520 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:00:25,521 - DaemonLog - INFO - новые файлы :Set(['9a6b9408-9cc8-49fc-97b2-aaabc520e963 (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 14:00:25,522 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963 (копия).jpg -resize 800x600 /home/sancta_py/sancta_dj/files/media/crop/800x600/9a6b9408-9cc8-49fc-97b2-aaabc520e963 (копия).jpg
+2012-10-12 14:00:25,525 - DaemonLog - INFO - 512
+2012-10-12 14:00:25,526 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:00:25,527 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:00:25,527 - DaemonLog - INFO - новые файлы :Set(['9a6b9408-9cc8-49fc-97b2-aaabc520e963 (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 14:00:25,528 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963 (копия).jpg -resize 100x100 /home/sancta_py/sancta_dj/files/tmp/100x100/9a6b9408-9cc8-49fc-97b2-aaabc520e963 (копия).jpg
+2012-10-12 14:00:25,532 - DaemonLog - INFO - 512
+2012-10-12 14:00:25,533 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:00:36,691 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 14:00:36,692 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:00:36,692 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:00:36,693 - DaemonLog - INFO - новые файлы :Set(['Ph4LnbLHNfs_3.jpg'])
+2012-10-12 14:00:36,693 - DaemonLog - INFO - convert /home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_3.jpg -resize 150x200 /home/sancta_py/sancta_dj/files/media/crop/150x200/Ph4LnbLHNfs_3.jpg
+2012-10-12 14:00:36,939 - DaemonLog - INFO - 0
+2012-10-12 14:00:36,940 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:00:36,941 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:00:36,941 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:00:36,942 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:00:36,942 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:00:36,942 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:00:36,943 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:37:12,338 - DaemonLog - INFO - start daemon azazel
+2012-10-12 14:37:12,339 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:37:12,340 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:37:12,341 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:37:12,341 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:37:12,341 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:37:12,341 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:37:12,342 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:37:12,342 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:37:12,342 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:37:12,342 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:37:36,185 - DaemonLog - INFO - start daemon azazel
+2012-10-12 14:37:36,186 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:37:36,187 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:37:36,188 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:37:36,188 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:37:36,188 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-12 14:37:36,188 - DaemonLog - INFO - новые файлы :Set(['Ph4LnbLHNfs_3.jpg', 'fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg', '4J9TcNQjo_M.jpg', '9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg'])
+2012-10-12 14:37:36,189 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/Ph4LnbLHNfs_3.jpg" -resize 20x10 "/home/sancta_py/sancta_dj/files/media/crop/20x10/Ph4LnbLHNfs_3.jpg"
+2012-10-12 14:37:36,641 - DaemonLog - INFO - 0
+2012-10-12 14:37:36,642 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg" -resize 20x10 "/home/sancta_py/sancta_dj/files/media/crop/20x10/fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg"
+2012-10-12 14:37:36,707 - DaemonLog - INFO - 0
+2012-10-12 14:37:36,707 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M.jpg" -resize 20x10 "/home/sancta_py/sancta_dj/files/media/crop/20x10/4J9TcNQjo_M.jpg"
+2012-10-12 14:37:36,793 - DaemonLog - INFO - 0
+2012-10-12 14:37:36,794 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg" -resize 20x10 "/home/sancta_py/sancta_dj/files/media/crop/20x10/9a6b9408-9cc8-49fc-97b2-aaabc520e963.jpg"
+2012-10-12 14:37:36,900 - DaemonLog - INFO - 0
+2012-10-12 14:37:36,901 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:37:36,901 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:37:36,901 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:37:36,902 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:37:36,902 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:37:36,902 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:37:36,902 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:39:43,882 - DaemonLog - INFO - start daemon azazel
+2012-10-12 14:39:43,883 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:39:43,884 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:39:43,884 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:39:43,885 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:39:43,885 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-12 14:39:43,885 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:39:43,885 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:39:43,886 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:39:43,886 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:39:43,886 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:39:43,886 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:39:43,887 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:39:43,887 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:40:00,554 - DaemonLog - INFO - start daemon azazel
+2012-10-12 14:40:00,555 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/media/crop/sdsfd', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:40:00,556 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:40:00,556 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:40:00,557 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:40:00,557 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-12 14:40:00,557 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:40:00,558 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:40:00,558 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:40:00,558 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:40:00,558 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:40:00,559 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:40:00,559 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:40:00,559 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:42,002 - DaemonLog - INFO - start daemon azazel
+2012-10-12 14:49:42,002 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:49:42,003 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:49:42,004 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:49:42,004 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:42,004 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-12 14:49:42,004 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:49:42,004 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:42,005 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:49:42,005 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:49:42,005 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:42,005 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:49:42,005 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 14:49:42,006 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:52,046 - DaemonLog - INFO - обнаружено изменение
+2012-10-12 14:49:52,047 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 14:49:52,047 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 14:49:52,048 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 14:49:52,048 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M (копия).jpg" -resize 150x200 "/home/sancta_py/sancta_dj/files/media/crop/150x200/4J9TcNQjo_M (копия).jpg"
+2012-10-12 14:49:52,182 - DaemonLog - INFO - 0
+2012-10-12 14:49:52,183 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:52,183 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-12 14:49:52,183 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 14:49:52,184 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M (копия).jpg" -resize 20x10 "/home/sancta_py/sancta_dj/files/media/crop/20x10/4J9TcNQjo_M (копия).jpg"
+2012-10-12 14:49:52,342 - DaemonLog - INFO - 0
+2012-10-12 14:49:52,343 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:52,343 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 14:49:52,343 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 14:49:52,344 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M (копия).jpg" -resize 800x600 "/home/sancta_py/sancta_dj/files/media/crop/800x600/4J9TcNQjo_M (копия).jpg"
+2012-10-12 14:49:52,588 - DaemonLog - INFO - 0
+2012-10-12 14:49:52,589 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 14:49:52,589 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 14:49:52,590 - DaemonLog - INFO - новые файлы :Set(['4J9TcNQjo_M (\xd0\xba\xd0\xbe\xd0\xbf\xd0\xb8\xd1\x8f).jpg'])
+2012-10-12 14:49:52,590 - DaemonLog - INFO - convert "/home/sancta_py/sancta_dj/files/media/origin/4J9TcNQjo_M (копия).jpg" -resize 100x100 "/home/sancta_py/sancta_dj/files/tmp/100x100/4J9TcNQjo_M (копия).jpg"
+2012-10-12 14:49:52,678 - DaemonLog - INFO - 0
+2012-10-12 14:49:52,679 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 15:27:52,029 - DaemonLog - INFO - start daemon azazel
+2012-10-12 15:27:52,030 - DaemonLog - INFO - folders list:['/home/sancta_py/sancta_dj/files/media/crop/150x200', '/home/sancta_py/sancta_dj/files/media/crop/20x10', '/home/sancta_py/sancta_dj/files/media/crop/800x600', '/home/sancta_py/sancta_dj/files/tmp/100x100']
+2012-10-12 15:27:52,031 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/150x200
+2012-10-12 15:27:52,032 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 15:27:52,032 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 15:27:52,032 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/20x10
+2012-10-12 15:27:52,032 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 15:27:52,032 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 15:27:52,033 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/media/crop/800x600
+2012-10-12 15:27:52,033 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 15:27:52,034 - DaemonLog - INFO - устаревшие файлы:Set([])
+2012-10-12 15:27:52,034 - DaemonLog - INFO - обработка для папки :/home/sancta_py/sancta_dj/files/tmp/100x100
+2012-10-12 15:27:52,034 - DaemonLog - INFO - новые файлы :Set([])
+2012-10-12 15:27:52,034 - DaemonLog - INFO - устаревшие файлы:Set([])
