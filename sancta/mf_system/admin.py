@@ -27,6 +27,7 @@ def handle_uploaded_file(request_file):
 
     # разделяем имя файла и его расширение
     file_name_info = os.path.splitext(request_file.name)
+    print file_name_info
     # генерируем уникальное имя файла
     new_filename = str(uuid.uuid4())+file_name_info[1]
     # загружаем файл
@@ -132,10 +133,6 @@ class TextAdmin(admin.ModelAdmin):
 
 
 class ObjectForm(forms.ModelForm):
-
-
-
-
     '''
     общий класс для дополнительных форм, модели которых отнаследованы от object
     '''
@@ -143,8 +140,7 @@ class ObjectForm(forms.ModelForm):
     annonce = forms.CharField(widget=forms.Textarea, required=False)
     content = forms.CharField(widget=forms.Textarea, required=False)
     exclude=('created_class',)
-    image = forms.ImageField(widget=widget.ImageWidget)
-
+    image = forms.ImageField(widget=widget.ImageWidget, required=False)
 
 
     def set_initial(self, instance):
