@@ -177,45 +177,36 @@ class EventAdminForm(ObjectForm):
     	# указываем что эта таблица расширяет EventAdminForm
     	model = calendar_model.MfCalendarEvent
 
-
-
-
-
 class ObjectAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_title')
-    readonly_fields = ('created', 'updated', 'created_class')
-
     '''
     общее для admin.ModelAdmin для моделей, основанных на object
     '''
+
+    list_display = ('id', 'get_title')
+    readonly_fields = ('created', 'updated', 'created_class')
+
     def save_text(self, request, obj, form, change):
         text = system_model.MfSystemObjectText.objects.get(system_object_id=obj.id,status=u'Active').system_text
         text.title = form.cleaned_data['title']
         text.annonce = form.cleaned_data['annonce']
         text.save()
 
+    def delete_model(self, request, obj):
+        '''
+        в формах унаследованных от ObjectAdmin (объект системный),
+        удаление модели - приводит к изменению статуса объекта
+        '''
+        system_model.MfSystemObject.objects.filter(pk=obj.id).update(status='deleted')
+
     class Media:
         css = {
             "all": ("css/b_forms.css", "css/edit_form.css")
         }
 
-
-
-class IconAdmin(ObjectAdmin):
-    fieldsets=(
-        (None, {'fields':('image', 'title',)}),
-        ('Контент', {'classes': ('collapse',),'fields':('annonce', 'content')}),
-        ('Настройки', {'classes': ('collapse',),'fields':('status', 'created', 'updated', 'created_class')}),
-    )
-    form = IconAdminForm
-    inlines = [RelatedInlineEvent,]
-
-    def save_model(self, request, obj, form, change):
-        super(IconAdmin, self).save_model(request, obj, form, change)
-        self.save_text(request, obj, form, change)
-
-
 class StatusObjectFilter(admin.SimpleListFilter):
+    '''
+    фильтр для всех форм, унаследованных от ObjectAdmin
+    '''
     title = u'статус'
     parameter_name = 'status'
     display = 'on'
@@ -237,6 +228,22 @@ class StatusObjectFilter(admin.SimpleListFilter):
         '''
         return [x for x in list(super(StatusObjectFilter, self).choices(cl))[1:]]
 
+
+
+
+class IconAdmin(ObjectAdmin):
+    fieldsets=(
+        (None, {'fields':('image', 'title',)}),
+        ('Контент', {'classes': ('collapse',),'fields':('annonce', 'content')}),
+        ('Настройки', {'classes': ('collapse',),'fields':('status', 'created', 'updated', 'created_class')}),
+    )
+    form = IconAdminForm
+    inlines = [RelatedInlineEvent,]
+    list_filter = (StatusObjectFilter,)
+
+    def save_model(self, request, obj, form, change):
+        super(IconAdmin, self).save_model(request, obj, form, change)
+        self.save_text(request, obj, form, change)
 
 
 class MfCalendarEventAdmin(ObjectAdmin):

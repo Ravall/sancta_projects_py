@@ -106,13 +106,6 @@ class MfSystemRelation(models.Model):
         managed = False
         app_label = 'sancta'
 
-# файлы
-class MfSystemFile(models.Model):
-    object = models.ForeignKey(MfSystemObject)
-    class Meta:
-        db_table = u'mf_system_file'
-        managed = False
-        app_label = 'sancta'
 
 
 
