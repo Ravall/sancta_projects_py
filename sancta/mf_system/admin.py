@@ -7,6 +7,7 @@ from django.conf import settings
 from django.db import models
 from django.contrib import admin
 
+
 from mf_system import models as system_model
 from mf_calendar import models as calendar_model
 from mf_system import widget
@@ -214,6 +215,29 @@ class IconAdmin(ObjectAdmin):
         self.save_text(request, obj, form, change)
 
 
+class StatusObjectFilter(admin.SimpleListFilter):
+    title = u'статус'
+    parameter_name = 'status'
+    display = 'on'
+    def lookups(self, request, model_admin):
+        return (
+            (None ,u'активные'),
+            ('off', u'Удаленные и на паузе'),
+        )
+    def queryset(self, request, queryset):
+        if self.value() == None:
+            return queryset.filter(status__in=['active',])
+        if self.value() == 'off':
+            return queryset.filter(status__in=['deleted', 'pause'])
+
+    def choices(self, cl):
+        '''
+        переопределил метод, который возвращает список пунктов меню фильтра
+        и убрал от туда первый 'все'
+        '''
+        return [x for x in list(super(StatusObjectFilter, self).choices(cl))[1:]]
+
+
 
 class MfCalendarEventAdmin(ObjectAdmin):
     def __init__(self, *args, **kwargs):
@@ -230,6 +254,7 @@ class MfCalendarEventAdmin(ObjectAdmin):
     	('Икона', {'classes': ('collapse',),'fields':('icon_title', 'alt_text', 'icon_file')}),
 
     )
+    list_filter = (StatusObjectFilter,)
     form = EventAdminForm
 
     def save_icon(self, request, obj, form, change):
