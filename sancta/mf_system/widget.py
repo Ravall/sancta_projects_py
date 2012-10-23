@@ -16,7 +16,7 @@ class IconWidget(forms.Widget):
         icon = calendar_model.MfCalendarIcon.objects.get(pk=value)
         return mark_safe(
             '<a href="/admin/sancta/mfcalendaricon/'+str(icon.id)+'/">'+icon.get_title()+'</a><br/>' \
-            + '<img width=100px src="/media/origin/%s">' % icon.image) + '<br/>' \
+            + '<img width=100px src="/media/crop/150x200/%s">' % icon.image) + '<br/>' \
             + '<i>'+icon.get_annonce()+'</i>' \
             + hidden.render(name, value)
 
