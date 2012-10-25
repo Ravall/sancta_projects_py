@@ -35,7 +35,3 @@ class MfCalendarEvent(system_model.MfSystemObject):
         app_label = 'sancta'
         verbose_name = 'событие календаря'
         verbose_name_plural = 'События календаря'
-
-    def title(self):
-        objectText = system_model.MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text
-        return objectText.title

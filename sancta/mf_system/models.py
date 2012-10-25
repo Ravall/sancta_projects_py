@@ -23,6 +23,8 @@ class MfSystemText(models.Model):
         app_label = 'sancta'
 
 
+
+
 class MfSystemObject(models.Model):
     status = models.CharField(max_length=21, blank=True)
     created = models.DateTimeField(null=True, blank=True)
@@ -35,12 +37,11 @@ class MfSystemObject(models.Model):
     related_objects = models.ManyToManyField("self", through='MfSystemRelation')
 
     def get_title(self):
-        objectText = MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text
-        return objectText.title
+        return self.texts.filter(mfsystemobjecttext__status='active').get().title
+
 
     def get_annonce(self):
-        objectText = MfSystemObjectText.objects.get(system_object_id=self.id,status=u'Active').system_text
-        return objectText.annonce
+        return self.texts.filter(mfsystemobjecttext__status='active').get().annonce
 
 
     def __unicode__(self):
