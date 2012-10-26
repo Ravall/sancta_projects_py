@@ -264,6 +264,17 @@ class MfCalendarEventAdmin(ObjectAdmin):
     list_filter = (StatusObjectFilter,)
     form = EventAdminForm
 
+    def get_title(self, object):
+        return object._prefetched_objects_cache['texts'].filter(mfsystemobjecttext__status='active')
+        #return object._prefetched_objects_cache['texts'][0]
+
+    def queryset(self, request):
+        result = super(MfCalendarEventAdmin, self) \
+                .queryset(request) \
+                .prefetch_related('texts') \
+                .select_related()
+        return result
+
     def save_icon(self, request, obj, form, change):
         if len(request.FILES) == 0:
             return None

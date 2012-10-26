@@ -13,6 +13,7 @@ class MfSystemText(models.Model):
     title = models.CharField(max_length=250, blank=True)
     annonce = models.TextField(blank=True)
     content = models.TextField(blank=True)
+    
 
     def __unicode__(self):
         return "%s" % self.title
@@ -58,6 +59,7 @@ class MfSystemObjectText(models.Model):
     system_text = models.OneToOneField(MfSystemText)
     status = models.CharField(max_length=18,
     						  choices=TEXT_STATUS_CHOICES)
+
 
     class Meta:
         db_table = u'mf_system_object_text'
