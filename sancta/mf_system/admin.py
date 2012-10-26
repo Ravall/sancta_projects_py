@@ -28,7 +28,6 @@ def handle_uploaded_file(request_file):
 
     # разделяем имя файла и его расширение
     file_name_info = os.path.splitext(request_file.name)
-    print file_name_info
     # генерируем уникальное имя файла
     new_filename = str(uuid.uuid4())+file_name_info[1]
     # загружаем файл
@@ -198,6 +197,26 @@ class ObjectAdmin(admin.ModelAdmin):
         '''
         system_model.MfSystemObject.objects.filter(pk=obj.id).update(status='deleted')
 
+    def get_title(self, object):
+        return object.text_active
+
+    def queryset(self, request):
+        '''
+        что бы безполезненно выудить заголовк события и не делать при этом по дополнительному
+        '''
+        result = super(ObjectAdmin, self) \
+                .queryset(request) \
+                .extra(
+                  select={'text_active':
+                    "select t.title \
+                     from mf_system_object_text ot \
+                     left join mf_system_text t on t.id = ot.system_text_id \
+                     where ot.system_object_id = %s.id \
+                     and ot.status = 'active'" % self.form.Meta.model._meta.db_table }
+                )
+        return result
+
+
     class Media:
         css = {
             "all": ("css/b_forms.css", "css/edit_form.css")
@@ -263,6 +282,7 @@ class MfCalendarEventAdmin(ObjectAdmin):
     )
     list_filter = (StatusObjectFilter,)
     form = EventAdminForm
+
 
     def save_icon(self, request, obj, form, change):
         if len(request.FILES) == 0:
