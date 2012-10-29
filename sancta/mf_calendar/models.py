@@ -16,6 +16,8 @@ class MfCalendarSmartFunction(models.Model):
         app_label = 'sancta'
 
 class MfCalendarIcon(system_model.MfSystemObject):
+    objects = system_model.SystemObjectManager()
+
     class Meta:
         db_table = u'mf_calendar_icon'
         managed = False
@@ -28,6 +30,13 @@ class MfCalendarIcon(system_model.MfSystemObject):
 class MfCalendarEvent(system_model.MfSystemObject):
     function = models.ForeignKey(MfCalendarSmartFunction)
     periodic = models.IntegerField(null=True, blank=True)
+
+    objects = system_model.SystemObjectManager()
+    def get_icons(self):
+        return self.related_objects.filter(created_class='MfCalendarIcon').extra(
+            **(system_model.SystemObjectManager.get_extra_for_text('mf_system_object.id'))
+        )
+        
 
     class Meta:
         db_table = u'mf_calendar_event'

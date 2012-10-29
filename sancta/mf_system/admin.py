@@ -198,24 +198,7 @@ class ObjectAdmin(admin.ModelAdmin):
         system_model.MfSystemObject.objects.filter(pk=obj.id).update(status='deleted')
 
     def get_title(self, object):
-        return object.text_active
-
-    def queryset(self, request):
-        '''
-        что бы безполезненно выудить заголовк события и не делать при этом по дополнительному
-        '''
-        result = super(ObjectAdmin, self) \
-                .queryset(request) \
-                .extra(
-                  select={'text_active':
-                    "select t.title \
-                     from mf_system_object_text ot \
-                     left join mf_system_text t on t.id = ot.system_text_id \
-                     where ot.system_object_id = %s.id \
-                     and ot.status = 'active'" % self.form.Meta.model._meta.db_table }
-                )
-        return result
-
+        return object.title
 
     class Media:
         css = {
