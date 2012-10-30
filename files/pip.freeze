@@ -4,3 +4,4 @@ MySQL-python==1.2.3
 PIL==1.1.7
 lockfile==0.9.1
 python-daemon==1.6
+trans==1.5.1
