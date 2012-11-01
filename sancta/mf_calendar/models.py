@@ -33,10 +33,10 @@ class MfCalendarEvent(system_model.MfSystemObject):
 
     objects = system_model.SystemObjectManager()
     def get_icons(self):
-        return self.related_objects.filter(created_class='MfCalendarIcon').extra(
+        return self.related_objects.filter(created_class='MfCalendarIcon',status='active').extra(
             **(system_model.SystemObjectManager.get_extra_for_text('mf_system_object.id'))
         )
-        
+
 
     class Meta:
         db_table = u'mf_calendar_event'
@@ -44,3 +44,18 @@ class MfCalendarEvent(system_model.MfSystemObject):
         app_label = 'sancta'
         verbose_name = 'событие календаря'
         verbose_name_plural = 'События календаря'
+
+
+# сетка календаря
+# TODO удалить поля day,month,year,event_id и связанные с ними индексы
+class MfCalendarNet(models.Model):
+    full_date = DateField()
+    function = models.ForeignKey(MfCalendarSmartFunction)
+
+    def get_day(self, day):
+        self.objects.get(full_date=day)
+
+    class Meta:
+        db_table = u'mf_calendar_net'
+        managed = False
+        app_label = 'sancta'

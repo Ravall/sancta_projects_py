@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-import uuid
-import os
-
 from django import forms
-from django.conf import settings
 from django.db import models
 from django.contrib import admin
 
@@ -11,30 +7,9 @@ from django.contrib import admin
 from mf_system import models as system_model
 from mf_calendar import models as calendar_model
 from mf_system import widget
+from mf_system import tools
 
-def handle_uploaded_file(request_file):
-    '''
-    загружаем файл из request, сохраняем с уникальным именем
-    очищаем exif данные
-    '''
-    def upload_file(request_file, new_filename):
-        '''
-        берем из request файл и грузим его в нужную папку
-        '''
-        destination = open(settings.ORIGIN_MEDIA_ROOT+'/'+new_filename, 'wb+')
-        for chunk in request_file.chunks():
-            destination.write(chunk)
-        destination.close()
 
-    # разделяем имя файла и его расширение
-    file_name_info = os.path.splitext(request_file.name)
-    # генерируем уникальное имя файла
-    new_filename = str(uuid.uuid4())+file_name_info[1]
-    # загружаем файл
-    upload_file(request_file, new_filename)
-    ## удаляем мета теги и перемещаем в новую папку
-    os.system('exiftool -all= ' + new_filename)
-    return new_filename
 
 
 class MfSystemRelationTypeAdmin(admin.ModelAdmin):
@@ -53,6 +28,10 @@ class EventRelatedInline(admin.TabularInline):
     model = calendar_model.MfCalendarEvent.related_objects.through
     fk_name = "parent_object"
     extra = 0
+
+    def queryset(self, request):
+        qs = super(EventRelatedInline, self).queryset(request)
+        return qs.filter(mf_object__status="active")
 
 
 class RelatedInlineEvent(EventRelatedInline):
@@ -101,6 +80,7 @@ class RelatedObjectsInlineIcons(EventRelatedInline):
         '''
         переопределим отображение некоторых полей в инлайн-форме икон
         '''
+
         if db_field.name == 'mf_object':
             kwargs['widget'] = widget.IconWidget()
         field = super(RelatedObjectsInlineIcons, self).formfield_for_dbfield(db_field, **kwargs)
@@ -171,7 +151,7 @@ class EventAdminForm(ObjectForm):
         instance = kwargs['instance']
         self.set_initial(instance)
         self.initial['icon_title'] = u'Икона '+self.initial['title']
-        self.initial['alt_text'] =  self.initial['annonce']
+        self.initial['alt_text'] =  self.initial['annonce'].replace("\n",' ')
     class Meta:
     	# указываем что эта таблица расширяет EventAdminForm
     	model = calendar_model.MfCalendarEvent
@@ -271,9 +251,16 @@ class MfCalendarEventAdmin(ObjectAdmin):
         if len(request.FILES) == 0:
             return None
         #сохраняем файл
-        file_name = handle_uploaded_file(request.FILES['icon_file'])
+        file_name = tools.handle_uploaded_file(
+            request.FILES['icon_file'],
+            form.cleaned_data['icon_title']
+        )
         # создаем объект икона
-        icon = calendar_model.MfCalendarIcon(status='active', image=file_name, created_class='MfCalendarIcon')
+        icon = calendar_model.MfCalendarIcon(
+            status='active',
+            image=file_name,
+            created_class='MfCalendarIcon'
+        )
         icon.save()
         # создаем текст
         icon_text = system_model.MfSystemText(title=form.cleaned_data['icon_title'],annonce=form.cleaned_data['alt_text'])
