@@ -1,1 +1,3 @@
 *.pyc
+files/media/origin/*
+files/media/crop/*
