@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     'mf_system',
     'api',
     'djangorestframework',
+    'tools',
 )
 
 # A sample logging configuration. The only tangible logging

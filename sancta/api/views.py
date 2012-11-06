@@ -1,31 +1,39 @@
 # -*- coding: utf-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
-
 from djangorestframework.views import View
 from djangorestframework.reverse import reverse
 from djangorestframework.response import Response
 from djangorestframework import status
-
-
-
 from mf_calendar import models as calendar_model
+from tools import api
 
 class CalendarView(View):
-	def prepare_day_data(self, event):
-		pass
+	'''
+	Выводит информацию о дне календаря.
+	'''
+	def prepare_day_data(self, days):
+		icons = calendar_model.MfCalendarIcon.get_by_events(
+			[{'id': day.event_id} for day in days]
+		)
+		return {
+			'icons': api.prepare_icons(icons),
+		}
 
 	'''
 	api к календарю
 	'''
-	def get(self, request, num):
+	def get(self, request, day):
 		try:
-			pass
+			day = calendar_model.MfCalendarNet.objects.filter(full_date=day)
 		except ObjectDoesNotExist:
 			return Response(status.HTTP_404_NOT_FOUND)
-		return self.prepare_day_data(event[0])
+		return self.prepare_day_data(day)
 
 
 class EventView(View):
+	'''
+	выдает информацию о событию
+	'''
 
 	def prepare_event_data(self, event):
 		'''
@@ -39,19 +47,7 @@ class EventView(View):
 		        'content': event.content,
 		    },
 		    'image': event.image,
-		    'icons': [{
-		    	'id': icon.id,
-		    	'text': {
-		    		'id': icon.id,
-		    		'title': icon.title,
-		    		'content': icon.content,
-		    	},
-		    	'image': icon.image,
-		    	'urls': {
-		    	    'origin': 'http://img.sancta.ru/origin/%s' % icon.image,
-		    	    '150x200': 'http://img.sancta.ru/crop/150x200/%s' % icon.image
-		    	}
-		     } for icon in event.get_icons()],
+		    'icons': api.prepare_icons(event.get_icons()),
 		}
 
 	'''

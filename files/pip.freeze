@@ -6,3 +6,4 @@ lockfile==0.9.1
 python-daemon==1.6
 djangorestframework==0.4.0
 trans==1.5.1
+django-debug-toolbar
