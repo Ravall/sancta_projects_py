@@ -3,8 +3,6 @@ from django.db import models
 from mf_system import models as system_model
 from tools import extra
 
-
-
 # функции
 class MfCalendarSmartFunction(models.Model):
     smart_function = models.CharField(max_length=765, blank=True)
@@ -24,14 +22,14 @@ class MfCalendarIcon(system_model.MfSystemObject):
     @classmethod
     def get_by_events(cls, events):
         return system_model.MfSystemRelation.objects.filter(
-            relation_id=2, 
+            relation_id=2,
             parent_object_id__in=[event['id'] for event in events],
             mf_object__status='active'
         ).extra(
             **(system_model.SystemObjectManager.get_extra_for_text(
                 'mf_system_object.id'
             ))
-        ).extra(**extra.icon_table())
+        ).extra(**extra.icon_table()).order_by('?')
 
 
     class Meta:
@@ -91,9 +89,9 @@ class CalendarManager(models.Manager):
 class MfCalendarNet(models.Model):
     full_date = models.DateField()
     function = models.ForeignKey(MfCalendarSmartFunction)
-    
+
     objects = CalendarManager()
-    
+
     class Meta:
         db_table = u'mf_calendar_net'
         managed = False
