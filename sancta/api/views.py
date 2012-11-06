@@ -34,38 +34,18 @@ class EventView(View):
 	'''
 	выдает информацию о событию
 	'''
-
-	def prepare_event_data(self, event):
-		'''
-		контролируем выводиме данные. ничего лишнего, только то, что нужно
-		'''
-		return {
-		    'id': event.id,
-		    'text': {
-		        'title': event.title,
-		        'annonce': event.annonce,
-		        'content': event.content,
-		    },
-		    'image': event.image,
-		    'icons': api.prepare_icons(event.get_icons()),
-		}
-
-	'''
-	api к event
-	'''
 	def get(self, request, num):
 		try:
-			event = calendar_model.MfCalendarEvent.objects.filter(pk=num)
+			event = calendar_model.MfCalendarEvent.objects.get(pk=num)
 		except ObjectDoesNotExist:
 			return Response(status.HTTP_404_NOT_FOUND)
-		return self.prepare_event_data(event[0])
+		return api.prepare_event(event)
 
 
 class ApiView(View):
     """
     Примеры api
     """
-
     def get(self, request):
         """
         Handle GET requests, returning a list of URLs pointing to 3 other views.
