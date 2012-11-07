@@ -1,38 +1,22 @@
 # -*- coding: utf-8 -*-
 # Django settings for sancta project.
 import os
+import platform
+
+DEBUG = platform.node() != 'sancta'
+if DEBUG:
+    from settings_env_dev import *
+else:
+    from settings_env_prod  import *
 
 _PATH = os.path.abspath(os.path.dirname(__file__)+'/../')
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Ravall', 'valery.ravall@gmail.com'),
 )
-
 MANAGERS = ADMINS
 
-DATABASES = {
-    # настройки django
-    # дополнительные модули
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sancta_dj',
-        'USER': 'sancta_user',
-        'PASSWORD': 'sancta_user_password',
-        'HOST': '',
-        'PORT': '',
-    },
-    # историческая база
-    'sancta_db' : {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mindfly',
-        'USER': 'sancta_user',
-        'PASSWORD': 'sancta_user_password',
-        'HOST': '',
-        'PORT': '',
-    }
-}
 
 DATABASE_ROUTERS=['sancta.db_router.Sancta_Router',]
 
