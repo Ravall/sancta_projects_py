@@ -37,5 +37,5 @@ def prepare_event(event):
         'id': event.id,
         'text':prepare_text(event),
         'image': event.image,
-        'icons': api.prepare_icons(event.get_icons()),
+        'icons': prepare_icons(event.get_icons()),
     }

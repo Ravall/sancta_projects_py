@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 # Django settings for sancta project.
 import os
+import platform
+
 _PATH = os.path.abspath(os.path.dirname(__file__)+'/../')
+
+# DEBUG должен находится тут
+DEBUG = platform.node() != 'sancta'
 
 ADMINS = (
     ('Ravall', 'valery.ravall@gmail.com'),
