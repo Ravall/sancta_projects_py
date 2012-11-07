@@ -20,8 +20,7 @@ def prepare_icon(icon):
         'image': icon.image,
         'urls': {
             'origin': 'http://img.sancta.ru/origin/%s' % icon.image,
-           # '150x200': 'http://img.sancta.ru/crop/150x200/%s' % icon.image
-            '150x200': 'http://127.0.0.1:8000/media/crop/150x200/%s' % icon.image,
+            '150x200': 'http://img.sancta.ru/crop/150x200/%s' % icon.image
         }
     }
 
