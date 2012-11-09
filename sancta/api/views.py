@@ -18,17 +18,12 @@ class CalendarView(View):
         )
         # выделим "уникальные" иконы
         # т.е от каждого события по одной иконе
-        tmp = set()
-        unicicons = set()
-        for icon in icons:
-            if not icon.event_id in tmp:
-                unicicons.add(icon)
-                tmp.add(icon.event_id)
+        unic_icons = {icon['event_id']: icon for icon in icons}.values()
         return {
             # все иконы
             'icons': api.prepare_icons(icons),
             # по одной иконе для event
-            'icons_unic': api.prepare_icons(unicicons),
+            'icons_unic': api.prepare_icons(unic_icons),
         }
 
     '''
