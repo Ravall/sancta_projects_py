@@ -3,6 +3,7 @@ from django.db import models
 from mf_system import models as system_model
 from tools import extra
 
+
 # функции
 class MfCalendarSmartFunction(models.Model):
     smart_function = models.CharField(max_length=765, blank=True)
@@ -15,6 +16,7 @@ class MfCalendarSmartFunction(models.Model):
         db_table = u'mf_calendar_smart_function'
         managed = False
         app_label = 'sancta'
+
 
 class MfCalendarIcon(system_model.MfSystemObject):
     objects = system_model.SystemObjectManager()
@@ -29,8 +31,7 @@ class MfCalendarIcon(system_model.MfSystemObject):
             **(system_model.SystemObjectManager.get_extra_for_text(
                 'mf_system_object.id'
             ))
-        ).extra(**extra.icon_table()).order_by('?')
-
+        ).extra(**extra.icon_table())
 
     class Meta:
         db_table = u'mf_calendar_icon'
@@ -44,8 +45,8 @@ class MfCalendarIcon(system_model.MfSystemObject):
 class MfCalendarEvent(system_model.MfSystemObject):
     function = models.ForeignKey(MfCalendarSmartFunction)
     periodic = models.IntegerField(null=True, blank=True)
-
     objects = system_model.SystemObjectManager()
+
     def get_icons(self):
         return self.related_objects.filter(
             created_class='MfCalendarIcon',
@@ -56,7 +57,6 @@ class MfCalendarEvent(system_model.MfSystemObject):
             ))
         ).extra(**extra.icon_table())
 
-
     class Meta:
         db_table = u'mf_calendar_event'
         managed = False
@@ -64,11 +64,12 @@ class MfCalendarEvent(system_model.MfSystemObject):
         verbose_name = 'событие календаря'
         verbose_name_plural = 'События календаря'
 
+
 class CalendarManager(models.Manager):
     def get_query_set(self):
         return super(CalendarManager, self).get_query_set().extra(
             select={
-                'event_id':'mf_calendar_event.id',
+                'event_id': 'mf_calendar_event.id',
             },
             tables=[
                 'mf_calendar_event',
@@ -83,6 +84,7 @@ class CalendarManager(models.Manager):
                 'Active',
             ]
         )
+
 
 # сетка календаря
 # TODO удалить поля day,month,year,event_id и связанные с ними индексы
