@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+
 def prepare_text(obj):
     '''
     вывод текст
     '''
-    return {
-        'title': obj.title,
-        'annonce': obj.annonce,
-        'content': obj.content,
-    },
+    return dict(
+        title=obj.title,
+        annonce=obj.annonce,
+        content=obj.content,
+    )
 
 def prepare_icon(icon):
     '''
@@ -19,8 +21,14 @@ def prepare_icon(icon):
         'text': prepare_text(icon),
         'image': icon.image,
         'urls': {
-            'origin': 'http://img.sancta.ru/origin/%s' % icon.image,
-            '150x200': 'http://img.sancta.ru/crop/150x200/%s' % icon.image
+            'origin': '{host}origin/{image_name}'.format(
+                host=settings.MEDIA_HOST,
+                image_name=icon.image
+            ),
+            '150x200': '{host}crop/150x200/{image_name}'.format(
+                host=settings.MEDIA_HOST,
+                image_name=icon.image
+            )
         }
     }
 

@@ -4,7 +4,7 @@ from databases_dev import DATABASES
 TEMPLATE_DEBUG = True
 ROOT_URLCONF = 'sancta.urls'
 WSGI_APPLICATION = 'sancta.wsgi.application'
-
+MEDIA_HOST='http://127.0.0.1:8000/media/'
 # django debug toolbar
 MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 INSTALLED_APPS += ('debug_toolbar',)

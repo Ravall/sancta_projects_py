@@ -6,8 +6,7 @@ from djangorestframework.response import Response
 from djangorestframework import status
 from mf_calendar import models as calendar_model
 from tools import api
-
-
+from random import shuffle
 class CalendarView(View):
     '''
     Выводит информацию о дне календаря.
@@ -18,7 +17,9 @@ class CalendarView(View):
         )
         # выделим "уникальные" иконы
         # т.е от каждого события по одной иконе
-        unic_icons = {icon['event_id']: icon for icon in icons}.values()
+
+        unic_icons = {icon.event_id: icon for icon in icons}.values()
+
         return {
             # все иконы
             'icons': api.prepare_icons(icons),
