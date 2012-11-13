@@ -2,20 +2,21 @@
 # Django settings for sancta project.
 import os
 import platform
+# celery
+import djcelery
 
-_PATH = os.path.abspath(os.path.dirname(__file__)+'/../')
-
+_PATH = os.path.abspath(os.path.dirname(__file__) + '/../')
 # DEBUG должен находится тут
 DEBUG = platform.node() != 'sancta'
-
 ADMINS = (
     ('Ravall', 'valery.ravall@gmail.com'),
 )
 MANAGERS = ADMINS
 
 
-DATABASE_ROUTERS=['sancta.db_router.Sancta_Router',]
-
+DATABASE_ROUTERS = [
+    'sancta.db_router.Sancta_Router',
+]
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -76,7 +77,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -112,6 +113,9 @@ INSTALLED_APPS = (
     'api',
     'djangorestframework',
     'tools',
+    'celerytest',
+    'djcelery',
+    'kombu.transport.django',
 )
 
 LOGGING = {
@@ -138,3 +142,8 @@ LOGGING = {
     }
 }
 
+djcelery.setup_loader()
+BROKER_URL = 'amqp://'
+#BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
+BROKER_BACKEND = "amqp"
+CELERY_IMPORTS = ("celerytest.tasks",)
