@@ -272,10 +272,19 @@ class MfCalendarEventAdmin(ObjectAdmin):
         relation = system_model.MfSystemRelation(relation_id=2, parent_object = obj, mf_object=icon)
         relation.save()
 
+
     def save_model(self, request, obj, form, change):
     	super(MfCalendarEventAdmin, self).save_model(request, obj, form, change)
     	self.save_text(request, obj, form, change)
     	self.save_icon(request, obj, form, change)
+        #запускаем отложенную задачу "пост изменения события"
+
+        # при любом изменении события (кроме холостого) 
+        # очищаем кэш сетки
+        # очищаем кэш события
+        # при изменения формулы очищаем кэш 
+        # по старой формуле и по новой для сетки календаря
+
 
 
 
