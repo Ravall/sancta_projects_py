@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from mf_system import models as system_model
-from tools import extra
+from tools import extra, smartfunction
 
 
 # функции
@@ -11,6 +11,9 @@ class MfCalendarSmartFunction(models.Model):
 
     def __unicode__(self):
         return "%s" % self.smart_function
+
+    def getDates(self, year):
+        return smartfunction.generate(self.smart_function, year)
 
     class Meta:
         db_table = u'mf_calendar_smart_function'

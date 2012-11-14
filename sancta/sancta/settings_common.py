@@ -113,7 +113,6 @@ INSTALLED_APPS = (
     'api',
     'djangorestframework',
     'tools',
-    'celerytest',
     'djcelery',
     'kombu.transport.django',
 )
@@ -146,4 +145,9 @@ djcelery.setup_loader()
 BROKER_URL = 'amqp://'
 #BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 BROKER_BACKEND = "amqp"
-CELERY_IMPORTS = ("celerytest.tasks",)
+CELERY_IMPORTS = ("mf_system.celery_tasks",)
+
+# года, которые интересны для быстрой работы
+# по ним оперативно чистится кэш, оперативно выбираются события
+SMART_FUNCTION_YEAR_BEGIN = 1950
+SMART_FUNCTION_YEAR_END = 2050
