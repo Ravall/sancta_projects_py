@@ -18,6 +18,13 @@ class EnumFormula():
     при этом formulaХ может быть формулой с любой формой
     '''
     @staticmethod
+    def is_formula(formula):
+        '''
+        проверяем является ли формула перечислением
+        '''
+        pass
+
+    @staticmethod
     def explain(formula):
         '''
         развернем формулу
