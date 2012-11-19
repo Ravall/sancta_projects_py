@@ -2,8 +2,7 @@
 from django.test import TestCase
 from testutil import data_provider
 import tools.date as date
-from smartfunction import FullFormula
-
+from smartfunction import FullFormula, EnumFormula
 
 
 class DateTest(TestCase):
@@ -34,7 +33,7 @@ class DateTest(TestCase):
                 date.is_leap_year(year),
                 '{0} должен не быть високосным'.format(year)
             )
-    
+
     def provider_date_compare():
         return (
             ('3.11.1983', '3.10.1983', -1),
@@ -54,7 +53,7 @@ class DateTest(TestCase):
         тестируем сравнение дат
         '''
         self.assertEquals(
-            date.date_compare(*year1.split('.')+year2.split('.')),
+            date.date_compare(*year1.split('.') + year2.split('.')),
             result,
             '{0} and {1} result {2}'.format(year1, year2, result)
         )
@@ -103,17 +102,12 @@ class DateTest(TestCase):
         '''
         тестируем смещение даты
         '''
-        date_shift = date.date_shift(*date_before.split('.')+[delta])
+        date_shift = date.date_shift(*date_before.split('.') + [delta])
         date_shift_str = '.'.join(map(str, date_shift))
-        
-        self.assertEquals(
-            date_shift_str, date_after,
-            'после смещения даты {0} на {1} дней, ' \
-            'должно получится {2}, a получилось {3}'.format(
-                date_before, delta, date_after, date_shift_str
-            )
-        )
-
+        message = "после смещения даты {0} на {1} дней, " +\
+                  "должно получится {2}, a получилось {3}".\
+                  format(date_before, delta, date_after, date_shift_str)
+        self.assertEquals(date_shift_str, date_after, message)
 
     def provider_get_day_of_week():
         return (
@@ -129,14 +123,9 @@ class DateTest(TestCase):
         тестируем определения дня недели
         '''
         result = date.get_day_of_week(*test_date.split('.'))
-        self.assertEquals(
-            result, week_day,
-            '{0} должен приходится на {1} день недели' \
-            ' а получился на {2}'.format(
-                test_date, week_day, result
-            )
-        )
-
+        message = '{0} должен приходится на {1} день недели' \
+                  ' а получился на {2}'.format(test_date, week_day, result)
+        self.assertEquals(result, week_day, message)
 
     def provider_is_date_correct():
         return (
@@ -163,7 +152,7 @@ class DateTest(TestCase):
                 date.is_date_correct(*day.split('.')),
                 '{0} должна быть некорректной'.format(day)
             )
-        
+
     def provider_pascha():
         return (
             (1918, '5.5.1918'),
@@ -185,19 +174,18 @@ class DateTest(TestCase):
         тестируем вычисление даты православной пасхи
         '''
         result = '.'.join(map(str, date.Pascha(year)))
-        self.assertEquals(
-            result, day,
-            'в {0} году пасха должна приходится на {1}'\
-            ' а получается на {2}'.format(year, day, result)
-        )
+        message = 'в {0} году пасха должна приходится на {1}'\
+                  ' а получается на {2}'.format(year, day, result)
+        self.assertEquals(result, day, message)
+
 
 class FullFormulaTest(TestCase):
     def provider_explain():
         return (
-            ('12.01,12.15.01~[12<{Pascha}~18<{Pascha}||1]' \
-             ',[{be}|1000000]|1100111|1,2,3', '1100111', '1,2,3', 
-             '12.01,12.15.01~[12<{Pascha}~18<{Pascha}||1],[{be}|1000000]'),
-            ('12.01~[12.02~13.04|100000]|1100001', 
+            ("12.01,12.15.01~[12<{Pascha}~18<{Pascha}||1]"
+             ",[{be}|1000000]|1100111|1,2,3",
+             '1100111', '1,2,3', '12.01,12.15.01~[12<{Pascha}~18<{Pascha}||1],[{be}|1000000]'),
+            ('12.01~[12.02~13.04|100000]|1100001',
              '1100001', '', '12.01~[12.02~13.04|100000]'),
             ('19.01|1111111', '1111111', '', '19.01'),
             ('19.01||0', '', '0', '19.01'),
@@ -209,21 +197,31 @@ class FullFormulaTest(TestCase):
     def test_explain(self, full_formula, w_filter, d_filter, formula):
         frm, w_f, d_f = FullFormula.explain(full_formula)
         self.assertEquals(
-            frm, formula, 
-            'в полной формуле {0} формула '\
+            frm, formula,
+            'в полной формуле {0} формула '
             'должна выйти {1}, но не {2}'.format(full_formula, formula, frm)
         )
-        self.assertEquals(w_f, w_filter,
-            'в полной формуле {0} фильтр дней '\
-            'должен выйти {1}, но не {2}'.format(full_formula, w_filter, w_f)
+        self.assertEquals(
+            w_f, w_filter, 'в полной формуле {0} фильтр дней '
+                           'должен выйти {1}, но не {2}'
+                           .format(full_formula, w_filter, w_f)
         )
         self.assertEquals(
-            d_f, d_filter,
-            'в полной формуле {0} фильтр данных '\
-            'должен выйти {1}, но не {2}'.format(full_formula, d_filter, d_f)
+            d_f, d_filter, 'в полной формуле {0} фильтр данных '
+                           'должен выйти {1}, но не {2}'
+                           .format(full_formula, d_filter, d_f)
         )
 
 
+class EnumFormulaTest(TestCase):
+    def provider_explain():
+        return (
+            ('12.11,[11.02,[12.02]|1000000|1,2],15.01~14.05,'
+             ' [11.04~15,11.14|1000000|1,4],14.05',
+             ['12.11', '[11.02,[12.02]|1000000|1,2]',
+              '15.01~14.05', '[11.04~15,11.14|1000000|1,4]', '14.05']),
+        )
 
-
-
+    @data_provider(provider_explain)
+    def test_explain(self, formula, f_list):
+        self.assertEquals(EnumFormula.explain(formula), f_list)
