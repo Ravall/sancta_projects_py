@@ -22,7 +22,15 @@ class EnumFormula():
         '''
         проверяем является ли формула перечислением
         '''
-        pass
+        for alfa in formula:
+            if alfa == '[':
+                level += 1
+            if alfa == ']':
+                level -= 1
+            # если находится хотябы одна 
+            if alfa == ',' and not level:
+                return True
+        return False
 
     @staticmethod
     def explain(formula):
