@@ -98,8 +98,18 @@ class SmartFormula():
         '''
         return formula[0] == '{' and formula[-1] == '}'
 
+    @staticmethod
     def explain(formula):
+        '''
+        отделяем смартформулу от года
+        '''
         formula = formula[1:-1]
+        parts = re.findall('^(.*)\((.*)\)$', formula)
+        if parts:
+            s_formula, year = parts[0]
+        else:
+            s_formula, year = formula, ''
+        return [s_formula, year]
 
 
 class DiapasonFormula():

@@ -280,3 +280,13 @@ class SmartFormulaTest(TestCase):
     @data_provider(provider_is_formula)
     def test_is_formula(self, formula, result):
         self.assertEquals(SmartFormula.is_formula(formula), result)
+
+    def provider_explain():
+        return (
+            ('{be}', ['be', '']),
+            ('{e(1900)}', ['e', '1900']),
+        )
+
+    @data_provider(provider_explain)
+    def test_explain(self, formula, f_list):
+        self.assertEquals(SmartFormula.explain(formula), f_list)
