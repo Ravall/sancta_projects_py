@@ -2,7 +2,8 @@
 from django.test import TestCase
 from testutil import data_provider
 import tools.date as date
-from smartfunction import FullFormula, EnumFormula
+from smartfunction import FullFormula, EnumFormula, DiapasonFormula,\
+    SmartFormula
 
 
 class DateTest(TestCase):
@@ -227,3 +228,55 @@ class EnumFormulaTest(TestCase):
     @data_provider(provider_explain)
     def test_explain(self, formula, f_list):
         self.assertEquals(EnumFormula.explain(formula), f_list)
+
+    def provider_is_formula():
+        return (
+            ('11.11,12.11', True),
+            ('11.11~[12.11,12.11]', False),
+            ('[12.11,12.11]~[12,12||1,2]', False),
+            ('[12.11,12.11]~[12,12||1,2],11.12', True),
+            ('11.11~12.11~13.11', False),
+        )
+
+    @data_provider(provider_is_formula)
+    def test_is_formula(self, formula, result):
+        self.assertEquals(EnumFormula.is_formula(formula), result)
+
+
+class DiapasonFormulaTest(TestCase):
+    def provider_is_formula():
+        return (
+            ('11.11,12.11', False),
+            ('11.11~[12.11,12.11]', True),
+            ('[12.11,12.11]~[12,12||1,2]', True),
+            ('11.11~12.11~13.11', False),
+            ('11.11~12.11', True),
+        )
+
+    @data_provider(provider_is_formula)
+    def test_is_formula(self, formula, result):
+        self.assertEquals(DiapasonFormula.is_formula(formula), result)
+
+    def provider_explain():
+        return (
+            ('12>12.01~11.02', ['12>12.01', '11.02']),
+            ('[11.12~15.12]~[20.12~21.12]', ['[11.12~15.12]', '[20.12~21.12]']),
+        )
+
+    @data_provider(provider_explain)
+    def test_explain(self, formula, f_list):
+        self.assertEquals(DiapasonFormula.explain(formula), f_list)
+
+
+class SmartFormulaTest(TestCase):
+    def provider_is_formula():
+        return (
+            ('{xxx}', True),
+            ('{xx(1)}', True),
+            ('xx}', False),
+            ('{xx)', False),
+        )
+
+    @data_provider(provider_is_formula)
+    def test_is_formula(self, formula, result):
+        self.assertEquals(SmartFormula.is_formula(formula), result)
