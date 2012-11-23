@@ -81,9 +81,18 @@ class FormulaFactory():
         #если формула выражена диапазоном
         if DiapasonFormula.is_formula(formula):
             return DiapasonFormula(formula)
+        #если формула выражена смещением
+        if BlasFormula.is_formula(formula):
+            return BlasFormula(formula)
         #если формула выражена smart формулой
         if SmartFormula.is_formula(formula):
             return SmartFormula(formula)
+
+
+class BlasFormula():
+    @staticmethod
+    def is_formula(formula):
+        pass
 
 
 class SmartFormula():
