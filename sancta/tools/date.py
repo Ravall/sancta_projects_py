@@ -6,6 +6,7 @@ def is_leap_year(year):
     Проверяем год на високосность
     '''
     return (not int(year) % 4 and int(year) % 100) or not int(year) % 400
+    
 
 def date_compare(d1, m1, y1, d2, m2, y2):
     '''
@@ -72,7 +73,12 @@ def date_shift(day, month, year, shift):
         
     return [day, month, year]
 
-
+def get_current_year():
+    '''
+    получаем текущий год
+    '''
+    dt = datetime.datetime.now()
+    return int(dt.strftime('%Y'))
 
 
 def is_date_correct(d, m, y=None):
@@ -83,8 +89,7 @@ def is_date_correct(d, m, y=None):
     m = int(m)
     y = int(y)
     if y is None:
-        dt = datetime.datetime.now()
-        y = int(dt.strftime('%Y'))
+        y = get_current_year()
   
     if d is None or m is None or not str(y).isdigit():
         return 0;

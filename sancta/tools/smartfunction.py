@@ -66,10 +66,26 @@
         [{BE(2001)},{BE()}|1000000|1,-1] - аналогично
 '''
 import re
+import tools.date as date
+
+def smart_function(formula, year=None):
+    '''
+    основная функция
+    '''
+    if not year:
+        year = date.get_current_year()
+    formula_obj = FormulaFactory.getClass(formula)
+    #установим год
+    formula_obj.year = year
+    #проверим
+    formula_obj.check()
+    return formula_obj.get_list()
+
+class FormulaException(Exception):
+    pass
 
 
 class FormulaFactory():
-
     @staticmethod
     def getClass(formula):
         #если формула выражена полной формулой
@@ -87,15 +103,86 @@ class FormulaFactory():
         #если формула выражена smart формулой
         if SmartFormula.is_formula(formula):
             return SmartFormula(formula)
+        #если формула выражена смещением года
+        if BlasYearFormula.is_formula(formula):
+            return BlasYearFormula(formula)
+        #просто дата
+        if SimpleDateFormula.is_formula(formula):
+            return SimpleDateFormula(formula)
+        # во всех остальных случаях
+        raise FormulaException('формула не определена')
+
+class Formula():
+    year = None
+
+class SimpleDateFormula(Formula):
+    '''
+    формула выраженная просто датой 11.01
+    или 11.01.2011 (т.е не зависимая от входящего года)
+    '''
+
+    @classmethod
+    def is_formula(cls, formula):
+        return bool(re.search(
+            '^\d{1,2}\.\d{1,2}\.\d{4}?$|^\d{1,2}\.\d{1,2}$', 
+            formula
+        ))
+
+    @classmethod
+    def explain(cls, formula):
+        cnt = formula.count('.')
+        if cnt == 1:
+            return formula.split('.')+[(None)]
+        elif cnt == 2:
+            return formula.split('.')
+        raise FormulaException('формула не SimpleDateFormula')
 
 
-class BlasFormula():
+
+class BlasYearFormula(Formula):
+    '''
+    если умная формула выражена смещением года
+    11.06.+1
+    '''
+    reg = '^(\d{1,2}\.\d{1,2})\.([-+]\d+)$'
+
+    @classmethod
+    def is_formula(cls, formula):
+        return bool(re.search(cls.reg, formula))
+
+    @classmethod
+    def explain(cls, formula):
+        return re.findall(cls.reg, formula)[0]
+
+
+class BlasFormula(Formula):
+    '''
+    умная форумула выраженная смещением 
+    '''
     @staticmethod
     def is_formula(formula):
-        pass
+        #проверим что сначала идет пареметры смещения
+        if not re.search('^-?\d+[<>].+', formula):
+            return False
+        #проверим что смещение корректно т.е один указатель смещения
+        level = 0
+        blas = 0
+        for alfa in formula:
+            if alfa == '[':
+                level += 1
+            if alfa == ']':
+                level -= 1
+            if (alfa == '>' or alfa == '<') and not level:
+                blas += 1
+        return blas == 1
+    
+    @staticmethod
+    def explain(formula):
+        return re.findall('^(-?\d+)([<>])(.+)', formula)[0]
 
 
-class SmartFormula():
+
+class SmartFormula(Formula):
     '''
     умная формула выраженная смартформулой
     {be},{b}, {Pascha(1998)}
@@ -121,7 +208,7 @@ class SmartFormula():
         return [s_formula, year]
 
 
-class DiapasonFormula():
+class DiapasonFormula(Formula):
     '''
     умная формула выраженная диапазоном
     formula1~formula2
@@ -173,7 +260,7 @@ class DiapasonFormula():
         pass
 
 
-class EnumFormula():
+class EnumFormula(Formula):
     '''
     умная формула выраженная в виде перечислений формул:
     formula1,formula2,formula3
@@ -230,18 +317,21 @@ class EnumFormula():
 
         return sub_formules
 
+    def __init__(self, formula):
+        sub_formules = EnumFormula.explain(formula)
 
-class FullFormula():
+
+class FullFormula(Formula):
     '''
     умная формула выраженная в своей полной форме
     формула,фильтры
     full_formula = [formula|w_filter|d_filter]
     '''
     # фильтр дня недели
-    w_filter = '1111111',
+    w_filter = '1111111'
     # фильтр данных
     f_filter = '0'
-    formula = []
+    formula = None
 
     @staticmethod
     def is_formula(full_formula):
@@ -249,7 +339,7 @@ class FullFormula():
         проверяем что строка является полной формулой
         - т.е обернута в []
         '''
-        return full_formula['0'] == '[' and full_formula[-1] == ']'
+        return full_formula[0] == '[' and full_formula[-1] == ']'
 
     @staticmethod
     def explain(full_formula):
@@ -265,22 +355,32 @@ class FullFormula():
         filters_cnt = tmp_formula.count('|')
         if filters_cnt > 2:
             #возможны лишь два фильтра
-            raise Exception('Количество фильтров превышает 2')
+            raise FormulaException('Количество фильтров превышает 2')
         # дополним временную и полную формулу
         tmp_formula = tmp_formula + "|" * (2 - filters_cnt)
         full_formula = full_formula + "|" * (2 - filters_cnt)
         #разобъем полную формулу по составляющим
         formula, w_filter, f_filter = tmp_formula.split('|')
-        #убедимся что фильтры корректны
-        if w_filter and not re.search('^[0,1]{7}$', w_filter):
-            raise Exception('фильтр дня недели не корректен')
-        if f_filter and not re.search('^[\d,-]*$', f_filter):
-            raise Exception('фильтр данных не корректен')
         # сотрем область фильтров - получим формулу
         formula = re.sub(
             '\|{0}\|{1}$'.format(w_filter, f_filter), '', full_formula
         )
         return [formula, w_filter, f_filter]
+
+    
+    def check(self):
+        '''
+        проверка что все корректно
+        проверка выполняется для данных полученных explain
+        '''
+        if not self.formula:
+            raise FormulaException('формула должна быть получена')
+        #убедимся что фильтры корректны
+        if self.w_filter and not re.search('^[0,1]{7}$', self.w_filter):
+            raise FormulaException('фильтр дня недели не корректен')
+        if self.f_filter and not re.search('^[\d,-]*$', self.f_filter):
+            raise FormulaException('фильтр данных не корректен')
+
 
     def __init__(self, full_formula):
         if FullFormula.is_formula(full_formula):
@@ -293,6 +393,7 @@ class FullFormula():
         if f_filter:
             self.f_filter = f_filter
 
-    def get_dates_list(self):
+
+    def get_list(self):
         formula_obj = FormulaFactory.getClass(self.formula)
-        self.dates_list = formula_obj.get_dates_list()
+        dates_list = formula_obj.get_list()
