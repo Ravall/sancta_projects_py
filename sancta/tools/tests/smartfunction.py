@@ -4,10 +4,28 @@ from tools.testutil import data_provider
 
 from tools.smartfunction import FullFormula, EnumFormula, DiapasonFormula,\
     SmartFormula, BlasFormula, BlasYearFormula, SimpleDateFormula,\
-    FormulaException
+    FormulaException, Formula
 
 
-
+class FormulaTest(TestCase):
+    def test_sort_dates_list(self):
+        # просто фейк-формула
+        formula_obj = Formula('xxx')
+        formula_obj.dates_list = [
+            (1, 1, 1984), (1, 12, 1983), (3, 11, 1983),
+            (5, 11, 1983), (10, 1, 1983), (1, 2, 1983),
+            (11, 9, 1982)
+        ]
+        formula_obj.sort_dates_list()
+        self.assertEquals(
+            formula_obj.dates_list,
+            [
+                (11, 9, 1982), (10, 1, 1983), (1, 2, 1983),
+                (3, 11, 1983), (5, 11, 1983), (1, 12, 1983),
+                (1, 1, 1984),
+            ],
+            'получилось: {0}'.format(formula_obj.dates_list)
+        )
 
 
 class FullFormulaTest(TestCase):
@@ -45,27 +63,99 @@ class FullFormulaTest(TestCase):
 
     def provider_check():
         return (
-           # ('11.01|1|1|1', False, None),
-           # ('11.01|1|1', False, None),
-           # ('11.01|1111112|1', False, None),
-           # ('11.01|1111111|1', True, None),
-           # ('11.01|1111111|-1,1', True, None),
-           # ('11.01|1111111|', True, None),
-            ('11.01||0', True, None),
+            ('11.01|1|1|1', False),
+            ('11.01|1|1', False),
+            ('11.01||1,,2', False),
+            ('11.01||1,--2', False),
+            ('11.01|1111112|1', False),
+            ('11.01|1111111|1', True),
+            ('11.01|1111111|-1,1', True),
+            ('11.01|1111111|', True),
+            ('11.01|1111111|11,12', True),
+            ('11.01||0', True),
 
         )
 
     @data_provider(provider_check)
-    def test_check(self, formula, correct, year):
+    def test_check(self, formula, correct):
         try:
             formula_obj = FullFormula(formula)
-            formula_obj.year = year
             formula_obj.check()
             is_correct = True
         except FormulaException:
             is_correct = False
         self.assertEquals(is_correct, correct)
 
+    def provider_week_filter():
+        return (
+            (
+                'x|1111111',
+                [(1, 11, 1983), (2, 11, 1983), (3, 11, 1983)],
+                [(1, 11, 1983), (2, 11, 1983), (3, 11, 1983)]
+            ),
+            (
+                'x|0000000',
+                [(1, 11, 1983), (2, 11, 1983), (3, 11, 1983)],
+                []
+            ),
+            (
+                'x|1010100',
+                [
+                    (19, 11, 2012), (20, 11, 2012), (21, 11, 2012),
+                    (22, 11, 2012), (23, 11, 2012), (24, 11, 2012),
+                    (25, 11, 2012)
+                ],
+                [
+                    (19, 11, 2012), (21, 11, 2012), (23, 11, 2012)
+                ],
+            ),
+            (
+                'x|0000011',
+                [
+                    (19, 11, 2012), (20, 11, 2012), (21, 11, 2012),
+                    (22, 11, 2012), (23, 11, 2012), (24, 11, 2012),
+                    (25, 11, 2012), (26, 11, 2012), (27, 11, 2012),
+                    (28, 11, 2012), (29, 11, 2012), (30, 11, 2012),
+                    (1, 12, 2012), (2, 12, 2012)
+                ],
+                [
+                    (24, 11, 2012), (25, 11, 2012), (1, 12, 2012),
+                    (2, 12, 2012)
+                ],
+            )
+        )
+
+    @data_provider(provider_week_filter)
+    def test_week_filter(self, formula, dates_list, result_dates_list):
+        # инициируем объект FullFormula с фильтром.
+        # сама формула не важна, потому как список дат мы ниже внедрим
+        formula_obj = FullFormula(formula)
+        # внедрим список дат
+        formula_obj.dates_list = dates_list
+        formula_obj.week_filter()
+        self.assertEquals(result_dates_list, formula_obj.dates_list)
+
+    def provider_data_filter():
+        def week_dates():
+            return [
+                (19, 11, 2012), (20, 11, 2012), (21, 11, 2012),
+                (22, 11, 2012), (23, 11, 2012), (24, 11, 2012),
+                (25, 11, 2012)
+            ]
+        return (
+            ('x||0,1,2,3', week_dates(), week_dates()),
+            ('x||1', week_dates(), [(19, 11, 2012)]),
+            ('x||1,2', week_dates(), [(19, 11, 2012), (20, 11, 2012)]),
+            ('x||-1,2', week_dates(), [(20, 11, 2012), (25, 11, 2012)]),
+        )
+
+    @data_provider(provider_data_filter)
+    def test_data_filter(self, formula, dates_list, result_dates_list):
+        #аналогично test_week_filter
+        formula_obj = FullFormula(formula)
+        formula_obj.dates_list = dates_list
+        formula_obj.data_filter()
+        self.assertEquals(result_dates_list, formula_obj.dates_list)
 
 
 class EnumFormulaTest(TestCase):
@@ -121,6 +211,96 @@ class DiapasonFormulaTest(TestCase):
     def test_explain(self, formula, f_list):
         self.assertEquals(DiapasonFormula.explain(formula), f_list)
 
+    def provider_check():
+        return (
+            (
+                [(1, 11, 1983), (2, 11, 1983)],
+                [(3, 11, 1983), (4, 11, 1983)],
+                False
+            ),
+            (
+                [(1, 11, 1983)],
+                [(3, 11, 1983), (4, 11, 1983)],
+                False
+            ),
+            (
+                [(1, 11, 1983), (2, 11, 1983)],
+                [(4, 11,1983)],
+                False
+            ),
+            (
+                [(4, 11, 1983)],
+                [(3, 11, 1983)],
+                False
+            ),
+            (
+                [(3, 11, 1983)],
+                [(3, 11, 1983)],
+                False
+            ),
+            (
+                [(1, 11, 1983)],
+                [(3, 11, 1983)],
+                True
+            ),
+        )
+
+    @data_provider(provider_check)
+    def test_check(self, date_list1, date_list2, correct):
+        try:
+            #просто левая формула
+            formula_obj = DiapasonFormula('12.01~13.01')
+            formula_obj.dates_list_formula1 = date_list1
+            formula_obj.dates_list_formula2 = date_list2
+            formula_obj.check()
+            is_correct = True
+        except FormulaException:
+            is_correct = False
+        self.assertEquals(is_correct, correct)
+
+
+    def provider_generate_list():
+        return (
+            (
+                (3, 11, 1983), (5, 11, 1983),
+                [(3, 11, 1983), (4, 11, 1983), (5, 11, 1983)]
+            ),
+            (
+                (3, 11, 1983), (4, 11, 1983),
+                [(3, 11, 1983), (4, 11, 1983)]
+            ),
+            (
+                (29, 11, 1983), (4, 12, 1983),
+                [
+                    (29, 11, 1983), (30, 11, 1983), (1, 12, 1983),
+                    (2, 12, 1983), (3, 12, 1983), (4, 12, 1983)
+                ]
+            ),
+            (
+                (26, 2, 2011), (2, 3, 2011),
+                [
+                    (26, 2, 2011), (27, 2, 2011), (28, 2, 2011),
+                    (1, 3, 2011), (2, 3, 2011),
+                ]
+            ),
+            (
+                (26, 2, 2000), (2, 3, 2000),
+                [
+                    (26, 2, 2000), (27, 2, 2000), (28, 2, 2000),
+                    (29, 2, 2000), (1, 3, 2000), (2, 3, 2000),
+                ]
+            ),
+        )
+
+    @data_provider(provider_generate_list)
+    def test_generate_list(self, date1, date2, dates_list):
+        #просто левая формула
+        formula_obj = DiapasonFormula('12.01~13.01')
+        formula_obj.dates_list_formula1 = date1,
+        formula_obj.dates_list_formula2 = date2,
+        formula_obj.generate_list()
+        self.assertEquals(formula_obj.dates_list, dates_list)
+
 
 class SmartFormulaTest(TestCase):
     def provider_is_formula():
@@ -137,7 +317,7 @@ class SmartFormulaTest(TestCase):
 
     def provider_explain():
         return (
-            ('{be}', ['be', '']),
+            ('{be}', ['be', None]),
             ('{e(1900)}', ['e', '1900']),
         )
 
@@ -164,16 +344,52 @@ class BlasFormulaTest(TestCase):
 
     def provider_explain():
         return (
-            ('12>{Pascha}', '12', '>', '{Pascha}'),
-            ('-12<[12>11.02]', '-12', '<', '[12>11.02]'),
+            ('12>{Pascha}', 12, '{Pascha}'),
+            ('12<{Pascha}', -12, '{Pascha}'),
+            ('-12<[12>11.02]', 12, '[12>11.02]'),
+            ('-12>[12>11.02]', -12, '[12>11.02]'),
         )
 
     @data_provider(provider_explain)
-    def test_explain(self, formula, days, operator, subformula):
-        _days, _operator, _subformula = BlasFormula.explain(formula)
+    def test_explain(self, formula, days, subformula):
+        _days, _subformula = BlasFormula.explain(formula)
         self.assertEquals(days, _days)
-        self.assertEquals(operator, _operator)
         self.assertEquals(subformula, _subformula)
+
+    def provider_check():
+        return (
+            ([(1, 12, 1983),], True),
+            ([(1, 12, 1983), (2, 12, 1983)], False),
+        )
+
+    @data_provider(provider_check)
+    def test_check(self, date_begin, correct):
+        try:
+            #просто левая формула
+            formula_obj = BlasFormula('12<12.01')
+            formula_obj.date_begin = date_begin
+            formula_obj.check()
+            is_correct = True
+        except FormulaException:
+            is_correct = False
+        self.assertEquals(is_correct, correct)
+
+
+    def provider_blas():
+        return (
+            ([(3, 11, 1983),], 2, (5, 11, 1983)),
+            ([(3, 11, 1983),], -4, (30, 10, 1983))
+        )
+
+
+    @data_provider(provider_blas)
+    def test_blas(self, date_begin, blas, dates_list):
+        #просто левая формула
+        formula_obj = BlasFormula('12<12.01')
+        formula_obj.date_begin = date_begin
+        formula_obj.blas = blas
+        formula_obj.process_blas()
+        self.assertEquals(formula_obj.dates_list, dates_list)
 
 
 class BlasYearFormulaTest(TestCase):
@@ -232,10 +448,10 @@ class SimpleDateFormulaTest(TestCase):
     @data_provider(provider_explain)
     def test_explain(self, formula, day, month, year):
         self.assertEquals(
-            SimpleDateFormula.explain(formula), 
+            SimpleDateFormula.explain(formula),
             [day, month, year]
         )
-        
+
 
 
 

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+
 def is_leap_year(year):
     '''
     Проверяем год на високосность
     '''
     return (not int(year) % 4 and int(year) % 100) or not int(year) % 400
-    
+
 
 def date_compare(d1, m1, y1, d2, m2, y2):
     '''
@@ -41,7 +42,7 @@ def num_days_in_month(month, year):
         return 30
     if int(month) == 2:
         return 28 + is_leap_year(year)
-    raise Exception("Неверный месяц в num_days_in_month!");
+    raise Exception("Неверный месяц в num_days_in_month!")
 
 
 def date_shift(day, month, year, shift):
@@ -54,24 +55,25 @@ def date_shift(day, month, year, shift):
     shift = int(shift)
 
     if not shift:
-        return [day, month, year]
+        return (day, month, year)
     day += shift
     while day < 1:
         month -= 1
         if month < 1:
             month = 12
             year -= 1
-        
+
         day += num_days_in_month(month, year)
-    
+
     while day > num_days_in_month(month, year):
-        day -= num_days_in_month(month,year)
+        day -= num_days_in_month(month, year)
         month += 1
         if month > 12:
             month = 1
             year += 1
-        
-    return [day, month, year]
+
+    return (day, month, year)
+
 
 def get_current_year():
     '''
@@ -90,14 +92,13 @@ def is_date_correct(d, m, y=None):
     y = int(y)
     if y is None:
         y = get_current_year()
-  
     if d is None or m is None or not str(y).isdigit():
-        return 0;
+        return 0
     if not str(d).isdigit() or d < 1 or d > 31:
         return 0
     if not str(m).isdigit() or m < 1 or m > 12:
         return 0
-    if m == 2 and d > 28 + is_leap_year(y): 
+    if m == 2 and d > 28 + is_leap_year(y):
         return 0
     if (m == 4 or m == 6 or m == 9 or m == 11) and d == 31:
         return 0
@@ -114,9 +115,9 @@ def get_day_of_week(d, m, y):
 
     где d - число месяца;
     m - номер месяца, начиная с марта (март=1, апрель=2, ... февраль=12);
-    y - номер года в столетии (например, для 1965 года y=65. Для января и февраля 1965 года, т.е. 
+    y - номер года в столетии (например, для 1965 года y=65. Для января и февраля 1965 года, т.е.
     для m=11 или m=12 номер года надо брать предыдущий, т.е. y=64);
-    c - количество столетий (например, для 2000 года c=20. И здесь для января и февраля 2000 года 
+    c - количество столетий (например, для 2000 года c=20. И здесь для января и февраля 2000 года
     надо брать предыдущее столетие с=19);
     квадратные скобки означают целую часть полученного числа (отбрасываем дробную).
 
@@ -136,47 +137,45 @@ def get_day_of_week(d, m, y):
     m = int(m)
     y = int(y)
     if not is_date_correct(d, m, y):
-        return -1;
-    
+        return -1
+
     if m < 3:
         y -= 1
     c = int(y / 100)
     y %= 100
-    m -= 2; 
+    m -= 2
     if m < 1:
         m += 12
-    W = (d + int((13 * m - 1)/5) + y + int(y / 4) + int(c / 4) - 2 * c) % 7
-    if W <= 0: 
-        W +=7
-    return W;
-
+    W = (d + int((13 * m - 1) / 5) + y + int(y / 4) + int(c / 4) - 2 * c) % 7
+    if W <= 0:
+        W += 7
+    return W
 
 
 def Pascha(year):
     '''
     Вычисляем дату православной Пасхи
     '''
-    a = year % 4 
+    a = year % 4
     b = year % 7
-    c = year % 19 
-    d = ( 19 * c + 15 ) % 30
-    e = ( 2 * a + 4 * b - d + 34 ) % 7
+    c = year % 19
+    d = (19 * c + 15) % 30
+    e = (2 * a + 4 * b - d + 34) % 7
     month = 3 + int((d + e + 21) / 31)
-    day = ( d + e + 21 ) % 31 + 1
-    
+    day = (d + e + 21) % 31 + 1
+
     #Переход на григорианский календаь в России состаялся 26.01.1918г.
     #Ввод григорианского календаря в католических странах 5.10.1582г.
     #Вот тут надо подумать, какую дату ставить в сравнение?
     #Дата более ранняя - выдаём дату по юлианскому календарю
-    if date_compare(day, month, year, 5, 10, 1582)>=0:
+    if date_compare(day, month, year, 5, 10, 1582) >= 0:
         return [day, month, year]
-    
+
     #Если дата более поздняя - пересчитываем на григорианский календарь
     delta = int(year / 100) - int(c / 4) - 2
     day, month, year = date_shift(day, month, year, delta)
     #Ближайшее раннее воскресенье
     a = get_day_of_week(day, month, year)
-    if (a<7):
-        day, month, year = date_shift(day, month, year, -a);
-    return [day, month, year]
-    
+    if (a < 7):
+        day, month, year = date_shift(day, month, year, -a)
+    return (day, month, year)
