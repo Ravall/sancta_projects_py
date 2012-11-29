@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from tools.testutil import data_provider
-
+import tools.date as date
 from tools.smartfunction import FullFormula, EnumFormula, DiapasonFormula,\
     SmartFormula, BlasFormula, BlasYearFormula, SimpleDateFormula,\
     FormulaException, Formula
+
 
 
 class FormulaTest(TestCase):
@@ -162,6 +163,30 @@ class FullFormulaTest(TestCase):
         formula_obj.data_filter(d_filter)
         self.assertEquals(result_dates_list, formula_obj.dates_list)
 
+    def provider_generatelist():
+        return (
+            (
+                '[29.10~4.11|0000011]', 2012,
+                [(3, 11, 2012), (4, 11, 2012)]
+            ),
+            (
+                '29.10~4.11|0100011|1,2', 2012,
+                [
+                    (30, 10, 2012), (3, 11, 2012)
+                ]
+            ),
+        )
+
+    @data_provider(provider_generatelist)
+    def test_generatelist(self, formula, year, dates_list):
+        formula_obj = FullFormula(formula, year)
+        try:
+            formula_obj.generatelist()
+            d_list = formula_obj.dates_list
+        except FormulaException:
+            d_list = False
+        self.assertEquals(d_list, dates_list)
+
 
 class EnumFormulaTest(TestCase):
     def provider_explain():
@@ -190,6 +215,38 @@ class EnumFormulaTest(TestCase):
     @data_provider(provider_is_formula)
     def test_is_formula(self, formula, result):
         self.assertEquals(EnumFormula.is_formula(formula), result)
+
+    def provider_generatelist():
+        c_year = date.get_current_year()
+        return (
+            (
+                '12.01,14.01', 2010,
+                [(12, 1, 2010), (14, 1, 2010)]
+            ),
+            (
+                '[30.01~3.02],5.02', 2010,
+                [
+                    (30, 1, 2010), (31, 1, 2010), (1, 2, 2010),
+                    (2, 2, 2010), (3, 2, 2010), (5, 2, 2010)
+                ]
+            ),
+            (
+                '{b},3.01', None,
+                [
+                    (1, 1, c_year), (3, 1, c_year)
+                ]
+            ),
+        )
+
+    @data_provider(provider_generatelist)
+    def test_generatelist(self, formula, year, dates_list):
+        formula_obj = EnumFormula(formula, year)
+        try:
+            formula_obj.generatelist()
+            d_list = formula_obj.dates_list
+        except FormulaException:
+            d_list = False
+        self.assertEquals(d_list, dates_list)
 
 
 class DiapasonFormulaTest(TestCase):
@@ -302,6 +359,44 @@ class DiapasonFormulaTest(TestCase):
         formula_obj.diapason([date1], [date2])
         self.assertEquals(formula_obj.dates_list, dates_list)
 
+    def provider_generatelist():
+        c_year = date.get_current_year()
+        return (
+            (
+                '12.01~14.01', 2010,
+                [(12, 1, 2010), (13, 1, 2010), (14, 1, 2010)]
+            ),
+            (
+                '30.01~3.02', 2010,
+                [
+                    (30, 1, 2010), (31, 1, 2010), (1, 2, 2010),
+                    (2, 2, 2010), (3, 2, 2010)
+                ]
+            ),
+            (
+                '{b}~3.01', None,
+                [
+                    (1, 1, c_year), (2, 1, c_year), (3, 1, c_year)
+                ]
+            ),
+            (
+                '10<11.12~3.12', 2010,
+                [(1, 12, 2010), (2, 12, 2010), (3, 12, 2010)]
+            ),
+
+        )
+
+    @data_provider(provider_generatelist)
+    def test_generatelist(self, formula, year, dates_list):
+        formula_obj = DiapasonFormula(formula, year)
+        try:
+            formula_obj.generatelist()
+            d_list = formula_obj.dates_list
+        except FormulaException:
+            d_list = False
+        self.assertEquals(d_list, dates_list)
+
+
 
 class SmartFormulaTest(TestCase):
     def provider_is_formula():
@@ -325,6 +420,27 @@ class SmartFormulaTest(TestCase):
     @data_provider(provider_explain)
     def test_explain(self, formula, f_list):
         self.assertEquals(SmartFormula.explain(formula), f_list)
+
+    def provider_generatelist():
+        return (
+            ('{b}', 2010, [(1, 1, 2010)]),
+            ('{b(2011)}', 2010, [(1, 1, 2011)]),
+            ('{e}', None, [(31, 12, date.get_current_year())]),
+            ('{e(2000)}', None, [(31, 12, 2000)]),
+            ('{Pascha}', 2000, [date.Pascha(2000)]),
+            ('{Pascha}', None, [date.Pascha(date.get_current_year())]),
+        )
+
+    @data_provider(provider_generatelist)
+    def test_generatelist(self, formula, year, dates_list):
+        formula_obj = SmartFormula(formula, year)
+        try:
+            formula_obj.generatelist()
+            d_list = formula_obj.dates_list
+        except FormulaException:
+            d_list = False
+        self.assertEquals(d_list, dates_list)
+
 
 class BlasFormulaTest(TestCase):
     def provider_is_formula():
@@ -357,6 +473,23 @@ class BlasFormulaTest(TestCase):
         self.assertEquals(days, _days)
         self.assertEquals(subformula, _subformula)
 
+    def provider_generatelist():
+        return (
+            ('12>11.02', 2010, [(23, 2, 2010)]),
+            ('20<11.02.+10', None, [(22, 1, date.get_current_year()+10)]),
+            ('1>28.02', 2000, [(29, 2, 2000)]),
+            ('2>28.02', 2000, [(1, 3, 2000)]),
+        )
+
+    @data_provider(provider_generatelist)
+    def test_generatelist(self, formula, year, dates_list):
+        formula_obj = BlasFormula(formula, year)
+        try:
+            formula_obj.generatelist()
+            d_list = formula_obj.dates_list
+        except FormulaException:
+            d_list = False
+        self.assertEquals(d_list, dates_list)
 
 class BlasYearFormulaTest(TestCase):
     def provider_is_formula():
@@ -387,6 +520,25 @@ class BlasYearFormulaTest(TestCase):
         self.assertEquals(year, _year)
         self.assertEquals(subformula, _subformula)
 
+    def provider_generatelist():
+        return (
+            ('11.02.+1', 2010, [(11, 2, 2011)]),
+            ('11.02.-2', '2010', [(11, 2, 2008)]),
+            ('11.02.+10', None, [(11, 2, date.get_current_year()+10)]),
+            ('29.02.+1', 1999, [(29, 2, 2000)]),
+            ('29.02.-1', 2000, False),
+        )
+
+    @data_provider(provider_generatelist)
+    def test_generatelist(self, formula, year, dates_list):
+        formula_obj = BlasYearFormula(formula, year)
+        try:
+            formula_obj.generatelist()
+            d_list = formula_obj.dates_list
+        except FormulaException:
+            d_list = False
+        self.assertEquals(d_list, dates_list)
+
 
 class SimpleDateFormulaTest(TestCase):
     def provider_is_formula():
@@ -408,7 +560,7 @@ class SimpleDateFormulaTest(TestCase):
     def provider_explain():
         return (
             ('11.01.2011', '11', '01', '2011'),
-            ('15.06', '15', '06', None),
+            ('15.06', '15', '06', '0'),
         )
 
     @data_provider(provider_explain)
@@ -418,6 +570,21 @@ class SimpleDateFormulaTest(TestCase):
             [day, month, year]
         )
 
+    def provider_generatelist():
+        return (
+            ('11.02', 2010, [(11, 2, 2010)]),
+            ('11.02', '2010', [(11, 2, 2010)]),
+            ('11.02', None, [(11, 2, date.get_current_year())]),
+            ('29.02', 2000, [(29, 2, 2000)]),
+            ('29.02', 2001, False),
+        )
 
-
-
+    @data_provider(provider_generatelist)
+    def test_generatelist(self, formula, year, dates_list):
+        formula_obj = SimpleDateFormula(formula, year)
+        try:
+            formula_obj.generatelist()
+            d_list = formula_obj.dates_list
+        except FormulaException:
+            d_list = False
+        self.assertEquals(d_list, dates_list)

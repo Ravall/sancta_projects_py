@@ -76,14 +76,12 @@ def get_current_year():
     return int(dt.strftime('%Y'))
 
 
-def is_date_correct(d, m, y=None):
+def is_date_correct(d, m, y=0):
     '''
     Проверяем дату на корректность
     '''
-    d = int(d)
-    m = int(m)
-    y = int(y)
-    if y is None:
+    d, m, y = map(int, [d, m, y])
+    if not y:
         y = get_current_year()
     if d is None or m is None or not str(y).isdigit():
         return 0
