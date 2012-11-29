@@ -475,10 +475,8 @@ class FullFormula(Formula):
         if not w_filter:
             w_filter = '1111111'
         if not d_filter:
-            d_filter = 0
-        parts = [formula, w_filter, d_filter]
-        FullFormula.check(parts)
-        return parts
+            d_filter = '0'
+        return [formula, w_filter, d_filter]
 
     def week_filter(self, w_filter):
         '''
@@ -508,7 +506,7 @@ class FullFormula(Formula):
             lambda x: x + len(self.dates_list) if x < 0 else x - 1,
             positions
         )
-        for i in range(len(dates_list))[::-1]:
+        for i in range(len(self.dates_list))[::-1]:
             if not i in positions:
                 del self.dates_list[i]
 
@@ -529,6 +527,7 @@ class FullFormula(Formula):
 
     def generatelist(self):
         formula, w_filter, d_filter = FullFormula.explain(full_formula)
+        FullFormula.check(formula, w_filter, d_filter)
         formula_obj = FormulaFactory.getClass(formula)
         formula_obj.generatelist()
         self.dates_list = formula_obj.dates_list

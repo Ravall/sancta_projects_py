@@ -35,11 +35,11 @@ class FullFormulaTest(TestCase):
              ",[{be}|1000000]|1100111|1,2,3",
              '1100111', '1,2,3', '12.01,12.15.01~[12<{Pascha}~18<{Pascha}||1],[{be}|1000000]'),
             ('12.01~[12.02~13.04|100000]|1100001',
-             '1100001', '', '12.01~[12.02~13.04|100000]'),
-            ('19.01|1111111', '1111111', '', '19.01'),
-            ('19.01||0', '', '0', '19.01'),
-            ('12.01~[12.02~13.04|100000]', '', '', '12.01~[12.02~13.04|100000]'),
-            ('19.01', '', '', '19.01'),
+             '1100001', '0', '12.01~[12.02~13.04|100000]'),
+            ('19.01|1111111', '1111111', '0', '19.01'),
+            ('19.01||0', '1111111', '0', '19.01'),
+            ('12.01~[12.02~13.04|100000]', '1111111', '0', '12.01~[12.02~13.04|100000]'),
+            ('19.01', '1111111', '0', '19.01'),
         )
 
     @data_provider(provider_explain)
@@ -80,10 +80,7 @@ class FullFormulaTest(TestCase):
     def test_check(self, formula, correct):
         try:
             formula_obj = FullFormula(formula)
-            formula, w_filter, d_filter = FullFormula.explain(formula)
-            FullFormula.w_filter = w_filter
-            FullFormula.d_filter = d_filter
-            formula_obj.check()
+            formula_obj.check(*FullFormula.explain(formula))
             is_correct = True
         except FormulaException:
             is_correct = False
@@ -133,10 +130,9 @@ class FullFormulaTest(TestCase):
         # инициируем объект FullFormula с фильтром.
         # сама формула не важна, потому как список дат мы ниже внедрим
         formula_obj = FullFormula('xxx')
-        formula_obj.w_filter = w_filter
         # внедрим список дат
         formula_obj.dates_list = dates_list
-        formula_obj.week_filter()
+        formula_obj.week_filter(w_filter)
         self.assertEquals(
             result_dates_list, formula_obj.dates_list,
             'для фильтра {0} результат не верный. Получился {1}'.format(
@@ -162,9 +158,8 @@ class FullFormulaTest(TestCase):
     def test_data_filter(self, d_filter, dates_list, result_dates_list):
         #аналогично test_week_filter
         formula_obj = FullFormula('xxx')
-        formula_obj.d_filter = d_filter 
         formula_obj.dates_list = dates_list
-        formula_obj.data_filter()
+        formula_obj.data_filter(d_filter)
         self.assertEquals(result_dates_list, formula_obj.dates_list)
 
 
