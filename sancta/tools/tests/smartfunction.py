@@ -357,41 +357,6 @@ class BlasFormulaTest(TestCase):
         self.assertEquals(days, _days)
         self.assertEquals(subformula, _subformula)
 
-    def provider_check():
-        return (
-            ([(1, 12, 1983),], True),
-            ([(1, 12, 1983), (2, 12, 1983)], False),
-        )
-
-    @data_provider(provider_check)
-    def test_check(self, date_begin, correct):
-        try:
-            #просто левая формула
-            formula_obj = BlasFormula('12<12.01')
-            formula_obj.date_begin = date_begin
-            formula_obj.check()
-            is_correct = True
-        except FormulaException:
-            is_correct = False
-        self.assertEquals(is_correct, correct)
-
-
-    def provider_blas():
-        return (
-            ([(3, 11, 1983),], 2, (5, 11, 1983)),
-            ([(3, 11, 1983),], -4, (30, 10, 1983))
-        )
-
-
-    @data_provider(provider_blas)
-    def test_blas(self, date_begin, blas, dates_list):
-        #просто левая формула
-        formula_obj = BlasFormula('12<12.01')
-        formula_obj.date_begin = date_begin
-        formula_obj.blas = blas
-        formula_obj.process_blas()
-        self.assertEquals(formula_obj.dates_list, dates_list)
-
 
 class BlasYearFormulaTest(TestCase):
     def provider_is_formula():

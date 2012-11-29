@@ -206,25 +206,15 @@ class BlasFormula(Formula):
         sub_formula = parts[2]
         return (blas, sub_formula)
 
-    def check(self, date_begin):
-        '''
-        смещаемая формула должна быть датой одной
-        '''
-        if len(self.date_begin) != 1:
-            raise FormulaException('Дата не должны быть списком')
 
     def generatelist(self):
         blas, formula = BlasFormula.explain(self.formula)
         formula_obj = FormulaFactory.getClass(formula)
         formula_obj.generatelist()
+        if len(formula_obj.dates_list) != 1:
+            raise FormulaException('Дата не должны быть списком')
         date_begin = formula_obj.dates_list[0]
-        self.check(date_begin)
-        self.blas(date_begin)
-
-    def blas(self, date_begin):
-        self.dates_list = [date.date_shift(*date_begin + (self.blas,))]
-
-    
+        self.dates_list = [date.date_shift(*date_begin + (blas,))]
         
 
 

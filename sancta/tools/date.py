@@ -49,11 +49,7 @@ def date_shift(day, month, year, shift):
     '''
     Сдвигает дату на $shift дней
     '''
-    day = int(day)
-    month = int(month)
-    year = int(year)
-    shift = int(shift)
-
+    day, month, year, shift = map(int, [day, month, year, shift])
     if not shift:
         return (day, month, year)
     day += shift
@@ -62,16 +58,13 @@ def date_shift(day, month, year, shift):
         if month < 1:
             month = 12
             year -= 1
-
         day += num_days_in_month(month, year)
-
     while day > num_days_in_month(month, year):
         day -= num_days_in_month(month, year)
         month += 1
         if month > 12:
             month = 1
             year += 1
-
     return (day, month, year)
 
 
@@ -163,14 +156,12 @@ def Pascha(year):
     e = (2 * a + 4 * b - d + 34) % 7
     month = 3 + int((d + e + 21) / 31)
     day = (d + e + 21) % 31 + 1
-
     #Переход на григорианский календаь в России состаялся 26.01.1918г.
     #Ввод григорианского календаря в католических странах 5.10.1582г.
     #Вот тут надо подумать, какую дату ставить в сравнение?
     #Дата более ранняя - выдаём дату по юлианскому календарю
     if date_compare(day, month, year, 5, 10, 1582) >= 0:
         return [day, month, year]
-
     #Если дата более поздняя - пересчитываем на григорианский календарь
     delta = int(year / 100) - int(c / 4) - 2
     day, month, year = date_shift(day, month, year, delta)
