@@ -132,7 +132,9 @@ class Formula(object):
         '''
         сортировка
         '''
-        self.dates_list.sort(key=lambda date: '{2:02d}-{1:02d}-{0:02d}'.format(*date))
+        self.dates_list.sort(
+            key=lambda date: '{2:02d}-{1:02d}-{0:02d}'.format(*date)
+        )
 
 
 class SimpleDateFormula(Formula):
@@ -179,8 +181,6 @@ class BlasFormula(Formula):
     умная форумула выраженная смещением
     12>12.01
     '''
-    blas = 0
-    date_begin = None
 
     @staticmethod
     def is_formula(formula):
@@ -206,27 +206,26 @@ class BlasFormula(Formula):
         sub_formula = parts[2]
         return (blas, sub_formula)
 
-    def check(self):
+    def check(self, date_begin):
         '''
         смещаемая формула должна быть датой одной
         '''
         if len(self.date_begin) != 1:
             raise FormulaException('Дата не должны быть списком')
 
-    def get_list(self):
-        formula_obj = FormulaFactory.getClass(self.formula)
-        self.date_begin = formula_obj.get_list()
-        self.check()
-        self.process_blas()
-        self.sort_dates_list()
-        return self.dates_list
+    def generatelist(self):
+        blas, formula = BlasFormula.explain(self.formula)
+        formula_obj = FormulaFactory.getClass(formula)
+        formula_obj.generatelist()
+        date_begin = formula_obj.dates_list[0]
+        self.check(date_begin)
+        self.blas(date_begin)
 
-    def process_blas(self):
-        date_begin = self.date_begin[0]
-        self.dates_list = date.date_shift(*date_begin + (self.blas,))
+    def blas(self, date_begin):
+        self.dates_list = [date.date_shift(*date_begin + (self.blas,))]
 
-    def __init__(self, formula):
-        self.blas, self.formula = BlasFormula.explain(formula)
+    
+        
 
 
 class SmartFormula(Formula):
@@ -332,12 +331,12 @@ class DiapasonFormula(Formula):
         проверить что части - есть одиночные даты
         проверить что первое число меньше второго
         '''
-        if len(self.dates1) != 1 or len(self.dates2) != 1:
+        if len(dates1) != 1 or len(dates2) != 1:
             raise FormulaException('Даты не должны быть списком')
-        if date.date_compare(*self.dates1[0] + self.dates2[0]) <= 0:
+        if date.date_compare(*dates1[0] + dates2[0]) <= 0:
             raise FormulaException('Вторая дата должна быть старше')
 
-    def diapason(dates1, dates2):
+    def diapason(self, dates1, dates2):
         # cгенерируем список
         self.dates_list = dates1
         current_date = dates1[0]
@@ -453,6 +452,10 @@ class FullFormula(Formula):
         и саму основную формулу
         '''
         #получить хвост формулы
+        if FullFormula.is_formula(full_formula):
+            # если формула представлена в виде полной формулы
+            # то уберем оборачивающие символы
+            full_formula = full_formula[1:-1]
         tmp_formula = re.sub('\[.*\]', '*', full_formula)
         filters_cnt = tmp_formula.count('|')
         if filters_cnt > 2:
@@ -467,28 +470,36 @@ class FullFormula(Formula):
         formula = re.sub(
             '\|{0}\|{1}$'.format(w_filter, d_filter), '', full_formula
         )
-        return [formula, w_filter, d_filter]
+        # если фильтры выделить не удалось 
+        # - используем значения по умолчанию
+        if not w_filter:
+            w_filter = '1111111'
+        if not d_filter:
+            d_filter = 0
+        parts = [formula, w_filter, d_filter]
+        FullFormula.check(parts)
+        return parts
 
-    def week_filter(self):
+    def week_filter(self, w_filter):
         '''
         фильтр дня недели
         '''
-        if self.w_filter == '1111111':
+        if w_filter == '1111111':
             return
-        if self.w_filter == '0000000':
+        if w_filter == '0000000':
             self.dates_list = []
             return
         # проходимся с конца массива дат
         for i in range(len(self.dates_list))[::-1]:
             # если дата не соответсвует маске, тоудаляем ее
-            if self.w_filter[date.get_day_of_week(*self.dates_list[i]) - 1] == '0':
+            if w_filter[date.get_day_of_week(*self.dates_list[i]) - 1] == '0':
                 del self.dates_list[i]
 
-    def data_filter(self):
+    def data_filter(self, d_filter):
         '''
         фильтр данных
         '''
-        positions = map(int, self.d_filter.split(','))
+        positions = map(int, d_filter.split(','))
         # если есть указатель всех данных - то возвращаем без изменений
         if 0 in positions:
             return
@@ -497,39 +508,30 @@ class FullFormula(Formula):
             lambda x: x + len(self.dates_list) if x < 0 else x - 1,
             positions
         )
-        for i in range(len(self.dates_list))[::-1]:
+        for i in range(len(dates_list))[::-1]:
             if not i in positions:
                 del self.dates_list[i]
 
-    def check(self):
+    @staticmethod
+    def check(formula, w_filter, d_filter):
         '''
         проверка что все корректно
         проверка выполняется для данных полученных explain
         '''
-        if not self.formula:
+        if not formula:
             raise FormulaException('формула должна быть получена')
         #убедимся что фильтры корректны
-        if self.w_filter and not re.search('^[0,1]{7}$', self.w_filter):
+        if w_filter and not re.search('^[0,1]{7}$', w_filter):
             raise FormulaException('фильтр дня недели не корректен')
-        if self.d_filter and not re.search('^(-?\d+,)*-?\d+$', self.d_filter):
+        if d_filter and not re.search('^(-?\d+,)*-?\d+$', d_filter):
             raise FormulaException('фильтр данных не корректен')
 
+
     def generatelist(self):
-        if FullFormula.is_formula(full_formula):
-            # если формула представлена в виде полной формулы
-            # то уберем оборачивающие символы
-            full_formula = full_formula[1:-1]
-        # разложим
         formula, w_filter, d_filter = FullFormula.explain(full_formula)
-        if w_filter:
-            self.w_filter = w_filter
-        if d_filter:
-            self.d_filter = d_filter
-        # проверим
-        self.check()
         formula_obj = FormulaFactory.getClass(formula)
         formula_obj.generatelist()
         self.dates_list = formula_obj.dates_list
         # фильтруем
-        self.week_filter()
-        self.data_filter()
+        self.week_filter(w_filter)
+        self.data_filter(d_filter)
