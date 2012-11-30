@@ -75,7 +75,6 @@ import re
 import tools.date as date
 
 
-
 class FormulaException(Exception):
     '''
     исключение при вычислении формулы
@@ -110,8 +109,13 @@ def formula_factory(formula, year):
         formula_obj = SimpleDateFormula(formula, year)
     # во всех остальных случаях
     else:
-        raise FormulaException('формула не определена')
+        raise FormulaException(
+            'формула {0} не определена'.format(
+                formula
+            )
+        )
     return formula_obj
+
 
 def smart_function(formula, year):
     '''
@@ -119,11 +123,11 @@ def smart_function(formula, year):
     '''
     try:
         formula_obj = formula_factory(formula, year)
-        formula_obj.process()
         formula_obj.generatelist()
         formula_obj.sort_dates_list()
         dates_list = formula_obj.dates_list
-    except FormulaException:
+    except FormulaException as e:
+        print e
         dates_list = []
     return dates_list
 
@@ -495,12 +499,36 @@ class FullFormula(Formula):
     d_filter = '0'
 
     @staticmethod
-    def is_formula(full_formula):
+    def is_full_formula(full_formula):
         '''
         проверяем что строка является полной формулой
         - т.е обернута в []
         '''
         return full_formula[0] == '[' and full_formula[-1] == ']'
+
+    @staticmethod
+    def is_formula(formula):
+        '''
+        полная формула - это формула с фильтрами
+        или что-то полностью обернутое в []
+        '''
+        level = 0
+        some_filter, some_alfa = False, False
+        for alfa in formula:
+            if alfa == '[':
+                level += 1
+            elif alfa == ']':
+                level -= 1
+            elif not level:
+                some_alfa = True
+            # если запятая и мы не ушли вглубь другой формулы
+            # - то считаем, что началась новая форумал
+            if alfa == '|' and not level:
+                return True
+        # если полностью обернута в []
+        if FullFormula.is_full_formula(formula) and not some_alfa:
+            return True
+        return False
 
     @staticmethod
     def explain(full_formula):
@@ -513,7 +541,7 @@ class FullFormula(Formula):
         и саму основную формулу
         '''
         #получить хвост формулы
-        if FullFormula.is_formula(full_formula):
+        if FullFormula.is_full_formula(full_formula):
             # если формула представлена в виде полной формулы
             # то уберем оборачивающие символы
             full_formula = full_formula[1:-1]
@@ -521,7 +549,11 @@ class FullFormula(Formula):
         filters_cnt = tmp_formula.count('|')
         if filters_cnt > 2:
             #возможны лишь два фильтра
-            raise FormulaException('Количество фильтров превышает 2')
+            raise FormulaException(
+                'Количество фильтров превышает 2 для формулы {0}'.format(
+                    full_formula
+                )
+            )
         # дополним временную и полную формулу
         tmp_formula = tmp_formula + "|" * (2 - filters_cnt)
         full_formula = full_formula + "|" * (2 - filters_cnt)

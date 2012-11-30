@@ -4,6 +4,7 @@ from tools.testutil import data_provider
 import tools.date as date
 import datetime
 
+
 class DateTest(TestCase):
     def provider_is_leap_year():
         return (
@@ -72,6 +73,7 @@ class DateTest(TestCase):
             ('10.1911', 31),
             ('11.1911', 30),
             ('12.1911', 31),
+            ('2.2012', 29),
         )
 
     @data_provider(provider_num_days_in_month)
@@ -79,9 +81,12 @@ class DateTest(TestCase):
         '''
         тестируем вычисление количества дней в месяце
         '''
+        result = date.num_days_in_month(*month_year.split('.'))
         self.assertEquals(
-            date.num_days_in_month(*month_year.split('.')), days,
-            '{0} должно быть {1} дней'.format(month_year, days)
+            result, days,
+            '{0} должно быть {1} дней, а получилось {2}'.format(
+                month_year, days, result
+            )
         )
 
     def provider_date_shift():
@@ -93,7 +98,7 @@ class DateTest(TestCase):
             ('20.2.2001', 20, '12.3.2001'),
             ('20.2.2001', 50, '11.4.2001'),
             ('23.12.1983', 10, '2.1.1984'),
-
+            ('15.4.2012', -48, '27.2.2012'),
         )
 
     @data_provider(provider_date_shift)
@@ -176,8 +181,6 @@ class DateTest(TestCase):
         message = 'в {0} году пасха должна приходится на {1}'\
                   ' а получается на {2}'.format(year, day, result)
         self.assertEquals(result, day, message)
-        
-
 
     def test_get_current_year(self):
         '''

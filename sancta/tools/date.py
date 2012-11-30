@@ -2,11 +2,18 @@
 import datetime
 
 
+def yyyy_mm_dd(date):
+    '''
+    удобный формат
+    '''
+    return '{2:02d}.{1:02d}.{0:02d}'.format(*date)
+
+
 def is_leap_year(year):
     '''
     Проверяем год на високосность
     '''
-    return (not int(year) % 4 and int(year) % 100) or not int(year) % 400
+    return bool(not int(year) % 4 and int(year) % 100) or not int(year) % 400
 
 
 def date_compare(d1, m1, y1, d2, m2, y2):
