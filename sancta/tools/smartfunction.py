@@ -146,9 +146,7 @@ class Formula(object):
         '''
         сортировка
         '''
-        self.dates_list.sort(
-            key=lambda date: '{2:02d}-{1:02d}-{0:02d}'.format(*date)
-        )
+        self.dates_list.sort(key=lambda dt: date.yyyy_mm_dd(dt))
 
 
 class SimpleDateFormula(Formula):
@@ -297,13 +295,11 @@ class SmartFormula(Formula):
             s_formula, year = formula, None
         return [s_formula, year]
 
-
-    def process(self, year, sub_formula):
+    @staticmethod
+    def process(sub_formula, year):
         '''
         Преобразуем смарт фунцию
         '''
-        if not year:
-            year = self.year
         if sub_formula == 'be':
             formula_obj = DiapasonFormula('01.01~31.12', year)
         elif sub_formula == 'b':
@@ -316,7 +312,9 @@ class SmartFormula(Formula):
                 '{0:02d}.{1:02d}.{2:02d}'.format(*pascha), year
             )
         else:
-            raise FormulaException('Неопределенная формула')
+            raise FormulaException(
+                'Неопределенная формула {0}'.format(sub_formula)
+            )
         return formula_obj
 
     def generatelist(self):
@@ -324,8 +322,8 @@ class SmartFormula(Formula):
         создание списка дат
         '''
         sub_formula, year = SmartFormula.explain(self.formula)
-        if not sub_formula in ('be', 'b', 'e', 'Pascha'):
-            raise FormulaException('Неопределенная формула')
+        if not year:
+            year = self.year
         formula_obj = self.process(sub_formula, year)
         formula_obj.generatelist()
         self.dates_list = formula_obj.dates_list
