@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# исторический код уберем проверку C0103 на короткие имена
+# pylint: disable=C0103
+
 import datetime
 
 

@@ -126,8 +126,7 @@ def smart_function(formula, year):
         formula_obj.generatelist()
         formula_obj.sort_dates_list()
         dates_list = formula_obj.dates_list
-    except FormulaException as e:
-        print e
+    except FormulaException:
         dates_list = []
     return dates_list
 
@@ -513,7 +512,7 @@ class FullFormula(Formula):
         или что-то полностью обернутое в []
         '''
         level = 0
-        some_filter, some_alfa = False, False
+        some_alfa = False
         for alfa in formula:
             if alfa == '[':
                 level += 1
