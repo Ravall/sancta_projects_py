@@ -22,7 +22,7 @@ def cc_smart_function(function):
     '''
     удалим кэш для дат фунции
     '''
-    for year in range(settings.SMART_FUNCTION_YEAR_BEGIN, 
+    for year in range(settings.SMART_FUNCTION_YEAR_BEGIN,
                       settings.SMART_FUNCTION_YEAR_END):
         # для каждого года получим дату
         for date in smart_function(function, year):
@@ -33,12 +33,13 @@ def cc_smart_function(function):
 
 
 def remove_cach_file_by_url(url):
+    url += '?format=json'
     logger = logging.getLogger('sancta_log')
     logger.info('чистим кэш по урлу {0}'.format(url))
     file_name = md5(url).hexdigest()
     file_path = os.path.abspath(os.path.join(settings.NGINX_CACHE, file_name))
     try:
-        os.remove(file_path)    
+        os.remove(file_path)
     except:
         pass
 
