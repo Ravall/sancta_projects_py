@@ -9,7 +9,7 @@ def yyyy_mm_dd(date):
     '''
     удобный формат
     '''
-    return '{2:02d}.{1:02d}.{0:02d}'.format(*date)
+    return '{2:02d}-{1:02d}-{0:02d}'.format(*date)
 
 
 def is_leap_year(year):

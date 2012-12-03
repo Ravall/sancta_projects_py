@@ -119,7 +119,16 @@ INSTALLED_APPS = (
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '[%(levelname)s|%(asctime)s] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -130,6 +139,14 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': os.path.abspath(
+                os.path.join(_PATH, '../', 'files', 'logs', 'sancta.log')
+            ),
+            'formatter': 'simple'
         }
     },
     'loggers': {
@@ -138,16 +155,23 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'sancta_log' : {
+            'handlers': ['log_file'],
+            'level': 'ERROR',
+            'propagate': True,
+        }
     }
 }
 
 djcelery.setup_loader()
-BROKER_URL = 'amqp://'
-#BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
-BROKER_BACKEND = "amqp"
+#BROKER_URL = 'amqp://'
+BROKER_URL = 'django://'
+BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
+#BROKER_BACKEND = "amqp"
 CELERY_IMPORTS = ("mf_system.celery_tasks",)
 
 # года, которые интересны для быстрой работы
 # по ним оперативно чистится кэш, оперативно выбираются события
 SMART_FUNCTION_YEAR_BEGIN = 1950
 SMART_FUNCTION_YEAR_END = 2050
+NGINX_CACHE = ''
