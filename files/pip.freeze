@@ -7,3 +7,5 @@ python-daemon==1.6
 djangorestframework==0.4.0
 trans==1.5.1
 django-debug-toolbar
+celery==3.0.12
+South==0.7.6

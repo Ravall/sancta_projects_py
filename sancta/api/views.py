@@ -6,7 +6,8 @@ from djangorestframework.response import Response
 from djangorestframework import status
 from mf_calendar import models as calendar_model
 from tools import api
-from random import shuffle
+
+
 class CalendarView(View):
     '''
     Выводит информацию о дне календаря.

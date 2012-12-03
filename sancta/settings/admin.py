@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from settings_common import *
+from settings_common import *	
 from databases import DATABASES
 TEMPLATE_DEBUG = True
 

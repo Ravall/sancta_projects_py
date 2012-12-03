@@ -2,20 +2,21 @@
 # Django settings for sancta project.
 import os
 import platform
+# celery
+import djcelery
 
-_PATH = os.path.abspath(os.path.dirname(__file__)+'/../')
-
+_PATH = os.path.abspath(os.path.dirname(__file__) + '/../')
 # DEBUG должен находится тут
 DEBUG = platform.node() != 'sancta'
-
 ADMINS = (
     ('Ravall', 'valery.ravall@gmail.com'),
 )
 MANAGERS = ADMINS
 
 
-DATABASE_ROUTERS=['sancta.db_router.Sancta_Router',]
-
+DATABASE_ROUTERS = [
+    'sancta.db_router.Sancta_Router',
+]
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -76,7 +77,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -112,11 +113,22 @@ INSTALLED_APPS = (
     'api',
     'djangorestframework',
     'tools',
+    'djcelery',
+    'kombu.transport.django',
 )
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '[%(levelname)s|%(asctime)s] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -127,6 +139,14 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': os.path.abspath(
+                os.path.join(_PATH, '../', 'files', 'logs', 'sancta.log')
+            ),
+            'formatter': 'simple'
         }
     },
     'loggers': {
@@ -135,6 +155,23 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'sancta_log' : {
+            'handlers': ['log_file'],
+            'level': 'ERROR',
+            'propagate': True,
+        }
     }
 }
 
+djcelery.setup_loader()
+#BROKER_URL = 'amqp://'
+BROKER_URL = 'django://'
+BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
+#BROKER_BACKEND = "amqp"
+CELERY_IMPORTS = ("mf_system.celery_tasks",)
+
+# года, которые интересны для быстрой работы
+# по ним оперативно чистится кэш, оперативно выбираются события
+SMART_FUNCTION_YEAR_BEGIN = 1900
+SMART_FUNCTION_YEAR_END = 2100
+NGINX_CACHE = '/home/var/cache/'
