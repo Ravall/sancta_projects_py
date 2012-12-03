@@ -172,6 +172,6 @@ CELERY_IMPORTS = ("mf_system.celery_tasks",)
 
 # года, которые интересны для быстрой работы
 # по ним оперативно чистится кэш, оперативно выбираются события
-SMART_FUNCTION_YEAR_BEGIN = 1950
-SMART_FUNCTION_YEAR_END = 2050
-NGINX_CACHE = ''
+SMART_FUNCTION_YEAR_BEGIN = 1900
+SMART_FUNCTION_YEAR_END = 2100
+NGINX_CACHE = '/home/var/cache/'
