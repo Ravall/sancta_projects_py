@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-from settings_common import *
+from common import *
+LOGGING['loggers']['sancta_log']['level'] = 'INFO'
 from databases_dev import DATABASES
 TEMPLATE_DEBUG = True
 ROOT_URLCONF = 'sancta.urls'
 WSGI_APPLICATION = 'sancta.wsgi.application'
-
+MEDIA_HOST='http://127.0.0.1:8000/media/'
 # django debug toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
 MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 INSTALLED_APPS += ('debug_toolbar',)
 
@@ -21,4 +25,4 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.logger.LoggingPanel',
 )
 INTERNAL_IPS = ('127.0.0.1',)
-
+NGINX_CACHE = '/tmp'

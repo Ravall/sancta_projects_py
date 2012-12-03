@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from mf_system import models as system_model
-from tools import extra
+from tools import extra, smartfunction
 
 
 # функции
@@ -11,6 +11,9 @@ class MfCalendarSmartFunction(models.Model):
 
     def __unicode__(self):
         return "%s" % self.smart_function
+
+    def getDates(self, year):
+        return smartfunction.generate(self.smart_function, year)
 
     class Meta:
         db_table = u'mf_calendar_smart_function'
@@ -40,12 +43,37 @@ class MfCalendarIcon(system_model.MfSystemObject):
         verbose_name = 'икона'
         verbose_name_plural = 'Иконы'
 
+class EventObjectManager(system_model.SystemObjectManager):
+    '''
+    расширим objects у MfCalendarEvent
+    присоединим к модели событие - данные о фунции.
+    '''
+    @staticmethod
+    def get_extra_for_event():
+        return {
+            'select': {
+                'smart_function': 'mf_calendar_smart_function.smart_function'
+            },
+            'tables': [
+                'mf_calendar_smart_function'
+            ],
+            'where': [
+                'mf_calendar_smart_function.id = mf_calendar_event.function_id'
+            ]
+        }
+    def get_query_set(self):
+        return super(EventObjectManager, self).get_query_set().extra(
+            **EventObjectManager.get_extra_for_event()
+        )
+
+    
 
 # события
 class MfCalendarEvent(system_model.MfSystemObject):
+
     function = models.ForeignKey(MfCalendarSmartFunction)
     periodic = models.IntegerField(null=True, blank=True)
-    objects = system_model.SystemObjectManager()
+    objects = EventObjectManager()
 
     def get_icons(self):
         return self.related_objects.filter(
