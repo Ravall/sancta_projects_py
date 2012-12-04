@@ -16,16 +16,9 @@ class CalendarView(View):
         icons = calendar_model.MfCalendarIcon.get_by_events(
             [{'id': day.event_id} for day in days]
         )
-        # выделим "уникальные" иконы
-        # т.е от каждого события по одной иконе
-
-        unic_icons = {icon.event_id: icon for icon in icons}.values()
-
         return {
             # все иконы
             'icons': api.prepare_icons(icons),
-            # по одной иконе для event
-            'icons_unic': api.prepare_icons(unic_icons),
         }
 
     '''
