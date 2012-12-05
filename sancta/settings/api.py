@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from settings import *
+from common import *
 from databases import DATABASES
 TEMPLATE_DEBUG = False
 ROOT_URLCONF = 'sancta.urls_api'
