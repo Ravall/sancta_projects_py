@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 
+
 def prepare_text(obj):
     '''
     вывод текст
@@ -11,6 +12,7 @@ def prepare_text(obj):
         content=obj.content,
     )
 
+
 def prepare_icon(icon):
     '''
     подготавливает для вывода в словарь икону
@@ -20,16 +22,11 @@ def prepare_icon(icon):
         'event_id': icon.event_id,
         'text': prepare_text(icon),
         'image': icon.image,
-        'urls': {
-            'origin': '{host}origin/{image_name}'.format(
-                host=settings.MEDIA_HOST,
-                image_name=icon.image
-            ),
-            '150x200': '{host}crop/150x200/{image_name}'.format(
-                host=settings.MEDIA_HOST,
-                image_name=icon.image
-            )
-        }
+        'url': '{host}crop/*size*/{image_name}'.format(
+            host=settings.MEDIA_HOST,
+            image_name=icon.image
+        ),
+        'sizes': ['150x200', '600x800'],
     }
 
 
@@ -43,7 +40,7 @@ def prepare_event(event):
     '''
     return {
         'id': event.id,
-        'text':prepare_text(event),
+        'text': prepare_text(event),
         'image': event.image,
         'icons': prepare_icons(event.get_icons()),
     }
