@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import trans
 import os
-
+from hell import azazel
 from django.conf import settings
 
 
@@ -55,4 +55,6 @@ def handle_uploaded_file(request_file, icon_title):
     upload_file(request_file, new_filename)
     ## удаляем мета теги и перемещаем в новую папку
     os.system('exiftool -all= ' + new_filename)
+    # вызываем отложенное задание синхронизации
+    azazel.sync_folders.delay()
     return new_filename

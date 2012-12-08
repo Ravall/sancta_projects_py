@@ -8,7 +8,7 @@ from mf_calendar import models as calendar_model
 from mf_system import widget
 from tools import load_file, date
 from tools.smartfunction import FormulaException, formula_factory
-import celery_tasks
+from hell import sabnac
 
 
 
@@ -355,10 +355,10 @@ class MfCalendarEventAdmin(ObjectAdmin):
         if obj.smart_function != form.cleaned_data['smart_function']:
             logger.info('изменилась умная фунция')
             #очистим кеш по новой функции
-            celery_tasks.cc_smart_function.delay(cleaned_data['smart_function'])
+            sabnac.cc_smart_function.delay(cleaned_data['smart_function'])
         #очистим кеш и информацию о событии
-        celery_tasks.cc_smart_function.delay(obj.smart_function)
-        celery_tasks.cc_event_info.delay(obj.id)
+        sabnac.cc_smart_function.delay(obj.smart_function)
+        sabnac.cc_event_info.delay(obj.id)
         logger.info('save_model end')
 
 
