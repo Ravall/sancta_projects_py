@@ -168,7 +168,7 @@ djcelery.setup_loader()
 BROKER_URL = 'django://'
 BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 #BROKER_BACKEND = "amqp"
-CELERY_IMPORTS = ("mf_system.celery_tasks",)
+CELERY_IMPORTS = ("hell",)
 
 # года, которые интересны для быстрой работы
 # по ним оперативно чистится кэш, оперативно выбираются события

@@ -1,10 +1,14 @@
+# -*- coding: utf-8 -*-
+# pylint: disable=E1102
+
 '''
 САБНАК - демон, ответственный за гниение трупов.
 ------------
 удаляет старый кэш
-	cc_event_info	 	кэш информации о событии
-	cc_smart_function 	кэш для дат фунции
+    cc_event_info       кэш информации о событии
+    cc_smart_function   кэш для дат фунции
 '''
+
 import celery
 import os
 import logging
@@ -14,16 +18,18 @@ from django.conf import settings
 from tools.smartfunction import smart_function
 from djangorestframework.reverse import reverse
 
-@celery.task
-def cc_event_info(id):
+
+@celery.task(name='чистить кэш по event_id')
+def cc_event_info(event_id):
     '''
     удалим nginx кэш информации о событии
     '''
     _remove_cach_file_by_url(
-        reverse('event-api', kwargs={'num': id})
+        reverse('event-api', kwargs={'num': event_id})
     )
 
-@celery.task
+
+@celery.task(name='чистить кэш по датам')
 def cc_smart_function(function):
     '''
     удалим кэш для дат фунции
@@ -46,6 +52,5 @@ def _remove_cach_file_by_url(url):
     file_path = os.path.abspath(os.path.join(settings.NGINX_CACHE, file_name))
     try:
         os.remove(file_path)
-    except IOError:
+    except OSError:
         pass
-
