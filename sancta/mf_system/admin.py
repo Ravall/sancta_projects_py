@@ -1,40 +1,16 @@
 # -*- coding: utf-8 -*-
-import uuid
-import os
-
+import logging
 from django import forms
-from django.conf import settings
 from django.db import models
 from django.contrib import admin
-
-
 from mf_system import models as system_model
 from mf_calendar import models as calendar_model
 from mf_system import widget
+from tools import load_file, date
+from tools.smartfunction import FormulaException, formula_factory
+from hell import sabnac
 
-def handle_uploaded_file(request_file):
-    '''
-    загружаем файл из request, сохраняем с уникальным именем
-    очищаем exif данные
-    '''
-    def upload_file(request_file, new_filename):
-        '''
-        берем из request файл и грузим его в нужную папку
-        '''
-        destination = open(settings.ORIGIN_MEDIA_ROOT+'/'+new_filename, 'wb+')
-        for chunk in request_file.chunks():
-            destination.write(chunk)
-        destination.close()
 
-    # разделяем имя файла и его расширение
-    file_name_info = os.path.splitext(request_file.name)
-    # генерируем уникальное имя файла
-    new_filename = str(uuid.uuid4())+file_name_info[1]
-    # загружаем файл
-    upload_file(request_file, new_filename)
-    ## удаляем мета теги и перемещаем в новую папку
-    os.system('exiftool -all= ' + new_filename)
-    return new_filename
 
 
 class MfSystemRelationTypeAdmin(admin.ModelAdmin):
@@ -53,6 +29,10 @@ class EventRelatedInline(admin.TabularInline):
     model = calendar_model.MfCalendarEvent.related_objects.through
     fk_name = "parent_object"
     extra = 0
+
+    def queryset(self, request):
+        qs = super(EventRelatedInline, self).queryset(request)
+        return qs.filter(mf_object__status="active")
 
 
 class RelatedInlineEvent(EventRelatedInline):
@@ -101,6 +81,7 @@ class RelatedObjectsInlineIcons(EventRelatedInline):
         '''
         переопределим отображение некоторых полей в инлайн-форме икон
         '''
+
         if db_field.name == 'mf_object':
             kwargs['widget'] = widget.IconWidget()
         field = super(RelatedObjectsInlineIcons, self).formfield_for_dbfield(db_field, **kwargs)
@@ -163,15 +144,45 @@ class IconAdminForm(ObjectForm):
 class EventAdminForm(ObjectForm):
     # для икон. заголовок иконы и сама икона
     icon_file = forms.ImageField(required=False)
-    icon_title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'title'}), help_text=u"Название иконы")
-    alt_text = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'text'}), help_text=u"пропишется в alt картинки")
+    icon_title = forms.CharField(
+        required=False, 
+        widget=forms.TextInput(attrs={'class': 'title'}), 
+        help_text=u"Название иконы"
+    )
+    alt_text = forms.CharField(
+        required=False, 
+        widget=forms.TextInput(attrs={'class': 'text'}), 
+        help_text=u"пропишется в alt картинки"
+    )
+    smart_function = forms.CharField(
+        required=False, 
+        widget=forms.TextInput(attrs={'class': 'text'}), 
+        help_text=u"умная фунция им Алексея Клименко"
+    )
+    def clean_smart_function(self):
+        '''
+        валидация умной фунции
+        '''
+        try:
+            # возмем эту фунцию за текущий год
+            formula_obj = formula_factory(
+                self.cleaned_data['smart_function'],
+                date.get_current_year()
+            )
+            formula_obj.generatelist()
+        except FormulaException as exception:
+            raise forms.ValidationError(
+                'фунция не валидна: {0}'.format(exception)
+            )
+        return self.cleaned_data["smart_function"]
 
     def __init__(self, *args, **kwargs):
         super(EventAdminForm, self).__init__(*args, **kwargs)
         instance = kwargs['instance']
         self.set_initial(instance)
-        self.initial['icon_title'] = u'Икона '+self.initial['title']
-        self.initial['alt_text'] =  self.initial['annonce']
+        self.initial['icon_title'] = u'Икона ' + self.initial['title']
+        self.initial['alt_text'] = self.initial['annonce'].replace("\n", ' ')
+        self.initial['smart_function'] = instance.smart_function
     class Meta:
     	# указываем что эта таблица расширяет EventAdminForm
     	model = calendar_model.MfCalendarEvent
@@ -185,7 +196,10 @@ class ObjectAdmin(admin.ModelAdmin):
     readonly_fields = ('created', 'updated', 'created_class')
 
     def save_text(self, request, obj, form, change):
-        text = system_model.MfSystemObjectText.objects.get(system_object_id=obj.id,status=u'Active').system_text
+        text = system_model.MfSystemObjectText.objects.get(
+            system_object_id=obj.id,
+            status=u'Active'
+        ).system_text
         text.title = form.cleaned_data['title']
         text.annonce = form.cleaned_data['annonce']
         text.save()
@@ -195,27 +209,11 @@ class ObjectAdmin(admin.ModelAdmin):
         в формах унаследованных от ObjectAdmin (объект системный),
         удаление модели - приводит к изменению статуса объекта
         '''
-        system_model.MfSystemObject.objects.filter(pk=obj.id).update(status='deleted')
+        system_model.MfSystemObject\
+            .objects.filter(pk=obj.id).update(status='deleted')
 
     def get_title(self, object):
-        return object.text_active
-
-    def queryset(self, request):
-        '''
-        что бы безполезненно выудить заголовк события и не делать при этом по дополнительному
-        '''
-        result = super(ObjectAdmin, self) \
-                .queryset(request) \
-                .extra(
-                  select={'text_active':
-                    "select t.title \
-                     from mf_system_object_text ot \
-                     left join mf_system_text t on t.id = ot.system_text_id \
-                     where ot.system_object_id = %s.id \
-                     and ot.status = 'active'" % self.form.Meta.model._meta.db_table }
-                )
-        return result
-
+        return object.title
 
     class Media:
         css = {
@@ -268,16 +266,42 @@ class IconAdmin(ObjectAdmin):
 class MfCalendarEventAdmin(ObjectAdmin):
     def __init__(self, *args, **kwargs):
         super(MfCalendarEventAdmin, self).__init__(*args, **kwargs)
-        self.readonly_fields = self.readonly_fields+('function',)
+        #self.readonly_fields = self.readonly_fields+('function',)
 
     inlines = [
-        ObjectTextInline, RelatedObjectsInlineArticle, RelatedObjectsInlineIcons
+        ObjectTextInline, 
+        RelatedObjectsInlineArticle, 
+        RelatedObjectsInlineIcons
     ]
     fieldsets=(
-    	(None, {'fields':('title', 'function', 'periodic')}),
-    	('Контент', {'classes': ('collapse',),'fields':('annonce','content')}),
-    	('Настройки', {'classes': ('collapse',),'fields':('status', 'created','updated','created_class')}),
-    	('Икона', {'classes': ('collapse',),'fields':('icon_title', 'alt_text', 'icon_file')}),
+    	(
+            None, {
+                'fields': (
+                    'title', 'smart_function', 'periodic'
+                )
+            }
+        ),
+    	(
+            'Контент', {
+                'classes': ('collapse',),
+                'fields': ('annonce', 'content')
+            }
+        ),
+    	( 
+            'Настройки', {
+                'classes': ('collapse',),
+                'fields': (
+                    'status', 'created',
+                    'updated', 'created_class'
+                )
+            }
+        ),
+    	(
+            'Икона', {
+                'classes': ('collapse',),
+                'fields': ('icon_title', 'alt_text', 'icon_file')
+            }
+        ),
 
     )
     list_filter = (StatusObjectFilter,)
@@ -288,24 +312,54 @@ class MfCalendarEventAdmin(ObjectAdmin):
         if len(request.FILES) == 0:
             return None
         #сохраняем файл
-        file_name = handle_uploaded_file(request.FILES['icon_file'])
+        file_name = load_file.handle_uploaded_file(
+            request.FILES['icon_file'],
+            form.cleaned_data['icon_title']
+        )
         # создаем объект икона
-        icon = calendar_model.MfCalendarIcon(status='active', image=file_name, created_class='MfCalendarIcon')
+        icon = calendar_model.MfCalendarIcon(
+            status='active',
+            image=file_name,
+            created_class='MfCalendarIcon'
+        )
         icon.save()
         # создаем текст
-        icon_text = system_model.MfSystemText(title=form.cleaned_data['icon_title'],annonce=form.cleaned_data['alt_text'])
+        icon_text = system_model.MfSystemText(
+            title=form.cleaned_data['icon_title'],
+            annonce=form.cleaned_data['alt_text']
+        )
         icon_text.save()
         # привязываем текст к объекту
-        system_object_text = system_model.MfSystemObjectText(status='active', system_object=icon, system_text=icon_text)
+        system_object_text = system_model.MfSystemObjectText(
+            status='active', 
+            system_object=icon, 
+            system_text=icon_text
+        )
         system_object_text.save()
         # привязываем икону к редактируемому объекту
-        relation = system_model.MfSystemRelation(relation_id=2, parent_object = obj, mf_object=icon)
+        relation = system_model.MfSystemRelation(
+            relation_id=2, 
+            parent_object = obj, 
+            mf_object=icon
+        )
         relation.save()
+
 
     def save_model(self, request, obj, form, change):
     	super(MfCalendarEventAdmin, self).save_model(request, obj, form, change)
     	self.save_text(request, obj, form, change)
     	self.save_icon(request, obj, form, change)
+        #запускаем отложенную задачу "пост изменения события"
+        logger = logging.getLogger('sancta_log')
+        logger.info('сохранение события')
+        if obj.smart_function != form.cleaned_data['smart_function']:
+            logger.info('изменилась умная фунция')
+            #очистим кеш по новой функции
+            sabnac.cc_smart_function.delay(cleaned_data['smart_function'])
+        #очистим кеш и информацию о событии
+        sabnac.cc_smart_function.delay(obj.smart_function)
+        sabnac.cc_event_info.delay(obj.id)
+        logger.info('save_model end')
 
 
 
