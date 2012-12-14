@@ -118,6 +118,7 @@ class ObjectForm(forms.ModelForm):
     общий класс для дополнительных форм, модели которых отнаследованы от object
     '''
     title = forms.CharField(widget=forms.TextInput(attrs={'class':'title'}))
+    seo_url = forms.CharField(widget=forms.TextInput(attrs={'class':'text'}))
     annonce = forms.CharField(widget=forms.Textarea, required=False)
     content = forms.CharField(widget=forms.Textarea, required=False)
     exclude=('created_class',)
@@ -125,10 +126,14 @@ class ObjectForm(forms.ModelForm):
 
 
     def set_initial(self, instance):
-        text = system_model.MfSystemObjectText.objects.get(system_object_id=instance.id,status=u'Active').system_text
+        text = system_model.MfSystemObjectText.objects.get(
+            system_object_id=instance.id,
+            status=u'Active'
+        ).system_text
         self.initial['title'] = text.title
         self.initial['annonce'] = text.annonce
         self.initial['content'] = text.content
+        self.initial['seo_url'] = instance.url
 
 
 class IconAdminForm(ObjectForm):
@@ -204,6 +209,15 @@ class ObjectAdmin(admin.ModelAdmin):
         text.annonce = form.cleaned_data['annonce']
         text.save()
 
+    def save_seo(self, request, obj, form, change):
+        if form.cleaned_data.get('seo_url'):
+            obj.url = form.cleaned_data.get('seo_url')
+        else:
+            obj.url = form.cleaned_data['title']
+        obj.save()
+        
+
+
     def delete_model(self, request, obj):
         '''
         в формах унаследованных от ObjectAdmin (объект системный),
@@ -250,9 +264,26 @@ class StatusObjectFilter(admin.SimpleListFilter):
 
 class IconAdmin(ObjectAdmin):
     fieldsets=(
-        (None, {'fields':('image', 'title',)}),
-        ('Контент', {'classes': ('collapse',),'fields':('annonce', 'content')}),
-        ('Настройки', {'classes': ('collapse',),'fields':('status', 'created', 'updated', 'created_class')}),
+        (
+            None, 
+            {
+                'fields': ('image', 'title',)
+            }
+        ),
+        (
+            'Контент', 
+            {
+                'classes': ('collapse',),
+                'fields':('annonce', 'content')
+            }
+        ),
+        (
+            'Настройки', 
+            {
+                'classes': ('collapse',),
+                'fields': ('status', 'created', 'updated', 'created_class')
+            }
+        ),
     )
     form = IconAdminForm
     inlines = [RelatedInlineEvent,]
@@ -291,9 +322,14 @@ class MfCalendarEventAdmin(ObjectAdmin):
             'Настройки', {
                 'classes': ('collapse',),
                 'fields': (
-                    'status', 'created',
-                    'updated', 'created_class'
+                    'status', 'created', 'updated', 'created_class',
                 )
+            }
+        ),
+        (
+            'SEO', {
+                'classes': ('collapse',),
+                'fields': ('seo_url',)
             }
         ),
     	(
@@ -349,6 +385,7 @@ class MfCalendarEventAdmin(ObjectAdmin):
     	super(MfCalendarEventAdmin, self).save_model(request, obj, form, change)
     	self.save_text(request, obj, form, change)
     	self.save_icon(request, obj, form, change)
+        self.save_seo(request, obj, form, change)
         #запускаем отложенную задачу "пост изменения события"
         logger = logging.getLogger('sancta_log')
         logger.info('сохранение события')

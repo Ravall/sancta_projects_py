@@ -1,23 +1,8 @@
 # -*- coding: utf-8 -*-
-import trans
 import os
+from grammar import translite
 from hell import azazel
 from django.conf import settings
-
-
-def translite(string):
-    '''
-    транслитерация. подходит для seo
-    '''
-    def u8(string):
-        return string
-        return unicode(string,'utf-8')
-
-    def eu8(string):
-        return string.encode('utf-8')
-
-    return eu8(u8(string.replace(' ','-')).encode('trans').lower())
-
 
 def handle_uploaded_file(request_file, icon_title):
     '''

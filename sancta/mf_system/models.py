@@ -70,6 +70,8 @@ class MfSystemObject(models.Model):
     #objects = SystemObjectManager()
 
     texts = models.ManyToManyField(MfSystemText, through='MfSystemObjectText')
+    # для seo - транслитирированный url
+    url = models.CharField(max_length=250, blank=True)
     related_objects = models.ManyToManyField("self", through='MfSystemRelation',symmetrical=False, related_name='related')
 
 
