@@ -40,6 +40,7 @@ def prepare_event(event):
     '''
     return {
         'id': event.id,
+        'name': event.url,
         'text': prepare_text(event),
         'image': event.image,
         'icons': prepare_icons(event.get_icons()),
