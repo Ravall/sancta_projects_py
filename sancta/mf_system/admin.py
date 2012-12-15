@@ -8,6 +8,7 @@ from mf_calendar import models as calendar_model
 from mf_system import widget
 from tools import load_file, date
 from tools.smartfunction import FormulaException, formula_factory
+from tools.grammar import translite
 from hell import sabnac
 
 
@@ -62,8 +63,6 @@ class RelatedInlineEvent(EventRelatedInline):
         return False
 
 
-
-
 class RelatedObjectsInlineArticle(EventRelatedInline):
     verbose_name_plural = 'Статьи по теме'
 
@@ -81,11 +80,11 @@ class RelatedObjectsInlineIcons(EventRelatedInline):
         '''
         переопределим отображение некоторых полей в инлайн-форме икон
         '''
-
         if db_field.name == 'mf_object':
             kwargs['widget'] = widget.IconWidget()
-        field = super(RelatedObjectsInlineIcons, self).formfield_for_dbfield(db_field, **kwargs)
-        return field
+        return super(RelatedObjectsInlineIcons, self).formfield_for_dbfield(
+            db_field, **kwargs
+        )
 
     def queryset(self, request):
         '''
@@ -118,6 +117,10 @@ class ObjectForm(forms.ModelForm):
     общий класс для дополнительных форм, модели которых отнаследованы от object
     '''
     title = forms.CharField(widget=forms.TextInput(attrs={'class':'title'}))
+    seo_url = forms.CharField(
+        widget=forms.TextInput(attrs={'class':'text'}),
+        required=False
+    )
     annonce = forms.CharField(widget=forms.Textarea, required=False)
     content = forms.CharField(widget=forms.Textarea, required=False)
     exclude=('created_class',)
@@ -125,10 +128,14 @@ class ObjectForm(forms.ModelForm):
 
 
     def set_initial(self, instance):
-        text = system_model.MfSystemObjectText.objects.get(system_object_id=instance.id,status=u'Active').system_text
+        text = system_model.MfSystemObjectText.objects.get(
+            system_object_id=instance.id,
+            status=u'Active'
+        ).system_text
         self.initial['title'] = text.title
         self.initial['annonce'] = text.annonce
         self.initial['content'] = text.content
+        self.initial['seo_url'] = instance.url
 
 
 class IconAdminForm(ObjectForm):
@@ -204,6 +211,15 @@ class ObjectAdmin(admin.ModelAdmin):
         text.annonce = form.cleaned_data['annonce']
         text.save()
 
+    def save_seo(self, request, obj, form, change):
+        if form.cleaned_data.get('seo_url'):
+            obj.url = form.cleaned_data.get('seo_url')
+        else:
+            obj.url = translite(form.cleaned_data['title'])
+        obj.save()
+        
+
+
     def delete_model(self, request, obj):
         '''
         в формах унаследованных от ObjectAdmin (объект системный),
@@ -250,9 +266,26 @@ class StatusObjectFilter(admin.SimpleListFilter):
 
 class IconAdmin(ObjectAdmin):
     fieldsets=(
-        (None, {'fields':('image', 'title',)}),
-        ('Контент', {'classes': ('collapse',),'fields':('annonce', 'content')}),
-        ('Настройки', {'classes': ('collapse',),'fields':('status', 'created', 'updated', 'created_class')}),
+        (
+            None, 
+            {
+                'fields': ('image', 'title',)
+            }
+        ),
+        (
+            'Контент', 
+            {
+                'classes': ('collapse',),
+                'fields':('annonce', 'content')
+            }
+        ),
+        (
+            'Настройки', 
+            {
+                'classes': ('collapse',),
+                'fields': ('status', 'created', 'updated', 'created_class')
+            }
+        ),
     )
     form = IconAdminForm
     inlines = [RelatedInlineEvent,]
@@ -264,9 +297,17 @@ class IconAdmin(ObjectAdmin):
 
 
 class MfCalendarEventAdmin(ObjectAdmin):
+    
+    list_display = ('id', 'get_title', 'count_icons', 'count_articles')
+
     def __init__(self, *args, **kwargs):
         super(MfCalendarEventAdmin, self).__init__(*args, **kwargs)
-        #self.readonly_fields = self.readonly_fields+('function',)
+
+    def count_icons(self, obj):
+        return obj.count_icons
+
+    def count_articles(self, obj):
+        return obj.count_articles
 
     inlines = [
         ObjectTextInline, 
@@ -291,9 +332,14 @@ class MfCalendarEventAdmin(ObjectAdmin):
             'Настройки', {
                 'classes': ('collapse',),
                 'fields': (
-                    'status', 'created',
-                    'updated', 'created_class'
+                    'status', 'created', 'updated', 'created_class',
                 )
+            }
+        ),
+        (
+            'SEO', {
+                'classes': ('collapse',),
+                'fields': ('seo_url',)
             }
         ),
     	(
@@ -349,6 +395,7 @@ class MfCalendarEventAdmin(ObjectAdmin):
     	super(MfCalendarEventAdmin, self).save_model(request, obj, form, change)
     	self.save_text(request, obj, form, change)
     	self.save_icon(request, obj, form, change)
+        self.save_seo(request, obj, form, change)
         #запускаем отложенную задачу "пост изменения события"
         logger = logging.getLogger('sancta_log')
         logger.info('сохранение события')

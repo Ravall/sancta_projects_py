@@ -1,0 +1,4 @@
+language: python
+install:
+  - pip install -r files/pip.freeze --use-mirrors
+script: make tests
