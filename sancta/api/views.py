@@ -56,7 +56,7 @@ class ApiView(View):
         Handle GET requests, returning a list of URLs pointing to 3 other views.
         """
         resource_urls = [
-            reverse('event-api', kwargs={'num': 29}, request=request),
+            reverse('event-api', kwargs={'id_or_name': 29}, request=request),
             reverse('calendar-api', kwargs={'day': '2012-10-14'}, request=request)
         ]
         return {"example": resource_urls}
