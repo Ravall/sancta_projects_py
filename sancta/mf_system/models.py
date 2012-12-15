@@ -71,7 +71,7 @@ class MfSystemObject(models.Model):
 
     texts = models.ManyToManyField(MfSystemText, through='MfSystemObjectText')
     # для seo - транслитирированный url
-    url = models.CharField(max_length=250, blank=True)
+    url = models.CharField(max_length=250, blank=True, null=True)
     related_objects = models.ManyToManyField("self", through='MfSystemRelation',symmetrical=False, related_name='related')
 
 

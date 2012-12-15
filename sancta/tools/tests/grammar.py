@@ -3,6 +3,7 @@ from django.test import TestCase
 from tools.testutil import data_provider
 import tools.grammar as grammar
 
+
 class GrammarTest(TestCase):
 
     def provider_translite():
@@ -17,7 +18,3 @@ class GrammarTest(TestCase):
         self.assertEquals(str_trance, str_to)
         # дважды транслитирируем
         self.assertEquals(grammar.translite(str_trance), str_to)
-        
-
-        
-

@@ -52,7 +52,15 @@ class EventObjectManager(system_model.SystemObjectManager):
     def get_extra_for_event():
         return {
             'select': {
-                'smart_function': 'mf_calendar_smart_function.smart_function'
+                'smart_function': 'mf_calendar_smart_function.smart_function',
+                'count_icons': 'SELECT count(*) FROM mf_system_relation srlt\
+                     WHERE `srlt`.`parent_object_id` = \
+                        `mf_calendar_event`.`mfsystemobject_ptr_id` \
+                     AND relation_id = 2',
+                'count_articles': 'SELECT count(*) FROM mf_system_relation srlt\
+                     WHERE `srlt`.`parent_object_id` = \
+                        `mf_calendar_event`.`mfsystemobject_ptr_id` \
+                     AND relation_id = 1',
             },
             'tables': [
                 'mf_calendar_smart_function'

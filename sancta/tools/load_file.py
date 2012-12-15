@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
-from grammar import translite
+from tools.grammar import translite
 from hell import azazel
 from django.conf import settings
+
 
 def handle_uploaded_file(request_file, icon_title):
     '''
@@ -13,7 +14,9 @@ def handle_uploaded_file(request_file, icon_title):
         '''
         берем из request файл и грузим его в нужную папку
         '''
-        destination = open(settings.ORIGIN_MEDIA_ROOT+'/'+new_filename, 'wb+')
+        destination = open(
+            settings.ORIGIN_MEDIA_ROOT + '/' + new_filename, 'wb+'
+        )
         for chunk in request_file.chunks():
             destination.write(chunk)
         destination.close()
@@ -26,10 +29,12 @@ def handle_uploaded_file(request_file, icon_title):
         # разделяем имя файла и его расширение
         file_name_info = os.path.splitext(request_filename)
         # создаем шаблон имени файла
-        new_filename = translite(icon_title)+'%s' + file_name_info[1]
+        new_filename = translite(icon_title) + '%s' + file_name_info[1]
         prefix_filename = new_filename % ''
         count_try = 0
-        while os.path.exists(settings.ORIGIN_MEDIA_ROOT+'/'+prefix_filename):
+        while os.path.exists(
+            settings.ORIGIN_MEDIA_ROOT + '/' + prefix_filename
+        ):
             count_try += 1
             prefix_filename = new_filename % count_try
         return prefix_filename
