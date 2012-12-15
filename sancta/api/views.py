@@ -36,9 +36,12 @@ class EventView(View):
     '''
     выдает информацию о событию
     '''
-    def get(self, request, num):
+    def get(self, request, id_or_name):
         try:
-            event = calendar_model.MfCalendarEvent.objects.get(pk=num)
+            event = calendar_model.MfCalendarEvent.objects.get(
+                **dict(pk=id_or_name) if id_or_name.isdigit() 
+                else dict(url=id_or_name)
+            )
         except ObjectDoesNotExist:
             return Response(status.HTTP_404_NOT_FOUND)
         return api.prepare_event(event)
@@ -53,7 +56,7 @@ class ApiView(View):
         Handle GET requests, returning a list of URLs pointing to 3 other views.
         """
         resource_urls = [
-            reverse('event-api', kwargs={'num': 29}, request=request),
+            reverse('event-api', kwargs={'id_or_name': 29}, request=request),
             reverse('calendar-api', kwargs={'day': '2012-10-14'}, request=request)
         ]
         return {"example": resource_urls}
