@@ -20,7 +20,7 @@ from djangorestframework.reverse import reverse
 from mf_calendar import models as calendar_model
 
 
-@celery.task(name='чистить кэш по event_id')
+@celery.task()
 def cc_event_info(event_id):
     '''
     удалим nginx кэш информации о событии
@@ -34,7 +34,7 @@ def cc_event_info(event_id):
     )
 
 
-@celery.task(name='чистить кэш по датам')
+@celery.task()
 def cc_smart_function(function):
     '''
     удалим кэш для дат фунции

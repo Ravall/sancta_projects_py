@@ -16,7 +16,7 @@ import celery
 import logging
 
 
-@celery.task(name='синхронизиовать изображения')
+@celery.task()
 def sync_folders():
     daemon = AzazelDaemon()
     daemon.sunc_folders()
