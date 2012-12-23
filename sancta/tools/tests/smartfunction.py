@@ -427,6 +427,8 @@ class SmartFormulaTest(TestCase):
     def provider_generatelist():
         return (
             ('{b}', 2010, [(1, 1, 2010)]),
+            ('{t}', None, [date.today()]),
+            ('{t}', 2010, [date.today()]),
             ('{b(2011)}', 2010, [(1, 1, 2011)]),
             ('{e}', None, [(31, 12, date.get_current_year())]),
             ('{e(2000)}', None, [(31, 12, 2000)]),
