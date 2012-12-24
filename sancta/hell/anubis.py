@@ -7,6 +7,7 @@
 '''
 import celery
 import logging
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.http import HttpRequest
 from django.contrib.sitemaps import Sitemap
@@ -69,7 +70,7 @@ class ArticleSitemap(ObjSitemap):
 class CalendarNetSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.5
-    lastmod = yyyy_mm_dd(smart_function('1<{t}', None)[0])
+    lastmod = datetime.now() - timedelta(1)
 
     def location(self, obj):
         return obj
