@@ -71,8 +71,8 @@ class CalendarNetSitemap(ObjSitemap):
         date_from = yyyy_mm_dd(smart_function('01.01.-1', None)[0])
         date_to = yyyy_mm_dd(smart_function('31.12.+1', None)[0])
         net = calendar_model.MfCalendarNet.objects.filter(
-            full_date__gt=date_from,
-            full_date__lt=date_to
+            full_date__gte=date_from,
+            full_date__lte=date_to
         )
         return [
             dict(
