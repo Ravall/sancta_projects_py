@@ -23,3 +23,4 @@ def deploy(tag=None):
             run('service uwsgi start')
             run('service celeryd stop')
             run('service celeryd start')
+            run("ps aux | grep 'celery'")
