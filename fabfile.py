@@ -13,6 +13,7 @@ def deploy(tag=None):
             run("git fetch")
             run("git remote prune origin")
             run("git checkout {0}".format(tag))
+            run("cat release")
             run("pip install -r files/pip.freeze")
             run("python sancta/manage.py syncdb  --settings=config.admin")
             run("python sancta/manage.py migrate --settings=config.admin")
