@@ -5,3 +5,22 @@ cs:
 	pep8 sancta
 
 integrate: cs tests
+
+NEXT_RELEASE=$(shell perl -pe 's/^(\d+)\.(\d+)\.(\d+)$$/qq{$$1.}.($$2+1).".0"/e' release)
+next_release:
+	echo $(NEXT_RELEASE)
+	git checkout develop
+	git pull origin develop
+	git flow release start $(NEXT_RELEASE)
+	echo $(NEXT_RELEASE) > release
+	git add release
+	git commit -m "Bumped release version to $(NEXT_RELEASE)"
+
+NEXT_HOTFIX=$(shell perl -pe 's/^(\d+)\.(\d+)\.(\d+)$$/qq{$$1.$$2.}.($$3+1)/e' release)
+hotfix:
+	echo $(NEXT_HOTFIX)
+	git checkout master
+	git flow hotfix start $(NEXT_HOTFIX)
+	echo $(NEXT_HOTFIX) > release
+	git add release
+	git commit -m "Bumped release version to $(NEXT_HOTFIX)"

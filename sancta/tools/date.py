@@ -178,3 +178,7 @@ def Pascha(year):
     if (a < 7):
         day, month, year = date_shift(day, month, year, -a)
     return (day, month, year)
+
+def today():
+    dt = datetime.datetime.now()
+    return (dt.day, dt.month, dt.year)

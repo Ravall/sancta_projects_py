@@ -314,6 +314,11 @@ class SmartFormula(Formula):
             formula_obj = SimpleDateFormula(
                 '{0:02d}.{1:02d}.{2:02d}'.format(*pascha), year
             )
+        elif sub_formula == 't':
+            formula_obj = SimpleDateFormula(
+                '{0:02d}.{1:02d}.{2:02d}'.format(*date.today()), 
+                year
+            ) 
         else:
             raise FormulaException(
                 'Неопределенная формула {0}'.format(sub_formula)
