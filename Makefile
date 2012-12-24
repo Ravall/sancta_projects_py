@@ -7,7 +7,7 @@ cs:
 integrate: cs tests
 
 NEXT_RELEASE=$(shell perl -pe 's/^(\d+)\.(\d+)\.(\d+)$$/qq{$$1.}.($$2+1).".0"/e' release)
-release:
+next_release:
 	echo $(NEXT_RELEASE)
 	git checkout develop
 	git pull origin develop
