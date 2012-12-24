@@ -130,7 +130,7 @@ class Anubis():
             "simple: {0} links".format(sitemaps['simple'].paginator.count)
         )
         xml = sitemap(HttpRequest(), sitemaps)
-        sitemap_file = settings.MEDIA_ROOT + '/orthdoxy.sitemap'
+        sitemap_file = settings.MEDIA_ROOT + '/orthsitemap.xml'
         xml_file = open(sitemap_file, 'w')
         self.log("write to {0}".format(sitemap_file))
         xml_file.write(xml.rendered_content.encode("utf-8"))
