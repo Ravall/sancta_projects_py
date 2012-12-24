@@ -66,7 +66,6 @@ class ArticleSitemap(ObjSitemap):
         ]
 
 
-
 class CalendarNetSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.5
@@ -133,9 +132,8 @@ class Anubis():
             "simple: {0} links".format(sitemaps['simple'].paginator.count)
         )
         xml = sitemap(HttpRequest(), sitemaps)
-        sitemap_file = settings.MEDIA_ROOT + '/orthsitemap.xml'
-        xml_file = open(sitemap_file, 'w')
-        self.log("write to {0}".format(sitemap_file))
+        xml_file = open(settings.SITEMAP, 'w')
+        self.log("write to {0}".format(settings.SITEMAP))
         xml_file.write(xml.rendered_content.encode("utf-8"))
         xml_file.close()
         self.log("finish")

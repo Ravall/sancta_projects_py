@@ -63,7 +63,7 @@ STATIC_ROOT = os.path.abspath(os.path.join(_PATH, '../', 'files', 'collected_sta
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
+SITEMAP = os.path.abspath(os.path.join(MEDIA_ROOT, 'orthsitemap.xml'))
 # Additional locations of static files
 
 STATICFILES_DIRS = (
