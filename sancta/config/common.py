@@ -181,7 +181,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'sancta_log' : {
+        'sancta_log': {
             'handlers': ['log_file'],
             'level': 'ERROR',
             'propagate': True,
