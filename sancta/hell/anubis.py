@@ -66,7 +66,15 @@ class ArticleSitemap(ObjSitemap):
         ]
 
 
-class CalendarNetSitemap(ObjSitemap):
+
+class CalendarNetSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.5
+    lastmod = yyyy_mm_dd(smart_function('1<{t}', None)[0])
+
+    def location(self, obj):
+        return obj
+
     def items(self):
         date_from = yyyy_mm_dd(smart_function('01.01.-1', None)[0])
         date_to = yyyy_mm_dd(smart_function('31.12.+1', None)[0])
@@ -74,12 +82,7 @@ class CalendarNetSitemap(ObjSitemap):
             full_date__gte=date_from,
             full_date__lte=date_to
         )
-        return [
-            dict(
-                lastmod=yyyy_mm_dd(smart_function('1<{t}', None)[0]),
-                location='/orthodoxy/{0}'.format(n.full_date)
-            ) for n in net
-        ]
+        return ['/orthodoxy/{0}'.format(n.full_date) for n in net]
 
 
 class SimplePages(Sitemap):
