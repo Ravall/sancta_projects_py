@@ -120,7 +120,7 @@ INSTALLED_APPS = (
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
-    'admin_tools.dashboard', 
+    'admin_tools.dashboard',
     'django.contrib.messages',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,12 +130,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'sancta',
     'mf_system',
     'api',
     'djangorestframework',
     'tools',
     'djcelery',
     'kombu.transport.django',
+    'south',
 
 )
 ADMIN_TOOLS_INDEX_DASHBOARD = 'sancta.dashboard.CustomIndexDashboard'
@@ -179,7 +181,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'sancta_log' : {
+        'sancta_log': {
             'handlers': ['log_file'],
             'level': 'ERROR',
             'propagate': True,
