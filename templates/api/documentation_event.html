@@ -1,0 +1,98 @@
+{% extends "api/documentation.html" %}
+{% block pagetitle %}Документация. Получение событий.{% endblock pagetitle %}
+{% block documentation %}
+<h5>Получение событий</h5>
+<p>Событие можно получить как по id: <code>{{ event_by_id_example }}</code>,<br/>
+так и по его name: <code>{{ event_by_name_example }}</code></p>
+<pre>
+<b>Пример ответа:</b>
+{
+    "type": "event",
+    "id": 29,
+    "name": "uspenskiy_post",
+    "tags": [
+        "post"
+    ],
+    "text": {
+        "content": "content of event",
+        "annonce": "annonce of event",
+        "title": "title of event"
+    },
+    "image": "Ph4LnbLHNfs_3.jpg",
+    "icons": [
+        {
+            "text": {
+                "content": "content",
+                "annonce": "annonce",
+                "title": "title"
+            },
+            "image": "4J9TcNQjo_M.jpg",
+            "type": "icon",
+            "id": 377
+        },
+        {
+            "text": {
+                "content": "content",
+                "annonce": "annonce",
+                "title": "title"
+            },
+            "image": "fe70858c-420d-49c4-a955-97e9bf2cc10f.jpg",
+            "type": "icon",
+            "id": 380
+        },
+    ],
+    "articles": [
+        {
+            "image": "",
+            "type": "article",
+            "id": 218
+            "name": "post_dlya_tela"
+        },
+        {
+            "image": "",
+            "type": "article",
+            "id": 225,
+            "name": "vidy_postnyh_dnyay"
+        },
+    ]
+}
+</pre>
+<div class="alert">
+  <strong>Cледует обратить внимание!</strong>
+  <ol>
+    <li>Cекция "статьи" сокращенная - приводится лишь id, name, type, image</li>
+    <li>Cекция "иконы" полная - приводится в том числе тексты</li>
+    <li>Секции tags,articles,icons могут отсутствовать</li>
+    <li>порядок полей ответа может быть иным</li>
+  </ol>
+</div>
+
+<p>
+    События можно получать по тегам: <code>{{ event_by_tag_example }}. При этом список секций будет сокращенных</code>
+</p>
+<pre>
+<b>Пример ответа:</b>
+[
+    {
+        "image": "image11.jpg",
+        "type": "event",
+        "id": 11,
+        "name": "event11",
+        "tags": [
+            "tag1",
+            "tag2"
+        ]
+    },
+    {
+        "image": "image12.jpg",
+        "type": "event",
+        "id": 12,
+        "name": "event12",
+        "tags": [
+            "tag1",
+            "tag3"
+        ]
+    }
+]
+</pre>
+{% endblock documentation %}

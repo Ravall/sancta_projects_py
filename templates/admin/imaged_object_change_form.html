@@ -1,0 +1,17 @@
+{% extends "admin/change_form.html" %}
+{% load image_exists %}
+{% block field_sets %}
+<table width='100%'>
+<tr>
+  <td>
+    {% for fieldset in adminform %}
+      {% include "admin/includes/fieldset.html" %}
+    {% endfor %}
+  </td>
+  <td width='200px'>
+    <b>Изображение</b> {{ original.image }}<br>
+    {% image_tag original.image 'crop/150x200' %}
+  </td>
+</tr>
+</table>
+{% endblock %}

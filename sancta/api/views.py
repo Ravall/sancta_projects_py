@@ -1,62 +1,120 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=W0613, W0622
+from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
-from djangorestframework.views import View
-from djangorestframework.reverse import reverse
-from djangorestframework.response import Response
-from djangorestframework import status
-from mf_calendar import models as calendar_model
-from tools import api
+from rest_framework.views import APIView
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import api_view
+from mf_calendar.models import MfCalendarNet, MfCalendarEvent
+from mf_system.models import MfSystemArticle
+from .models import prepare_event, prepare_events, \
+    prepare_article, prepare_articles
+from smart_date.date import is_date_correct
 
 
-class CalendarView(View):
-    '''
-    Выводит информацию о дне календаря.
-    '''
-    def prepare_day_data(self, days):
-        icons = calendar_model.MfCalendarIcon.get_by_events(
-            [{'id': day.event_id} for day in days]
-        )
-        return {
-            # все иконы
-            'icons': api.prepare_icons(icons),
+@api_view(['GET'])
+def get_articles(request, article_id, format):
+    """
+    возвращает информацию о статьях
+    """
+    try:
+        params = {
+            'status': 'active',
+            'id' if article_id.isdigit() else 'url': article_id
         }
-
-    '''
-    api к календарю
-    '''
-    def get(self, request, day):
-        try:
-            day = calendar_model.MfCalendarNet.objects.filter(full_date=day)
-        except ObjectDoesNotExist:
-            return Response(status.HTTP_404_NOT_FOUND)
-        return self.prepare_day_data(day)
+        article = MfSystemArticle.objects.get(**params)
+    except ObjectDoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    return Response(prepare_article(article, add_related=True))
 
 
-class EventView(View):
-    '''
-    выдает информацию о событию
-    '''
-    def get(self, request, id_or_name):
-        try:
-            event = calendar_model.MfCalendarEvent.objects.get(
-                **dict(pk=id_or_name) if id_or_name.isdigit() 
-                else dict(url=id_or_name)
-            )
-        except ObjectDoesNotExist:
-            return Response(status.HTTP_404_NOT_FOUND)
-        return api.prepare_event(event)
+@api_view(['GET'])
+def get_articles_by_tag(request, article_tag, format):
+    articles = MfSystemArticle.objects.filter(
+        tags__name__in=[article_tag],
+        status='active'
+    )
+    if not articles:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    return Response(prepare_articles(articles))
 
 
-class ApiView(View):
-    """
-    Примеры api
-    """
-    def get(self, request):
-        """
-        Handle GET requests, returning a list of URLs pointing to 3 other views.
-        """
-        resource_urls = [
-            reverse('event-api', kwargs={'id_or_name': 29}, request=request),
-            reverse('calendar-api', kwargs={'day': '2012-10-14'}, request=request)
+
+
+class Calendar(APIView):
+    @staticmethod
+    def prepare_day_data(events, day):
+        day_events = []
+        for event in events:
+            day_events.append(prepare_event(
+                event,
+                show_text=True,
+                show_icons=True,
+                show_articles=True
+            ))
+        return Response({
+            'date': day,
+            'events': day_events,
+        })
+
+    def get(self, request, day, format):
+        if not is_date_correct(*day.split('-')[::-1]):
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        days = MfCalendarNet.objects.filter(full_date=day)
+        event_ids = [
+            calendar_day.event_id for calendar_day in days
+            if calendar_day.event_id > 0
         ]
-        return {"example": resource_urls}
+        events = MfCalendarEvent.objects.filter(
+            pk__in=event_ids, status='active'
+        )
+        return self.prepare_day_data(events, day)
+
+
+@api_view(['GET'])
+def get_event(request, event_id, format):
+    try:
+        params = {
+            'status': 'active',
+            'id' if event_id.isdigit() else 'url': event_id
+        }
+        event = MfCalendarEvent.objects.get(**params)
+    except ObjectDoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    return Response(prepare_event(event))
+
+
+@api_view(['GET'])
+def get_events_by_tag(request, event_tag, format):
+    events = MfCalendarEvent.objects.filter(
+        tags__name__in=[event_tag],
+        status='active'
+    )
+    if not events:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    return Response(prepare_events(events))
+
+
+@api_view(['GET'])
+def get_example(request, format):
+    resource_urls = [
+        reverse(
+            'event-api', kwargs={'event_id': 29, 'format': 'json'},
+            request=request
+        ),
+        reverse(
+            'article-api', kwargs={'article_id': 231, 'format': 'json'},
+            request=request
+        ),
+        reverse(
+            'articletag-api', kwargs={'article_tag': 'post', 'format': 'json'},
+            request=request
+        ),
+        reverse(
+            'calendar-api', kwargs={'day': '2012-10-14', 'format': 'json'},
+            request=request
+        )
+    ]
+    return Response({"example": resource_urls})

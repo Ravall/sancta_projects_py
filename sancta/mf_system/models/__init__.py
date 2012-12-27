@@ -1,0 +1,7 @@
+from mf_article import MfSystemArticle
+from mf_object import MfSystemObject
+from mf_object_text import MfSystemObjectText
+from mf_relation import MfSystemRelation
+from mf_relation_type import MfSystemRelationType
+from mf_text import MfSystemText
+from object_manager import SystemObjectManager

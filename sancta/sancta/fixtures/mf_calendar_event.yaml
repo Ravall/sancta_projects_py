@@ -1,0 +1,24 @@
+- model: sancta.MfCalendarEvent
+  pk: 1014
+  fields:
+    mfsystemobject_ptr: 14
+    function: 114
+    periodic: 0
+- model: sancta.MfCalendarEvent
+  pk: 1050
+  fields:
+    mfsystemobject_ptr: 50
+    function: 150
+    periodic: 0
+- model: sancta.MfCalendarEvent
+  pk: 27
+  fields:
+    mfsystemobject_ptr: 27
+    function: 27
+    periodic: 1
+- model: sancta.MfCalendarEvent
+  pk: 99
+  fields:
+    mfsystemobject_ptr: 99
+    function: 99
+    periodic: 1

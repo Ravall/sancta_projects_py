@@ -1,0 +1,96 @@
+- model: sancta.MfSystemText
+  pk: 214
+  fields:
+    title: "blago vest title"
+    annonce: "blago vest annonce"
+    content: "blago vest content"
+- model: sancta.MfSystemText
+  pk: 250
+  fields:
+    title: "nedelya_krestopoklonnaya tilte"
+    annonce: "nedelya_krestopoklonnaya annonce"
+    content: "nedelya_krestopoklonnaya content"
+- model: sancta.MfSystemText
+  pk: 27
+  fields:
+    title: "velikiy_post tilte"
+    annonce: "velikiy_post annonce"
+    content: "velikiy_post content"
+- model: sancta.MfSystemText
+  pk: 1550
+  fields:
+    title: "icon 1 tilte"
+    annonce: "icon 1 annonce"
+    content: "icon 1 content"
+- model: sancta.MfSystemText
+  pk: 1564
+  fields:
+    title: "icon 2 tilte"
+    annonce: "icon 2 annonce"
+    content: "icon 2 content"
+- model: sancta.MfSystemText
+  pk: 1565
+  fields:
+    title: "icon 3 tilte"
+    annonce: "icon 3 annonce"
+    content: "icon 3 content"
+- model: sancta.MfSystemText
+  pk: 1566
+  fields:
+    title: "icon 4 tilte"
+    annonce: "icon 4 annonce"
+    content: "icon 4 content"
+- model: sancta.MfSystemText
+  pk: 999
+  fields:
+    title: "tilte"
+    annonce: "annonce"
+    content: "content"
+- model: sancta.MfSystemText
+  pk: 1567
+  fields:
+    title: "icon nedelya_krestopoklonnaya tilte"
+    annonce: "icon nedelya_krestopoklonnaya annonce"
+    content: "icon nedelya_krestopoklonnaya content"
+- model: sancta.MfSystemText
+  pk: 1568
+  fields:
+    title: "article 14 1 tilte"
+    annonce: "article 14 1 annonce"
+    content: "article 14 1 content"
+- model: sancta.MfSystemText
+  pk: 1569
+  fields:
+    title: "article 14 2 tilte"
+    annonce: "article 14 2 annonce"
+    content: "article 14 2 content"
+- model: sancta.MfSystemText
+  pk: 1570
+  fields:
+    title: "article 14 3 tilte"
+    annonce: "article 14 3 annonce"
+    content: "article 14 3 content"
+- model: sancta.MfSystemText
+  pk: 1571
+  fields:
+    title: "article 14 4 tilte"
+    annonce: "article 14 4 annonce"
+    content: "article 14 4 content"
+- model: sancta.MfSystemText
+  pk: 1572
+  fields:
+    title: "article 50 1 tilte"
+    annonce: "article 50 1 annonce"
+    content: "article 50 1 content"
+- model: sancta.MfSystemText
+  pk: 1573
+  fields:
+    title: "article 50 2 tilte"
+    annonce: "article 50 2 annonce"
+    content: "article 50 2 content"
+- model: sancta.MfSystemText
+  pk: 1574
+  fields:
+    title: "article 50 3 tilte"
+    annonce: "article 50 3 annonce"
+    content: "article 50 3 content"

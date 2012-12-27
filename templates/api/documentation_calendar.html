@@ -1,0 +1,94 @@
+{% extends "api/documentation.html" %}
+
+{% block pagetitle %}Документация. Получение дней.{% endblock pagetitle %}
+
+{% block documentation %}
+<h5>Получение информации о дне календаря</h5>
+<p>Что бы получить информацию о событиях, за определенный день каленадря, необходимо выполнить GET запрос по урлу: <code>{{ calendar_example }}</code>
+
+<pre>
+<b>Пример ответа:</b>
+
+{
+    "date": "2012-10-14",
+    "events": [
+        {
+            "text": {
+                "content": "content",
+                "annonce": "annonce",
+                "title": "title"
+            },
+            "image": "1323343443_637.jpg",
+            "type": "event",
+            "id": 20,
+            "icons": [
+                {
+                    "text": {
+                        "content": "content",
+                        "annonce": "annonce",
+                        "title": "title"
+                    },
+                    "image": "test.jpg",
+                    "type": "icon",
+                    "id": 387
+                },
+                {
+                    "text": {
+                        "content": "content",
+                        "annonce": "annonce",
+                        "title": "title"
+                    },
+                    "image": "test1.jpg",
+                    "type": "icon",
+                    "id": 388
+                }
+            ]
+        },
+        {
+            "text": {
+                "content": "content",
+                "annonce": "annonce",
+                "title": "title"
+            },
+            "image": "1321274057_263.jpg",
+            "type": "event",
+            "id": 30,
+            "icons": [
+                {
+                    "text": {
+                        "content": "content",
+                        "annonce": "annonce",
+                        "title": "title"
+                    },
+                    "image": "ikona-osenniy-myasoed.jpg",
+                    "type": "icon",
+                    "id": 389
+                }
+            ],
+            "articles": [
+                {
+                    "image": "",
+                    "type": "article",
+                    "id": 218
+                    "name": "article1"
+                },
+                {
+                    "image": "",
+                    "type": "article",
+                    "id": 225,
+                    "name": "article1"
+                },
+            ]
+        }
+    ]
+}
+</pre>
+<div class="alert">
+  <strong>Cледует обратить внимание!</strong>
+  <ol>
+    <li>Секция tags,icons,articles может отсутствовать</li>
+    <li>Секция articles, icons выводится в сокращенном виде (без текстов)</li>
+    <li>Порядок полей ответа может быть иным</li>
+  </ol>
+</div>
+{% endblock documentation %}

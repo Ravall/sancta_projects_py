@@ -57,6 +57,7 @@ class AzazelDaemon():
         self.logger = logging.getLogger('sancta_log')
 
     def get_folders_to_sync(self):
+        # pylint: disable=W0110
         '''
         получаем список папок, куда нужно синхронизавть.
         список берем из dir (где храняться кропнутые изображения)

@@ -1,8 +1,33 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.utils.safestring import mark_safe
-from mf_system import models as system_model
+from mf_system.models.mf_object_text import MfSystemObjectText
 from mf_calendar import models as calendar_model
+from sancta.templatetags.image_exists import image_tag
+from mf_system.models.mf_object import MfSystemObject
+
+
+class ObjectLinkWidget(forms.Widget):
+    """
+    Виджет отображения ссылки на редактирование
+    """
+    def render(self, name, value, attrs=None):
+
+        if not value:
+            return ''
+        hidden = forms.HiddenInput(attrs)
+        mf_object = MfSystemObject.objects.get(pk=value)
+        if mf_object.created_class == 'MfCalendarEvent':
+            return mark_safe(
+                u'<a href="/admin/sancta/mfcalendarevent/{0}">{1}</a>'
+                '<br/>{2}'.format(
+                    str(value),
+                    mf_object.get_title(),
+                    hidden.render(name, value)
+                )
+            )
+        return '#{0} ({1})'.format(str(value), mf_object.created_class)
+
 
 class IconWidget(forms.Widget):
     '''
@@ -14,11 +39,8 @@ class IconWidget(forms.Widget):
             return ''
         hidden = forms.HiddenInput(attrs)
         icon = calendar_model.MfCalendarIcon.objects.get(pk=value)
-        return mark_safe(
-            '<a href="/admin/sancta/mfcalendaricon/'+str(icon.id)+'/">'+icon.get_title()+'</a><br/>' \
-            + '<img width=100px src="/media/crop/150x200/%s">' % icon.image) + '<br/>' \
-            + '<i>'+icon.get_annonce()+'</i>' \
-            + hidden.render(name, value)
+
+        return image_tag(icon.image, 'crop/150x200') + hidden.render(name, value)
 
 
 class ImageWidget(forms.FileInput):
@@ -36,13 +58,35 @@ class ImageWidget(forms.FileInput):
         return mark_safe(u''.join(output))
 
 
-
 class EventLinkWidget(forms.Widget):
     def render(self, name, value, attrs=None):
         if not value:
             return ''
         hidden = forms.HiddenInput(attrs)
-        text = system_model.MfSystemObjectText.objects.get(system_object_id=value,status=u'Active').system_text
+        text = MfSystemObjectText.objects.get(
+            system_object_id=value,
+            status=u'Active'
+        ).system_text
         return mark_safe(
-            '<a href="/admin/sancta/mfcalendarevent/'+str(value)+'">' + text.title + '</a><br/>' + hidden.render(name, value)
+            u'<a href="/admin/sancta/mfcalendarevent/{0}">{1}</a>'
+            '<br/>{2}'.format(
+                str(value), text.title, hidden.render(name, value)
+            )
+        )
+
+
+class ArticleLinkWidget(forms.Widget):
+    def render(self, name, value, attrs=None):
+        if not value:
+            return ':-)'
+        hidden = forms.HiddenInput(attrs)
+        text = MfSystemObjectText.objects.get(
+            system_object_id=value,
+            status=u'Active'
+        ).system_text
+        return mark_safe(
+            u'<a href="/admin/sancta/mfsystemarticle/{0}">{1}</a>'
+            '<br/>{2}'.format(
+                str(value), text.title, hidden.render(name, value)
+            )
         )

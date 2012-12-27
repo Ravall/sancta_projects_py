@@ -1,0 +1,20 @@
+- model: sancta.MfCalendarIcon
+  pk: 361
+  fields:
+    mfsystemobject_ptr: 361
+- model: sancta.MfCalendarIcon
+  pk: 365
+  fields:
+    mfsystemobject_ptr: 369
+- model: sancta.MfCalendarIcon
+  pk: 366
+  fields:
+    mfsystemobject_ptr: 370
+- model: sancta.MfCalendarIcon
+  pk: 367
+  fields:
+    mfsystemobject_ptr: 371
+- model: sancta.MfCalendarIcon
+  pk: 368
+  fields:
+    mfsystemobject_ptr: 372

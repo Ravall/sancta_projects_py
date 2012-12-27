@@ -14,8 +14,8 @@ from django.contrib.sitemaps import Sitemap
 from django.contrib.sitemaps.views import sitemap
 from mf_calendar import models as calendar_model
 from mf_system import models as system_model
-from tools.date import yyyy_mm_dd
-from tools.smartfunction import smart_function
+from smart_date.smartfunction import smart_function
+from smart_date.date import yyyy_mm_dd
 
 
 class ObjSitemap(Sitemap):

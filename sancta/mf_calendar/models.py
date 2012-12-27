@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from mf_system import models as system_model
-from tools import extra, smartfunction
+from mf_system.models.mf_object import MfSystemObject
+from mf_system.models.object_manager import SystemObjectManager
+from mf_system.models import MfSystemRelation, MfSystemArticle
+from smart_date import smartfunction
 
 
 # функции
@@ -21,20 +23,12 @@ class MfCalendarSmartFunction(models.Model):
         app_label = 'sancta'
 
 
-class MfCalendarIcon(system_model.MfSystemObject):
-    objects = system_model.SystemObjectManager()
+class MfCalendarIcon(MfSystemObject):
+    objects = SystemObjectManager('mfsystemobject_ptr_id')
 
-    @classmethod
-    def get_by_events(cls, events):
-        return system_model.MfSystemRelation.objects.filter(
-            relation_id=2,
-            parent_object_id__in=[event['id'] for event in events],
-            mf_object__status='active'
-        ).extra(
-            **(system_model.SystemObjectManager.get_extra_for_text(
-                'mf_system_object.id'
-            ))
-        ).extra(**extra.icon_table())
+    def __init__(self, *args, **kwargs):
+        kwargs['created_class'] = 'MfCalendarIcon'
+        super(MfCalendarIcon, self).__init__(*args, **kwargs)
 
     class Meta:
         db_table = u'mf_calendar_icon'
@@ -43,11 +37,13 @@ class MfCalendarIcon(system_model.MfSystemObject):
         verbose_name = 'икона'
         verbose_name_plural = 'Иконы'
 
-class EventObjectManager(system_model.SystemObjectManager):
+
+class EventObjectManager(SystemObjectManager):
     '''
     расширим objects у MfCalendarEvent
     присоединим к модели событие - данные о фунции.
     '''
+
     @staticmethod
     def get_extra_for_event():
         return {
@@ -69,29 +65,48 @@ class EventObjectManager(system_model.SystemObjectManager):
                 'mf_calendar_smart_function.id = mf_calendar_event.function_id'
             ]
         }
+
     def get_query_set(self):
         return super(EventObjectManager, self).get_query_set().extra(
             **EventObjectManager.get_extra_for_event()
         )
 
-    
 
-# события
-class MfCalendarEvent(system_model.MfSystemObject):
+class MfCalendarEvent(MfSystemObject):
 
     function = models.ForeignKey(MfCalendarSmartFunction)
     periodic = models.IntegerField(null=True, blank=True)
-    objects = EventObjectManager()
+    objects = EventObjectManager('mf_calendar_event.mfsystemobject_ptr_id')
+
+
+    def add_icon(self, icon):
+        # привязываем икону к редактируемому объекту
+        relation = MfSystemRelation(
+            relation_id=2,
+            parent_object=self,
+            mf_object=icon
+        )
+        relation.save()
 
     def get_icons(self):
-        return self.related_objects.filter(
-            created_class='MfCalendarIcon',
-            status='active'
-        ).extra(
-            **(system_model.SystemObjectManager.get_extra_for_text(
-                'mf_system_object.id'
-            ))
-        ).extra(**extra.icon_table())
+        icons_ids = [
+            icon.id for icon in
+            self.related_objects.filter(
+                status='active',
+                created_class='MfCalendarIcon'
+            )
+        ]
+        return MfCalendarIcon.objects.filter(id__in=icons_ids)
+
+    def get_articles(self):
+        articles_ids = [
+            article.id for article in
+            self.related_objects.filter(
+                status='active',
+                created_class='MfSystemArticle'
+            )
+        ]
+        return MfSystemArticle.objects.filter(id__in=articles_ids)
 
     class Meta:
         db_table = u'mf_calendar_event'
@@ -105,7 +120,7 @@ class CalendarManager(models.Manager):
     def get_query_set(self):
         return super(CalendarManager, self).get_query_set().extra(
             select={
-                'event_id': 'mf_calendar_event.id',
+                'event_id': 'mf_system_object.id',
             },
             tables=[
                 'mf_calendar_event',

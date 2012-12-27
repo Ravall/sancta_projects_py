@@ -1,0 +1,70 @@
+{% extends "api/documentation.html" %}
+{% block pagetitle %}Документация. Получение статей.{% endblock pagetitle %}
+{% block documentation %}
+<h5>Получение статей</h5>
+<p>Статьи можно получить (как и события) по id: <code>{{ article_by_id_example }}</code>,<br/>
+и по его name: <code>{{ article_by_name_example }}</code></p>
+<pre>
+<b>Пример ответа:</b>
+{
+    "name": "kak_pitatsya_v_velikiy_post",
+    "tags": [
+        "post"
+    ],
+    "text": {
+        "content": "content",
+        "annonce": "annonce",
+        "title": "title"
+    },
+    "image": "image",
+    "type": "article",
+    "id": 228
+}
+<b>Пример ответа со статьей привязанной к событию:</b>
+{
+    "text": {
+        "content": "content",
+        "annonce": "annonce",
+        "title": "title"
+    },
+    "image": "",
+    "type": "article",
+    "id": 231,
+    "related": [
+        {
+            "image": "1323196997_738.jpg",
+            "type": "event",
+            "id": 7,
+            "name": "pasha"
+        }
+    ]
+}
+
+</pre>
+<div class="alert">
+  <strong>Cледует обратить внимание!</strong>
+  <ol>
+    <li>Секция tags может отсутствовать</li>
+    <li>Секция related показывает объект к которому привязана статья</li>
+    <li>Порядок полей ответа может быть иным</li>
+  </ol>
+</div>
+
+<p>
+    Статьи можно получать по тегам: <code>{{ article_by_tag_example }}. При этом список секций будет сокращенных</code>
+</p>
+<pre>
+<b>Пример ответа:</b>
+[
+    {
+        "image": "",
+        "type": "article",
+        "id": 228,
+        "name": "kak_pitatsya_v_velikiy_post",
+        "tags": [
+            "post"
+        ]
+    }
+]
+</pre>
+{% endblock documentation %}

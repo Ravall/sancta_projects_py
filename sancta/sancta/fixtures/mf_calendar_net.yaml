@@ -1,0 +1,25 @@
+- model: sancta.MfCalendarNet
+  pk: 19399
+  fields:
+    full_date: 2013-04-07
+    function: 114
+- model: sancta.MfCalendarNet
+  pk: 40081
+  fields:
+    full_date: 2013-04-07
+    function: 27
+- model: sancta.MfCalendarNet
+  pk: 40082
+  fields:
+    full_date: 2010-04-07
+    function: 27
+- model: sancta.MfCalendarNet
+  pk: 40083
+  fields:
+    full_date: 2011-04-07
+    function: 27
+- model: sancta.MfCalendarNet
+  pk: 147698
+  fields:
+    full_date: 2013-04-07
+    function: 150

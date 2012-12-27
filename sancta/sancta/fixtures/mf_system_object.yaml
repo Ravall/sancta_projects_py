@@ -1,0 +1,154 @@
+- model: sancta.MfSystemObject
+  pk: 14
+  fields:
+    status: active
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfCalendarEvent
+    image: 1322918540_327.jpg
+    url: blagoveshenie_presvyatoy_bogorodicy
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 50
+  fields:
+    status: active
+    created: 2011-01-29 12:56:19
+    updated: 2011-03-11 14:54:00
+    created_class: MfCalendarEvent
+    image: 1321823855_410.jpg
+    url: nedelya_krestopoklonnaya
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 27
+  fields:
+    status: active
+    created: 2010-12-03 19:52:48
+    updated: 2011-03-12 21:02:39
+    created_class: MfCalendarEvent
+    image: 1321257599_787.jpg
+    url: velikiy_post
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 361
+  fields:
+    status: deleted
+    created: 2012-09-12 12:08:00
+    updated: 2012-09-12 12:08:00
+    created_class: MfCalendarIcon
+    image: 1347444480_641.jpg
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 369
+  fields:
+    status: active
+    created: 2012-11-08 08:36:14
+    updated: 2012-11-08 08:36:14
+    created_class: MfCalendarIcon
+    image: ikona-blagoveshenie-presvyatoy-bogorodicy.jpg
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 370
+  fields:
+    status: active
+    created: 2012-11-08 08:48:18
+    updated: 2012-11-08 08:48:18
+    created_class: MfCalendarIcon
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 371
+  fields:
+    status: active
+    created: 2012-11-08 08:48:18
+    updated: 2012-11-08 08:48:18
+    created_class: MfCalendarIcon
+    image: ikona-blagoveshenie-presvyatoy-bogorodicy1.jpg
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 372
+  fields:
+    status: active
+    created: 2012-11-08 08:48:18
+    updated: 2012-11-08 08:48:18
+    created_class: MfCalendarIcon
+    image: ikona-nedelya_krestopoklonnaya.jpg
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 99
+  fields:
+    status: pause
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfCalendarEvent
+    image: xxxx.jpg
+    url: xxxx
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 373
+  fields:
+    status: active
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfSystemArticle
+    image: img_article_14_1.jpg
+    url: article_14_1
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 374
+  fields:
+    status: active
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfSystemArticle
+    image: img_article_14_2.jpg
+    url: article_14_2
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 375
+  fields:
+    status: active
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfSystemArticle
+    image: img_article_14_3.jpg
+    url: article_14_3
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 376
+  fields:
+    status: deleted
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfSystemArticle
+    image: img_article_14_4.jpg
+    url: article_14_4
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 377
+  fields:
+    status: active
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfSystemArticle
+    image: img_article_50_1.jpg
+    url: article_50_1
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 378
+  fields:
+    status: active
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfSystemArticle
+    image: img_article_50_2.jpg
+    url: article_50_2
+    site: 1
+- model: sancta.MfSystemObject
+  pk: 379
+  fields:
+    status: active
+    created: 2010-11-30 20:48:55
+    updated: 2011-03-09 20:51:38
+    created_class: MfSystemArticle
+    image: img_article_50_3.jpg
+    url: article_50_3
+    site: 1

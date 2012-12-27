@@ -1,0 +1,8 @@
+- model: sancta.MfSystemRelationType
+  pk: 1
+  fields:
+    relation_name: article
+- model: sancta.MfSystemRelationType
+  pk: 2
+  fields:
+    relation_name: icon
