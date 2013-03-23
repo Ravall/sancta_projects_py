@@ -20,6 +20,7 @@ def deploy(tag=None):
             run("python sancta/manage.py syncdb  --settings=config.admin --database=sancta_db")
             run("python sancta/manage.py migrate --settings=config.admin")
             run("python sancta/manage.py collectstatic  --settings=config.admin")
+            run("python sancta/manage.py collectstatic  --settings=config.api")
             run('service nginx stop')
             run('service nginx start')
             run('service uwsgi stop')
