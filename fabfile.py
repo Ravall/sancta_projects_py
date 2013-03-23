@@ -18,7 +18,7 @@ def deploy(tag=None):
             run("find . -name '*.pyc' -delete")
             run("python sancta/manage.py syncdb  --settings=config.admin")
             run("python sancta/manage.py syncdb  --settings=config.admin --database=sancta_db")
-            run("python sancta/manage.py migrate --settings=config.admin")
+            run("python sancta/manage.py migrate --settings=config.admin --merge")
             run("python sancta/manage.py collectstatic  --settings=config.admin")
             run('service nginx stop')
             run('service nginx start')
