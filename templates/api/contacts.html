@@ -1,0 +1,11 @@
+{% extends "api/api_layout.html" %}
+{% block pagetitle %}Контакты.{% endblock pagetitle %}
+{% block content %}
+<h2>Контакты</h2>
+<p> Для связи с редакцией и администрацией API, вы можете отправить нам письмо. Отправьте нам ваши предложения, пожелания. Мы обязательно их рассмотрим </p>
+<form method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Отправить" />
+</form>
+
+{% endblock content %}

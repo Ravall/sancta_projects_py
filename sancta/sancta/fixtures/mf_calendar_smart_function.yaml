@@ -1,0 +1,20 @@
+- model: sancta.MfCalendarSmartFunction
+  pk: 114
+  fields:
+    smart_function: "07.04"
+    reload: 0
+- model: sancta.MfCalendarSmartFunction
+  pk: 150
+  fields:
+    smart_function: "03.03"
+    reload: 0
+- model: sancta.MfCalendarSmartFunction
+  pk: 27
+  fields:
+    smart_function: "02.02"
+    reload: 0
+- model: sancta.MfCalendarSmartFunction
+  pk: 99
+  fields:
+    smart_function: "01.01"
+    reload: 0

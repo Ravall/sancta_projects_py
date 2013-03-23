@@ -1,4 +1,6 @@
 language: python
 install:
   - pip install -r files/pip.freeze --use-mirrors
-script: make tests
+before_script:
+  - mysql -e 'create database mindfly;'
+script: make integrate

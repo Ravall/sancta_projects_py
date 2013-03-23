@@ -1,0 +1,28 @@
+- model: sancta.MfSystemArticle
+  pk: 1
+  fields:
+    mfsystemobject_ptr: 373
+- model: sancta.MfSystemArticle
+  pk: 2
+  fields:
+    mfsystemobject_ptr: 374
+- model: sancta.MfSystemArticle
+  pk: 3
+  fields:
+    mfsystemobject_ptr: 375
+- model: sancta.MfSystemArticle
+  pk: 4
+  fields:
+    mfsystemobject_ptr: 376
+- model: sancta.MfSystemArticle
+  pk: 5
+  fields:
+    mfsystemobject_ptr: 377
+- model: sancta.MfSystemArticle
+  pk: 6
+  fields:
+    mfsystemobject_ptr: 378
+- model: sancta.MfSystemArticle
+  pk: 7
+  fields:
+    mfsystemobject_ptr: 379

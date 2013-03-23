@@ -1,0 +1,50 @@
+{% extends "api/api_layout.html" %}
+{% load static from staticfiles %}
+
+
+{% block content %}
+<div>
+<div class="hero-unit">
+  <h1>Православное API</h1>
+  <p>Низкоуровневое решение для работы с православным календарем.</p>
+  <p>
+    <a class="btn btn-primary btn-large">
+      Начать использовать
+    </a>
+  </p>
+</div>
+
+<div class="row">
+  <div class='span4'>
+    <h2>Православный календарь</h2>
+    <p><img class="img-polaroid" src="{% static "images/calendar.png" %}"></p>
+    <p>Можно получить список православных событий на нужный день календаря. API содержит {{ events_count }} православных праздников. </p></p>База праздников постоянно прорабатывается - улучшается содержание, описание, добавляются новые праздники, дни святых, православные седмицы.</p>
+  </div>
+  <div class='span4'>
+    <h2>Иконы</h2>
+    <p>
+      <img class="img-circle" src='http://img.sancta.ru/crop/75x100/ikona-pasha.jpg'>
+      <img class="img-circle" src='http://img.sancta.ru/crop/75x100/ikona-pasha1.jpg'>
+      <img class="img-circle" src='http://img.sancta.ru/crop/75x100/ikona-pasha2.jpg'>
+      <img class="img-circle" src='http://img.sancta.ru/crop/75x100/ikona-pasha3.jpg'>
+    </p>
+
+    <p> К каждому событию, по возможности подгружаются иконы. Иконы доступны в нескольких разрешениях.</p>
+  </div>
+  <div class='span4'>
+    <h2>Статьи</h2>
+    <p><img class="img-polaroid" src="{% static "images/article.png" %}"></p>
+    <p>Статьи тематические, привязанные к определенным событиями или сгруппированные между собой по определенной тематике, дополняют информационную базу календаря. Статьи написаны заинтересованными пользователями, прошедшие вычитку и коррекцию.</p>
+    <p> Вы можете <a href='{% url contacts %}'>прислать</a> нам свою авторскую статью - если она удовлетворит нашим <a href='{% url requires %}'>правилам</a>, то мы ее опубликуем.</p>
+  </div>
+
+
+</div>
+<hr/>
+ <h4>Православный календарь используют:</h4>
+    <a href='http://orthcalendar.ru/orthodoxy'>
+      <img src='http://orthcalendar.ru/images/banner.png' border=0 alt='православный календарь' title='православный календарь'>
+    </a>
+
+</div>
+{% endblock content %}

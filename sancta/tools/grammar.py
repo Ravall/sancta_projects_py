@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ругается что модуль trans не используется - ложь
-# pylint: disable=W0611  
+# pylint: disable=W0611
 import trans
 
 def translite(string):

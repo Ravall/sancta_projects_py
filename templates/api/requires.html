@@ -1,0 +1,26 @@
+{% extends "api/api_layout.html" %}
+{% load static from staticfiles %}
+{% block pagetitle %}Требования и Правила.{% endblock pagetitle %}
+{% block content %}
+<h2>Требования и Правила</h2>
+<ol>
+    <li>Сайт на котором используется православное API должен нести пользу людям в общепринятом понимании понятия польза.</li>
+    <li>Для использования API регистрация не нужна, единственное, что от вас ожидается - чтобы вы оставили свой email, для получения оповещений о новостях API</li>
+    <li>Если вы решили использовать православное API установите на одной из страниц сайта (например на странице "контакты" или "о нас" ) баннер </li>
+</ol>
+<p>
+<h4>Укажите ваш email для получения оповещений об изменениях</h4>
+<form method="post">{% csrf_token %}
+{{ form }}
+<input type="submit" value="Отправить" />
+</form>
+</p>
+<h4>Баннер, необходимый для установке на одной из страниц сайта:</h4>
+<p><img src="{% static "images/api-banner.png" %}"></p>
+<p>
+<code>
+&lt;a href='http://api.sancta.ru{% url index %}'&gt;&lt;img src='http://api.sancta.ru{% static "images/api-banner.png" %}' border=0 alt='православное API' title='православное API'/&gt;&lt;/a&gt;
+</code>
+</p>
+
+{% endblock content %}

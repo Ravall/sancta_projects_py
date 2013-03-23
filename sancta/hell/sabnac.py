@@ -5,57 +5,111 @@
 САБНАК - демон, ответственный за гниение трупов.
 ------------
 удаляет старый кэш
-    cc_event_info       кэш информации о событии
-    cc_smart_function   кэш для дат фунции
+    update_event вызывается при сохранении события
+    подчистить по урлу:
+        event/[id]
+        event/[url новый]
+        event/[url старый]
+        calendar/(все даты по новому smart_function)
+        calendar/(все даты по старому smart_function)
+        article[id добавленной статьи]
+        article[url добавленной статьи]
+            теги статей не трогаем т.к нельзя добавить тегированную статью
+        article[id всех привязанных статей к событию]
+        article[url всех привязанных статей к событию]
+    update_article вызывается при сохранении статьи
+    подчистить по урлам:
+        article[id]
+        article[url новый]
+        article[url старый]
+        article[tags старые]
+        article[tags новые]
+        event/[id к которому привязана статья]
+        event/[url к которому привязана статья]
+        calendar/(все даты по smart_function события,
+            к которому привязана статья)
+
 '''
-
 import celery
-import os
 import logging
-from md5 import md5
-from tools.date import yyyy_mm_dd
-from django.conf import settings
-from tools.smartfunction import smart_function
-from djangorestframework.reverse import reverse
-from mf_calendar import models as calendar_model
+from api import cc
+from mf_system.models import MfSystemArticle
+from mf_calendar.models import MfCalendarEvent, MfCalendarIcon
 
 
 @celery.task()
-def cc_event_info(event_id):
-    '''
-    удалим nginx кэш информации о событии
-    '''
-    _remove_cach_file_by_url(
-        reverse('event-api', kwargs={'id_or_name': event_id})
-    )
-    event = calendar_model.MfCalendarEvent.objects.get(pk=event_id)
-    _remove_cach_file_by_url(
-        reverse('event-api', kwargs={'id_or_name': event.url})
-    )
-
-
-@celery.task()
-def cc_smart_function(function):
-    '''
-    удалим кэш для дат фунции
-    '''
-    for year in range(settings.SMART_FUNCTION_YEAR_BEGIN,
-                      settings.SMART_FUNCTION_YEAR_END):
-        # для каждого года получим дату
-        for date in smart_function(function, year):
-            # подчистим для каждой даты кэш
-            _remove_cach_file_by_url(
-                reverse('calendar-api', kwargs={'day': yyyy_mm_dd(date)})
-            )
-
-
-def _remove_cach_file_by_url(url):
-    url += '?format=json'
+def update_event(obj, cleaned_data):
+    assert isinstance(obj, MfCalendarEvent)
+    """
+    методы по очистки кэша при обновлении события
+    event_id - идентификатор события
+    cleaned_data - форма данных
+    """
     logger = logging.getLogger('sancta_log')
-    logger.info('clear cache by url {0}'.format(url))
-    file_name = md5(url).hexdigest()
-    file_path = os.path.abspath(os.path.join(settings.NGINX_CACHE, file_name))
-    try:
-        os.remove(file_path)
-    except OSError:
-        pass
+    logger.info('сохранение события')
+
+    #очистим кеш и информацию о событии
+    if obj.id:
+        cc.by_event_id(obj.id)
+        cc.by_event_url(obj.url)
+        if obj.function != cleaned_data['smart_function']:
+            cc.by_smart_function(obj.function.smart_function)
+    cc.by_event_url(cleaned_data['seo_url'])
+    cc.by_smart_function(cleaned_data['smart_function'])
+
+    if cleaned_data['add_article']:
+        #если была добавлена статья
+        article = MfSystemArticle.objects.get(
+            pk=cleaned_data['add_article']
+        )
+        cc.by_article_url(article.url)
+        cc.by_article_id(article.id)
+    #чистим привязанные статьи
+    if obj.id:
+        for obj_art in obj.get_articles():
+            cc.by_article_url(obj_art.url)
+            cc.by_article_id(obj_art.id)
+    logger.info('save_model end')
+
+
+@celery.task()
+def update_article(obj, cleaned_data):
+    assert isinstance(obj, MfSystemArticle)
+    if obj.id:
+        # основные параметры
+        cc.by_article_url(obj.url)
+        cc.by_article_id(obj.id)
+        # пройдемся по существующим тегам
+        for tag in obj.tags.all():
+            cc.by_article_tag(tag.name)
+        # пройдемся по привязанным статьям
+        parent_relateds = obj.get_relate_to()
+        for rel_obj in parent_relateds:
+            if rel_obj.created_class == 'MfCalendarEvent':
+                event = MfCalendarEvent.objects.get(pk=rel_obj.id)
+                cc.by_smart_function(event.smart_function)
+                cc.by_event_id(event.id)
+                cc.by_event_url(event.url)
+    # пройдемся по новым тегам
+    for tag in [
+        art_tag.strip() for art_tag
+        in cleaned_data['tags'].split(',')
+        if art_tag.strip()
+    ]:
+        cc.by_article_tag(tag)
+    # новый seo_url
+    cc.by_article_url(cleaned_data['seo_url'])
+
+
+@celery.task()
+def update_icon(obj, cleaned_data):
+    # pylint: disable=W0613
+    assert isinstance(obj, MfCalendarIcon)
+    if obj.id:
+        parent_relateds = obj.get_relate_to()
+        for rel_obj in parent_relateds:
+            if rel_obj.created_class == 'MfCalendarEvent':
+                event = MfCalendarEvent.objects.get(pk=rel_obj.id)
+                cc.by_event_id(event.id)
+                cc.by_event_url(event.url)
+                cc.by_smart_function(event.function.smart_function)

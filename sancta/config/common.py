@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-# Django settings for sancta project.
+# pylint: disable=W0403,W0614,W0611
 import os
 import platform
-# celery
-import djcelery
 
 _PATH = os.path.abspath(os.path.dirname(__file__) + '/../')
 # DEBUG должен находится тут
 DEBUG = platform.node() != 'sancta'
+SERVER_EMAIL = 'valery.ravall@gmail.com'
 ADMINS = (
-    ('Ravall', 'valery.ravall@gmail.com'),
+    ('Ravall', SERVER_EMAIL),
 )
 MANAGERS = ADMINS
 
@@ -31,7 +30,7 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
@@ -57,7 +56,9 @@ UPLOAD_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'upload')
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 
-STATIC_ROOT = os.path.abspath(os.path.join(_PATH, '../', 'files', 'collected_static'))
+STATIC_ROOT = os.path.abspath(
+    os.path.join(_PATH, '../', 'files', 'collected_static')
+)
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -88,67 +89,41 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-
-)
-
-
 TEMPLATE_DIRS = (
     os.path.join(_PATH, '../', 'templates')
 )
 
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+)
+
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     # default template context processors
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
     'django.core.context_processors.media',
-
-    # django 1.2 only
-    'django.contrib.messages.context_processors.messages',
-
-    # required by django-admin-tools
-    'django.core.context_processors.request',
 )
 
 INSTALLED_APPS = (
-    'admin_tools',
-    'admin_tools.theming',
-    'admin_tools.menu',
-    'admin_tools.dashboard',
-    'django.contrib.messages',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'sancta',
-    'mf_system',
-    'api',
-    'djangorestframework',
-    'tools',
-    'djcelery',
-    'kombu.transport.django',
-    'south',
-
+    'rest_framework',
 )
-ADMIN_TOOLS_INDEX_DASHBOARD = 'sancta.dashboard.CustomIndexDashboard'
-ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'sancta.dashboard.CustomAppIndexDashboard'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+    'PAGINATE_BY': 100,
+}
+
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format':
+                '%(levelname)s %(asctime)s'
+                ' %(module)s %(process)d %(thread)d %(message)s'
         },
         'simple': {
             'format': '[%(levelname)s|%(asctime)s] %(message)s',
@@ -189,15 +164,7 @@ LOGGING = {
     }
 }
 
-djcelery.setup_loader()
-#BROKER_URL = 'amqp://'
-BROKER_URL = 'django://'
-BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
-#BROKER_BACKEND = "amqp"
-CELERY_IMPORTS = ("hell",)
 
-# года, которые интересны для быстрой работы
-# по ним оперативно чистится кэш, оперативно выбираются события
-SMART_FUNCTION_YEAR_BEGIN = 1900
-SMART_FUNCTION_YEAR_END = 2100
+
 NGINX_CACHE = '/home/var/cache/'
+IS_TESTING = 0

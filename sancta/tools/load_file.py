@@ -48,3 +48,9 @@ def handle_uploaded_file(request_file, icon_title):
     # вызываем отложенное задание синхронизации
     azazel.sync_folders.delay()
     return new_filename
+
+
+def delete_file(file_name):
+    full_file_name = settings.ORIGIN_MEDIA_ROOT + '/' + file_name
+    if os.path.exists(full_file_name):
+        os.remove(full_file_name)

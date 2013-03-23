@@ -1,0 +1,54 @@
+- model: sancta.MfSystemRelation
+  pk: 514
+  fields:
+    mf_object: 361
+    parent_object: 14
+    relation: 2
+- model: sancta.MfSystemRelation
+  pk: 516
+  fields:
+    mf_object: 369
+    parent_object: 14
+    relation: 2
+- model: sancta.MfSystemRelation
+  pk: 517
+  fields:
+    mf_object: 370
+    parent_object: 14
+    relation: 2
+- model: sancta.MfSystemRelation
+  pk: 518
+  fields:
+    mf_object: 371
+    parent_object: 14
+    relation: 2
+- model: sancta.MfSystemRelation
+  pk: 519
+  fields:
+    mf_object: 372
+    parent_object: 50
+    relation: 2
+- model: sancta.MfSystemRelation
+  pk: 520
+  fields:
+    mf_object: 373
+    parent_object: 14
+    relation: 1
+- model: sancta.MfSystemRelation
+  pk: 521
+  fields:
+    mf_object: 374
+    parent_object: 14
+    relation: 1
+- model: sancta.MfSystemRelation
+  pk: 522
+  fields:
+    mf_object: 375
+    parent_object: 14
+    relation: 1
+- model: sancta.MfSystemRelation
+  pk: 523
+  fields:
+    mf_object: 376
+    parent_object: 14
+    relation: 1

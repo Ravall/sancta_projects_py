@@ -1,0 +1,96 @@
+- model: sancta.MfSystemObjectText
+  pk: 1
+  fields:
+    system_object: 14
+    system_text: 214
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 2
+  fields:
+    system_object: 50
+    system_text: 250
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 27
+  fields:
+    system_object: 27
+    system_text: 27
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1549
+  fields:
+    system_object: 361
+    system_text: 1550
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1562
+  fields:
+    system_object: 369
+    system_text: 1564
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1563
+  fields:
+    system_object: 370
+    system_text: 1565
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1564
+  fields:
+    system_object: 371
+    system_text: 1566
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1565
+  fields:
+    system_object: 99
+    system_text: 999
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1566
+  fields:
+    system_object: 372
+    system_text: 1567
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1567
+  fields:
+    system_object: 373
+    system_text: 1568
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1568
+  fields:
+    system_object: 374
+    system_text: 1569
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1569
+  fields:
+    system_object: 375
+    system_text: 1570
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1570
+  fields:
+    system_object: 376
+    system_text: 1571
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1571
+  fields:
+    system_object: 377
+    system_text: 1572
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1572
+  fields:
+    system_object: 378
+    system_text: 1573
+    status: active
+- model: sancta.MfSystemObjectText
+  pk: 1573
+  fields:
+    system_object: 379
+    system_text: 1574
+    status: active

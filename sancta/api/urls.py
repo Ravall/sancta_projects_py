@@ -1,22 +1,36 @@
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework.urlpatterns import format_suffix_patterns
 from django.conf.urls.defaults import patterns, url
-from api.views import ApiView, EventView, CalendarView
+from django.conf import settings
+from api.views import Calendar
 
-
-urlpatterns = patterns('',
+# pylint: disable=C0103
+urlpatterns = patterns('api.views',
     url(
-    	r'^$', 
-    	ApiView.as_view(), 
-    	name='api-resources'
+        r'^$', 'get_example', name='api-resources',
     ),
     url(
-    	r'^event/(?P<id_or_name>[0-9a-z_]+)/$', 
-    	EventView.as_view(), 
-    	name='event-api'
+        r'^/event/(?P<event_id>[0-9a-z_]+)$', 'get_event',\
+        name='event-api'
     ),
     url(
-    	r'^calendar/(?P<day>[0-9]{4}-[0-9]{2}-[0-9]{2})/$', 
-    	CalendarView.as_view(), 
-    	name='calendar-api'
+        r'^/event/tag/(?P<event_tag>[0-9a-z_]+)$', 'get_events_by_tag',\
+        name='eventtag-api'
+    ),
+    url(
+        r'^/article/(?P<article_id>[0-9a-z_]+)$', 'get_articles',\
+        name='article-api'
+    ),
+    url(
+        r'^/article/tag/(?P<article_tag>[0-9a-z_]+)$', 'get_articles_by_tag',\
+        name='articletag-api'
+    ),
+    url(
+        r'^/calendar/(?P<day>[0-9]{4}-[0-9]{2}-[0-9]{2})$',\
+        Calendar.as_view(), name='calendar-api'
     )
+)
+
+urlpatterns = format_suffix_patterns(
+    urlpatterns, suffix_required=True,
+    allowed=settings.REST_SUFFIX_ALLOWED
 )

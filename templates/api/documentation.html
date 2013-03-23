@@ -1,0 +1,33 @@
+{% extends "api/api_layout.html" %}
+{% block content %}
+<ul class="nav nav-pills">
+  <li
+    {% if request.get_full_path == '/docs/' %}
+       class='active'
+    {% endif %}><a href="{% url docs %}">События</a></li>
+  <li
+    {% if request.get_full_path == '/docs/articles' %}
+       class='active'
+    {% endif %}><a href="{% url docs_articles %}">Статьи</a></li>
+  <li
+    {% if request.get_full_path == '/docs/calendar' %}
+       class='active'
+    {% endif %}
+  ><a href="{% url docs_calendar %}">Календарь</a></li>
+</ul>
+<h4>Методы православного API</h4>
+<div class='alert alert-info'>
+  <strong> Общая информация </strong>
+  <ol>
+    <li>обращение к API осуществляется через GET запрос на нужный урл</li>
+      <li>Ответ API возможен в двух форматах 'json' и 'xml'.
+          Формат задается суфиком запроса:
+          <code>http://*api_request*.[xml|json].</code>
+      </li>
+      <li>Некоторые секции ответов могут отсутствовать или возвращены пустым значением</li>
+      <li>Чтобы получить изображение, имя которого указано в секции <code>images</code>, нужно  запросить его по адресу http://img.sancta.ru/crop/<code>image_size</code>/<code>image_name</code>. В image_size необходимо подставить нужный размер из доступных - "150x200", "600x800"</li>
+  </ol>
+</div>
+
+{% block documentation %}{% endblock documentation %}
+{% endblock content %}
