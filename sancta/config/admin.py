@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0403,W0614,W0611,W0401
-from common import *
+from _admin import *
 from databases import DATABASES
 TEMPLATE_DEBUG = True
 
