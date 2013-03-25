@@ -86,7 +86,7 @@ def update_article(obj, cleaned_data):
         parent_relateds = obj.get_relate_to()
         for rel_obj in parent_relateds:
             if rel_obj.created_class == 'MfCalendarEvent':
-                event = MfCalendarEvent.objects.get(pk=rel_obj.id)
+                event = rel_obj
                 cc.by_smart_function(event.smart_function)
                 cc.by_event_id(event.id)
                 cc.by_event_url(event.url)
@@ -109,7 +109,7 @@ def update_icon(obj, cleaned_data):
         parent_relateds = obj.get_relate_to()
         for rel_obj in parent_relateds:
             if rel_obj.created_class == 'MfCalendarEvent':
-                event = MfCalendarEvent.objects.get(pk=rel_obj.id)
+                event = rel_obj
                 cc.by_event_id(event.id)
                 cc.by_event_url(event.url)
                 cc.by_smart_function(event.function.smart_function)

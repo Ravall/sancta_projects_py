@@ -59,6 +59,8 @@ def prepare_event(event, **kwargs):
     выводит инорфмацию об одном событии
     """
     data = prepare_object(event, **kwargs)
+    # выведем умную фунцию
+    data['smart_date'] = event.function.smart_function
     if kwargs.get('show_icons', True):
         icons = event.get_icons()
         if icons:
@@ -111,8 +113,14 @@ def prepare_object(text_object, **kwargs):
     if tags:
         # если у объекта есть теги - то выводим их названия
         data['tags'] = [tag.name for tag in tags]
+    # если показывать текст полностью - выводим секцию
+    # text = {'title':???, 'annonce': ???, 'content': ???}
+    # в проитвном случае - выдаем текст в общей секции
     if kwargs.get('show_text', True):
         data['text'] = prepare_text(text_object)
+    else:
+        data['title'] = text_object.title
+
     if text_object.url:
         data['name'] = text_object.url
 
