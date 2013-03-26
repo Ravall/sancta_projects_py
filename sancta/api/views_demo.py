@@ -47,6 +47,12 @@ def docs(request):
                 },
                 request=request
             ),
+            'event_all_example': reverse(
+                'eventall-api', kwargs={
+                    'format': 'json'
+                },
+                request=request
+            ),
         },
         context_instance=RequestContext(request),
 
