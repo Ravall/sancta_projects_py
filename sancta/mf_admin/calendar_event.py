@@ -140,7 +140,7 @@ class RelatedObjectsInlineIcons(EventRelatedInline):
 
 
 class MfCalendarEventAdmin(ObjectAdmin):
-    list_display = 'id', 'get_title', 'count_icons', 'count_articles'
+    list_display = 'id', 'get_title', 'get_tags', 'count_icons', 'count_articles'
 
     def __init__(self, *args, **kwargs):
         super(MfCalendarEventAdmin, self).__init__(*args, **kwargs)
@@ -150,6 +150,10 @@ class MfCalendarEventAdmin(ObjectAdmin):
 
     def count_articles(self, obj):
         return obj.count_articles
+
+    def get_tags(self, obj):
+        tags = [tag.name for tag in obj.tags.all()]
+        return ', '.join(tags)
 
     inlines = [
         ObjectTextInline,
