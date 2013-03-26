@@ -13,6 +13,7 @@
     "tags": [
         "post"
     ],
+    "smart_date": "14.08~27.08",
     "text": {
         "content": "content of event",
         "annonce": "annonce of event",
@@ -68,7 +69,7 @@
 </div>
 
 <p>
-    События можно получать по тегам: <code>{{ event_by_tag_example }}. При этом список секций будет сокращенных</code>
+    События можно получать по тегам: <code>{{ event_by_tag_example }}</code>. При этом список секций будет сокращенный
 </p>
 <pre>
 <b>Пример ответа:</b>
@@ -78,6 +79,7 @@
         "type": "event",
         "id": 11,
         "name": "event11",
+        "smart_date": "{}",
         "tags": [
             "tag1",
             "tag2"
@@ -88,6 +90,7 @@
         "type": "event",
         "id": 12,
         "name": "event12",
+        "smart_date": "{}",
         "tags": [
             "tag1",
             "tag3"
@@ -95,4 +98,39 @@
     }
 ]
 </pre>
+
+<p>
+    Получение всех событий: <code>{{ event_all_example }}</code>. При этом список секций будет сокращенный
+</p>
+<pre>
+<b>Пример ответа:</b>
+[
+    {
+        "name": "pasha",
+        "title": "Пасха",
+        "image": "1323196997_738.jpg",
+        "smart_date": "{Pascha}",
+        "type": "event",
+        "id": 7
+    },
+    {
+        "name": "rozhdestvo_bogorodicy",
+        "title": "Рождество Богородицы",
+        "image": "1323338809_479.jpg",
+        "smart_date": "21.09",
+        "type": "event",
+        "id": 8
+    },
+    {
+        "name": "vozdvizhenie_kresta_gospodnya",
+        "title": "Воздвижение Креста Господня",
+        "image": "1323338914_961.jpg",
+        "smart_date": "27.09",
+        "type": "event",
+        "id": 9
+    },
+    ...
+]
+</pre>
+
 {% endblock documentation %}
