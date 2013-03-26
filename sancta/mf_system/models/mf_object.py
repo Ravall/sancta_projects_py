@@ -124,7 +124,22 @@ class MfSystemObject(models.Model):
         получаем все объекты, к которому привязан текущий объект
         """
         relateds = MfSystemRelation.objects.filter(mf_object=self)
-        return [related.parent_object for related in relateds]
+        return [
+            self.factory(related.parent_object) for related in relateds
+        ]
+
+    @staticmethod
+    def factory(obj):
+        if obj.created_class == 'MfCalendarEvent':
+            from mf_calendar.models import MfCalendarEvent
+            factory_obj = MfCalendarEvent.objects.get(pk=obj.id)
+        elif obj.created_class == 'MfSystemArticle':
+            from mf_system.models import MfSystemArticle
+            factory_obj = MfSystemArticle.objects.get(pk=obj.id)
+        elif obj.created_class == 'MfCalendarIcon':
+            from mf_system.models import MfCalendarIcon
+            factory_obj = MfCalendarIcon.objects.get(pk=obj.id)
+        return factory_obj
 
 
     class Meta:

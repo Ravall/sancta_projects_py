@@ -8,13 +8,15 @@ urlpatterns = patterns('api.views',
     url(
         r'^$', 'get_example', name='api-resources',
     ),
-    url(
-        r'^/event/(?P<event_id>[0-9a-z_]+)$', 'get_event',\
-        name='event-api'
-    ),
+
     url(
         r'^/event/tag/(?P<event_tag>[0-9a-z_]+)$', 'get_events_by_tag',\
         name='eventtag-api'
+    ),
+    url(r'^/event/all$', 'get_all_events', name='eventall-api'),
+    url(
+        r'^/event/(?P<event_id>[0-9a-z_]+)$', 'get_event',\
+        name='event-api'
     ),
     url(
         r'^/article/(?P<article_id>[0-9a-z_]+)$', 'get_articles',\
