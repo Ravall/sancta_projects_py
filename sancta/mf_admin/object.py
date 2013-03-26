@@ -4,7 +4,7 @@ from django.contrib import admin
 from mf_system import models as system_model
 from mf_calendar import models as calendar_model
 from mf_system import widget
-from taggit.models import TaggedItem
+from taggit.models import Tag,TaggedItem
 from mf_system.models.mf_object_text import MfSystemObjectText
 from mf_admin.widgets import ObjectLinkWidget
 
@@ -196,11 +196,17 @@ class TagObjectFilter(admin.SimpleListFilter):
         # нужно из модели получить имя модели
         # не знаю способ кроме такого:
         # str(model_admin.opts.concrete_model._meta).split('.')[-1]
-        return [
-            (tagitem.tag.name,) * 2
-            for tagitem in TaggedItem.objects.select_related().filter(
+        tmp = set()
+        ids =  [
+            tagitem.tag_id
+            for tagitem in TaggedItem.objects.filter(
                 content_type__model=str(
                     model_admin.opts.concrete_model._meta
                 ).split('.')[-1]
-            )
+            ) if tagitem.tag_id not in tmp and not tmp.add(tagitem.tag_id)
         ]
+        return [
+            (tag.name,) * 2
+            for tag in Tag.objects.filter(pk__in=ids)
+        ]
+
