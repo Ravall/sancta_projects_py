@@ -98,10 +98,22 @@ def get_events_by_tag(request, event_tag, format):
 
 
 @api_view(['GET'])
+def get_all_events(request, format):
+    events = MfCalendarEvent.objects.filter(status='active')
+    if not events:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    return Response(prepare_events(events))
+
+
+@api_view(['GET'])
 def get_example(request, format):
     resource_urls = [
         reverse(
             'event-api', kwargs={'event_id': 29, 'format': 'json'},
+            request=request
+        ),
+        reverse(
+            'eventall-api', kwargs={'format': 'json'},
             request=request
         ),
         reverse(

@@ -134,6 +134,9 @@ class EventTest(ApiTest):
                 content['id'], 50
             )
             self.assertEquals(
+                content['smart_date'], '03.03'
+            )
+            self.assertEquals(
                 content['image'], '1321823855_410.jpg'
             )
             self.assertEquals(
@@ -188,6 +191,14 @@ class EventTest(ApiTest):
         self.assertEquals(14, content[0]['id'])
         self.assertEquals(27, content[1]['id'])
 
+    def test_get_all_events(self):
+        api_client = Client()
+        response = api_client.get(
+            '/api/event/all.{0}'.format('json')
+        )
+        self.assertEquals(response.status_code, 200)
+        content = ast.literal_eval(response.content)
+        self.assertTrue(len(content))
 
 class IconsTest(ApiTest):
     """
