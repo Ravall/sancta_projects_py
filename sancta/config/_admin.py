@@ -33,7 +33,13 @@ INSTALLED_APPS += (
     'kombu.transport.django',
     'south',
     'taggit',
+    'tinymce',
+    'file_picker',
+    'file_picker.uploads', # file and image Django app
+    #'file_picker.wymeditor', # optional WYMeditor plugin
 )
+
+FILEBROWSER_DIRECTORY = 'origin'
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.contrib.auth.context_processors.auth',
@@ -71,3 +77,30 @@ REST_FRAMEWORK = {
     )
 }
 REST_SUFFIX_ALLOWED = ['json', 'xml', 'api']
+
+
+#TINYMCE_JS_URL = 'http://debug.example.org/tiny_mce/tiny_mce_src.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'content_css' : "/static/css/tinymce_content.css",
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    #'font_size_style_values': "xx-large",
+    #'theme_advanced_font_sizes': "20px",
+    'style_formats' : [
+        {'title' : 'Тест 1', 'block' : 'p', 'classes' : 'test1' },
+        {'title' : 'Тест 2', 'inline' : 'span', 'classes' : 'test2'},
+    ],
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_FILEBROWSER = True
+#TINYMCE_COMPRESSOR = True
+
+DIRECTORY = 'uploads/'
+
+URL_FILEBROWSER_MEDIA = STATIC_URL + "filebrowser/"
+PATH_FILEBROWSER_MEDIA = os.path.join(STATIC_ROOT, 'filebrowser/')
+
+URL_TINYMCE = ADMIN_MEDIA_PREFIX + "tinymce/jscripts/tiny_mce/"
+PATH_TINYMCE = ADMIN_MEDIA_PREFIX + "tinymce/jscripts/tiny_mce/"

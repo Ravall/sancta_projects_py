@@ -4,7 +4,8 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from orthcalendar.views import generate_sitemap_view
-
+import file_picker
+file_picker.autodiscover()
 
 admin.autodiscover()
 
@@ -13,8 +14,14 @@ urlpatterns = patterns('',
     url(r'^api', include('api.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^admin_tools/', include('admin_tools.urls'))
+    url(r'^admin_tools/', include('admin_tools.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
+    #url(r'^grappelli/', include('grappelli.urls')),
+    #url(r'^admin/filebrowser/', include('filebrowser.urls')),
+    #url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^file-picker/', include(file_picker.site.urls)),
 )
+
 
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

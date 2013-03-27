@@ -4,6 +4,7 @@ from mf_admin.object import ObjectAdmin, StatusObjectFilter,\
     ObjectForm, IsObjectRelateFilter, TagObjectFilter
 from mf_system.models.mf_article import MfSystemArticle
 from hell import sabnac
+from tinymce.widgets import TinyMCE
 
 
 class ArticleForm(ObjectForm):
@@ -23,6 +24,16 @@ class ArticleForm(ObjectForm):
             # если установлены теги и привязана статья - это не правильно
             raise forms.ValidationError('Нельзя устанавливать теги, к приявзанной статье')
         return cleaned_data
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name in ('anounce', 'soderz', 'istochnik'):
+            return db_field.formfield(widget=TinyMCE(
+                attrs={'cols': 130, 'rows': 30},
+
+            ))
+        return super(ArticleForm, self).formfield_for_dbfield(db_field, **kwargs)
+
+
 
     class Meta:
         # указываем что эта таблица расширяет ArticleForm
