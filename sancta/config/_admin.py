@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0403,W0614,W0611,W0401
 from common import *
+SITE_ID = 1
 # celery
 import djcelery
 djcelery.setup_loader()

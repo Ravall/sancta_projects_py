@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
-from hell.anubis import generate_sitemap_file
-from django.shortcuts import redirect
-from django.contrib import messages
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+import requests
 
-def generate_sitemap_view(request):
-    messages.add_message(
-    	request, messages.SUCCESS, 
-    	'задание перегенерить карту сайта поставлено.'
+API_URL = 'http://api.sancta.ru/api/'
+
+def get_article(request, article):
+    r = requests.get(
+        '{0}article/{1}.{2}'.format(
+            API_URL, 'klassifikaciya_prazdnikov_v_pravoslavii', 'json'
+        )
     )
-    generate_sitemap_file.delay()
-    return redirect('/admin/')
+    r.raise_for_status()
+    return render_to_response(
+        'orthcalendar/article.html',
+        {'article': r.json()},
+        context_instance=RequestContext(request)
+    )
