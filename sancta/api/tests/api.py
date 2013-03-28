@@ -200,6 +200,7 @@ class EventTest(ApiTest):
         content = ast.literal_eval(response.content)
         self.assertTrue(len(content))
 
+
 class IconsTest(ApiTest):
     """
     тестируем получение икон

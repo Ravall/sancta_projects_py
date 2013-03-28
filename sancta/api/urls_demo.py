@@ -5,7 +5,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views_demo
 
 # pylint: disable=C0103
-urlpatterns = patterns('api.views_demo',
+urlpatterns = patterns(
+    'api.views_demo',
     url(r'^$', views_demo.index, name='index'),
     url(r'^smartdate/$', views_demo.smartdate, name="smartdate"),
     url(r'^docs/$', views_demo.docs, name="docs"),

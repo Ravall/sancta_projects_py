@@ -139,6 +139,7 @@ def prepare_object(text_object, **kwargs):
 
 class NotificationEmail(models.Model):
     email = models.EmailField()
+
     class Meta:
         db_table = u'api_nofify_email'
         managed = False

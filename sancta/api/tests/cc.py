@@ -256,5 +256,3 @@ class CcIconTest(CcCase):
                 call('/api/calendar/2011-04-07.json'),
                 call('/api/calendar/2011-04-07.xml'),
             ])
-
-

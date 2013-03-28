@@ -51,6 +51,7 @@ MEDIA_ROOT = os.path.abspath(os.path.join(_PATH, '../', 'files', 'media'))
 ORIGIN_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'origin')
 # в эту папку будет все загружено из вне.
 UPLOAD_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'upload')
+#DIRECTORY = '/upload'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -121,9 +122,8 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format':
-                '%(levelname)s %(asctime)s'
-                ' %(module)s %(process)d %(thread)d %(message)s'
+            'format': "%(levelname)s %(asctime)s " +
+            "%(module)s %(process)d %(thread)d %(message)s"
         },
         'simple': {
             'format': '[%(levelname)s|%(asctime)s] %(message)s',
@@ -163,7 +163,6 @@ LOGGING = {
         }
     }
 }
-
 
 
 NGINX_CACHE = '/home/var/cache/'

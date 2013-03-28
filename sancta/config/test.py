@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0403,W0611
 import os
-from common import SECRET_KEY, SITE_ID, _PATH
+from common import SECRET_KEY, SITE_ID, _PATH, STATIC_URL
 ROOT_URLCONF = 'sancta.urls'
 from databases_test import DATABASES
 # приложения, которые нужно тестировать

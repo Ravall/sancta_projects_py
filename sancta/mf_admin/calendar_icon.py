@@ -65,6 +65,7 @@ class IconAdmin(ObjectAdmin):
     list_filter = StatusObjectFilter,
 
     def save_model(self, request, obj, form, change):
+        # pylint: disable=E1002
         # чистка кэша
         sabnac.update_icon.delay(obj, form.cleaned_data)
         super(IconAdmin, self).save_model(
