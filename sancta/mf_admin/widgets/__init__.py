@@ -1,1 +1,1 @@
-from ObjectLinkWidget import ObjectLinkWidget
+from mf_admin.widgets.ObjectLinkWidget import ObjectLinkWidget

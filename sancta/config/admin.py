@@ -7,6 +7,5 @@ TEMPLATE_DEBUG = True
 ROOT_URLCONF = 'sancta.urls'
 WSGI_APPLICATION = 'sancta.wsgi.application'
 
-
-
-
+# переопределим на бою урл, чтобы смотрел на сервер изображений
+FILEBROWSER_MEDIA_URL = 'http://img.sancta.ru/'

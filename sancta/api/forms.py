@@ -17,7 +17,7 @@ class ContactForm(forms.Form):
         label='ваш email',
         error_messages={
             'required': 'укажите ваш email для того, '
-                'чтобы мы могли ответить вам',
+                        'чтобы мы могли ответить вам',
             'invalid': 'введите корректный email'
         }
     )

@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
-import logging
 from django import forms
 from django.contrib import admin
 from smart_date.smartfunction import FormulaException, formula_factory
 from smart_date import date
 from hell import sabnac
 from mf_system import widget
-from mf_admin.object import ObjectAdmin, ObjectForm, StatusObjectFilter,\
+from mf_admin.object import ObjectAdmin, ObjectForm, StatusObjectFilter, \
     TagObjectFilter
 from mf_calendar import models as calendar_model
 from mf_system.models.mf_article import MfSystemArticle
-from mf_system.models.mf_text import MfSystemText
-from mf_system.models.mf_object_text import MfSystemObjectText
 from mf_system.models.mf_relation import MfSystemRelation
 
 
@@ -54,6 +51,7 @@ class EventAdminForm(ObjectForm):
         return self.cleaned_data["smart_function"]
 
     def __init__(self, *args, **kwargs):
+        # pylint: disable=E1002, E1101
         super(EventAdminForm, self).__init__(*args, **kwargs)
         instance = kwargs['instance']
         self.set_initial(instance)
@@ -81,8 +79,8 @@ class EventRelatedInline(admin.TabularInline):
     extra = 0
 
     def queryset(self, request):
-        qs = super(EventRelatedInline, self).queryset(request)
-        return qs.filter(mf_object__status="active")
+        query_set = super(EventRelatedInline, self).queryset(request)
+        return query_set.filter(mf_object__status="active")
 
 
 class RelatedObjectsInlineArticle(EventRelatedInline):
@@ -103,14 +101,13 @@ class RelatedObjectsInlineArticle(EventRelatedInline):
         return False
 
     def queryset(self, request):
-        qs = super(RelatedObjectsInlineArticle, self).queryset(request)
-        return qs.filter(relation=1)
+        query_set = super(RelatedObjectsInlineArticle, self).queryset(request)
+        return query_set.filter(relation=1)
 
 
 class RelatedObjectsInlineIcons(EventRelatedInline):
     verbose_name_plural = 'Иконы привязанные к событию'
     #readonly_fields = 'mf_object',
-    #formset = XXX
     #template = 'admin/object_icons.html'
 
     def formfield_for_dbfield(self, db_field, **kwargs):
@@ -128,8 +125,8 @@ class RelatedObjectsInlineIcons(EventRelatedInline):
         среди всех связанных объектов нужно выыести только те,
         у которых relation=2 (икона)
         '''
-        qs = super(RelatedObjectsInlineIcons, self).queryset(request)
-        return qs.filter(relation=2)
+        query_set = super(RelatedObjectsInlineIcons, self).queryset(request)
+        return query_set.filter(relation=2)
 
     def has_add_permission(self, request):
         '''
@@ -140,18 +137,25 @@ class RelatedObjectsInlineIcons(EventRelatedInline):
 
 
 class MfCalendarEventAdmin(ObjectAdmin):
-    list_display = 'id', 'get_title', 'get_tags', 'count_icons', 'count_articles'
+    list_display = (
+        'id', 'get_title', 'get_tags',
+        'count_icons', 'count_articles'
+    )
 
     def __init__(self, *args, **kwargs):
+        # pylint: disable=E1002
         super(MfCalendarEventAdmin, self).__init__(*args, **kwargs)
 
-    def count_icons(self, obj):
+    @staticmethod
+    def count_icons(obj):
         return obj.count_icons
 
-    def count_articles(self, obj):
+    @staticmethod
+    def count_articles(obj):
         return obj.count_articles
 
-    def get_tags(self, obj):
+    @staticmethod
+    def get_tags(obj):
         tags = [tag.name for tag in obj.tags.all()]
         return ', '.join(tags)
 
@@ -165,27 +169,31 @@ class MfCalendarEventAdmin(ObjectAdmin):
             'fields': ('title', 'smart_function', 'periodic', 'image_file')
         }),
         ('Контент', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-open',),
             'fields': ('annonce', 'content', 'add_article')
         }),
         ('Настройки', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('status', 'created', 'updated', 'created_class', 'tags')
         }),
         ('SEO', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('seo_url',)
         }),
         ('Икона', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('icon_title', 'alt_text', 'icon_file')
         }),
     )
+    #classes = ('grp-collapse grp-open',)
+    inline_classes = ('grp-collapse grp-open',)
     list_filter = StatusObjectFilter, TagObjectFilter
     form = EventAdminForm
+    # pylint: disable=W0613
     change_form_template = 'admin/imaged_object_change_form.html'
 
     def save_icon(self, request, obj, form, change):
+        # pylint: disable=R0201
         if len(request.FILES) == 0:
             return None
         # создаем объект икона
@@ -203,6 +211,7 @@ class MfCalendarEventAdmin(ObjectAdmin):
         obj.add_icon(icon)
 
     def add_article(self, request, obj, form, change):
+        # pylint: disable=W0613, R0201
         """
         привязываем статью
         """
@@ -216,9 +225,9 @@ class MfCalendarEventAdmin(ObjectAdmin):
             relation.save()
 
     def save_model(self, request, obj, form, change):
+        # pylint: disable=E1002, E1101
         # чистка кэша
         sabnac.update_event.delay(obj, form.cleaned_data)
-
         super(MfCalendarEventAdmin, self).save_model(
             request, obj, form, change
         )
@@ -234,5 +243,3 @@ class MfCalendarEventAdmin(ObjectAdmin):
         self.save_text(request, obj, form, change)
         self.save_icon(request, obj, form, change)
         self.save_seo(request, obj, form, change)
-
-

@@ -5,15 +5,15 @@ DATABASES = {
         'NAME': 'sancta_dj',
         'USER': 'sancta_user',
         'PASSWORD': 'sancta_user_password',
-        'HOST': '',
+        'HOST': '127.0.0.1',
         'PORT': '',
     },
-    'sancta_db' : {
+    'sancta_db': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mindfly',
         'USER': 'sancta_user',
         'PASSWORD': 'sancta_user_password',
-        'HOST': '',
+        'HOST': '127.0.0.1',
         'PORT': '',
     }
 }
