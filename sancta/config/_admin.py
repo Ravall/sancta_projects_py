@@ -11,10 +11,13 @@ BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 CELERY_IMPORTS = "hell.sabnac", "hell.azazel", "hell.anubis"
 
 INSTALLED_APPS += (
+    #'admin_tools.dashboard',
+    'grappelli.dashboard',
+    'grappelli',
+    'filebrowser',
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
-    'admin_tools.dashboard',
     'django.contrib.messages',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,8 +37,8 @@ INSTALLED_APPS += (
     'south',
     'taggit',
     'tinymce',
-    'file_picker',
-    'file_picker.uploads', # file and image Django app
+    #'file_picker',
+    #'file_picker.uploads', # file and image Django app
     #'file_picker.wymeditor', # optional WYMeditor plugin
 )
 
@@ -67,6 +70,8 @@ SMART_FUNCTION_YEAR_END = 2100
 
 ADMIN_TOOLS_INDEX_DASHBOARD = 'sancta.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'sancta.dashboard.CustomAppIndexDashboard'
+GRAPPELLI_INDEX_DASHBOARD = 'sancta.dashboard_grappelli.CustomIndexDashboard'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
@@ -97,10 +102,25 @@ TINYMCE_SPELLCHECKER = True
 TINYMCE_FILEBROWSER = True
 #TINYMCE_COMPRESSOR = True
 
-DIRECTORY = 'uploads/'
+# Filebrowser
+DIRECTORY = ''
+FILEBROWSER_DEBUG = True
 
-URL_FILEBROWSER_MEDIA = STATIC_URL + "filebrowser/"
-PATH_FILEBROWSER_MEDIA = os.path.join(STATIC_ROOT, 'filebrowser/')
+# Test for or create a dashboard file
+FILEBROWSER_DIRECTORY = 'images/'
+FILEBROWSER_MAX_UPLOAD_SIZE = 2097152
+FILEBROWSER_SAVE_FULL_URL = False
+FILEBROWSER_VERSIONS_BASEDIR = "versions"
+FILEBROWSER_ADMIN_VERSIONS = {
+    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'}, }
+FILEBROWSER_ADMIN_VERSIONS = []
 
-URL_TINYMCE = ADMIN_MEDIA_PREFIX + "tinymce/jscripts/tiny_mce/"
-PATH_TINYMCE = ADMIN_MEDIA_PREFIX + "tinymce/jscripts/tiny_mce/"
+
+# Grappelli
+GRAPPELLI_ADMIN_TITLE = 'АдмЫнка.'
+GRAPPELLI_ADMIN_URL = 'admin/'
+
+# TODO
+# Test for and create a dashboard file
+
+#GRAPPELLI_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'

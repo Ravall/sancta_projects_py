@@ -165,22 +165,24 @@ class MfCalendarEventAdmin(ObjectAdmin):
             'fields': ('title', 'smart_function', 'periodic', 'image_file')
         }),
         ('Контент', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-open',),
             'fields': ('annonce', 'content', 'add_article')
         }),
         ('Настройки', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('status', 'created', 'updated', 'created_class', 'tags')
         }),
         ('SEO', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('seo_url',)
         }),
         ('Икона', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('icon_title', 'alt_text', 'icon_file')
         }),
     )
+    #classes = ('grp-collapse grp-open',)
+    inline_classes = ('grp-collapse grp-open',)
     list_filter = StatusObjectFilter, TagObjectFilter
     form = EventAdminForm
     change_form_template = 'admin/imaged_object_change_form.html'
