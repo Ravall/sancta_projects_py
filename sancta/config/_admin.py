@@ -79,6 +79,7 @@ REST_SUFFIX_ALLOWED = ['json', 'xml', 'api']
 
 
 TINYMCE_DEFAULT_CONFIG = {
+
     'content_css': "/static/css/tinymce_content.css",
     'plugins': "table,spellchecker,paste,searchreplace",
     'theme': "advanced",
@@ -88,6 +89,7 @@ TINYMCE_DEFAULT_CONFIG = {
         {'title': 'Тест 1', 'block': 'p', 'classes': 'test1'},
         {'title': 'Тест 2', 'inline': 'span', 'classes': 'test2'},
     ],
+    'verify_html' : False,
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_FILEBROWSER = True
