@@ -21,10 +21,14 @@ def deploy(tag=None):
             run("python sancta/manage.py migrate --settings=config.admin")
             run("python sancta/manage.py collectstatic  --settings=config.admin")
             run("python sancta/manage.py collectstatic  --settings=config.api")
-            run('service nginx stop')
-            run('service nginx start')
-            run('service uwsgi stop')
-            run('service uwsgi start')
-            run('service celeryd stop')
-            run('service celeryd start')
-            run("ps aux | grep 'celery'")
+            restart()
+
+
+def restart():
+    run('service nginx stop')
+    run('service nginx start')
+    run('service uwsgi stop')
+    run('service uwsgi start')
+    run('service celeryd stop')
+    run('service celeryd start')
+    run("ps aux | grep 'celery'")
