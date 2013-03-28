@@ -50,7 +50,7 @@ class MfSystemArticle(MfSystemObject):
     def update(self, params, up_file=False):
         try:
             filename, old_filename = None, str(self.image)
-            self._save_seo_url(params)
+            self.save_seo_url(params)
             self.update_text(params)
             if up_file:
                 filename = self.load_file(
@@ -84,7 +84,7 @@ class MfSystemArticle(MfSystemObject):
         """
         try:
             filename = None
-            self._save_seo_url(params, commit=False)
+            self.save_seo_url(params, commit=False)
             self.created_class = 'MfSystemArticle'
             self.save()
             if up_file:

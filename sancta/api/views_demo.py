@@ -104,6 +104,7 @@ def docs_articles(request):
         context_instance=RequestContext(request)
     )
 
+
 def smartdate(request):
     return render_to_response(
         'api/smart_date.html',
@@ -116,7 +117,7 @@ def requires(request):
         form = forms.ApiEmailNotificate(request.POST)
         if form.is_valid():
             email = NotificationEmail(
-                email = form.cleaned_data['email']
+                email=form.cleaned_data['email']
             )
             email.save()
             messages.success(request, 'Ваш еmail добавлен в базу')
@@ -144,7 +145,7 @@ def contacts(request):
             messages.success(request, 'Ваше письмо отправлено')
             return HttpResponseRedirect('/contacts/')
     else:
-        form = forms.ContactForm() # An unbound form
+        form = forms.ContactForm()
 
     return render_to_response(
         'api/contacts.html',

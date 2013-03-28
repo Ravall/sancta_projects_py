@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=E1002
 from django import forms
-from mf_admin.object import ObjectAdmin, StatusObjectFilter,\
+from mf_admin.object import ObjectAdmin, StatusObjectFilter, \
     ObjectForm, IsObjectRelateFilter, TagObjectFilter
 from mf_system.models.mf_article import MfSystemArticle
 from hell import sabnac
@@ -17,12 +18,12 @@ class ArticleForm(ObjectForm):
         self.set_initial(instance)
 
     def clean(self):
-        """
-        """
         cleaned_data = self.cleaned_data
         if cleaned_data.get('tags', False) and self.instance.is_related():
             # если установлены теги и привязана статья - это не правильно
-            raise forms.ValidationError('Нельзя устанавливать теги, к приявзанной статье')
+            raise forms.ValidationError(
+                'Нельзя устанавливать теги, к приявзанной статье'
+            )
         return cleaned_data
 
     def formfield_for_dbfield(self, db_field, **kwargs):
@@ -31,9 +32,9 @@ class ArticleForm(ObjectForm):
                 attrs={'cols': 130, 'rows': 30},
 
             ))
-        return super(ArticleForm, self).formfield_for_dbfield(db_field, **kwargs)
-
-
+        return super(ArticleForm, self).formfield_for_dbfield(
+            db_field, **kwargs
+        )
 
     class Meta:
         # указываем что эта таблица расширяет ArticleForm
@@ -42,7 +43,9 @@ class ArticleForm(ObjectForm):
 
 class MfSystemArticleAdmin(ObjectAdmin):
     list_display = 'id', 'get_title'
-    list_filter = StatusObjectFilter, IsObjectRelateFilter, TagObjectFilter, 'site'
+    list_filter = (
+        StatusObjectFilter, IsObjectRelateFilter, TagObjectFilter, 'site'
+    )
     form = ArticleForm
     change_form_template = 'admin/imaged_object_change_form.html'
     fieldsets = (

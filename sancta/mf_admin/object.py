@@ -4,13 +4,14 @@ from django.contrib import admin
 from mf_system import models as system_model
 from mf_calendar import models as calendar_model
 from mf_system import widget
-from taggit.models import Tag,TaggedItem
+from taggit.models import Tag, TaggedItem
 from mf_system.models.mf_object_text import MfSystemObjectText
 from mf_admin.widgets import ObjectLinkWidget
 from tinymce.widgets import TinyMCE
 
 
 class ObjectForm(forms.ModelForm):
+    # pylint: disable=R0924
     '''
     общий класс для дополнительных форм, модели которых отнаследованы от object
     '''
@@ -53,8 +54,9 @@ class RelatedInlineObject(admin.TabularInline):
     extra = 0
 
     def queryset(self, request):
-        qs = super(RelatedInlineObject, self).queryset(request)
-        return qs.filter(mf_object__status="active")
+        # pylint: disable=E1002
+        query_set = super(RelatedInlineObject, self).queryset(request)
+        return query_set.filter(mf_object__status="active")
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         # pylint: disable=E1002
@@ -109,7 +111,7 @@ class ObjectAdmin(admin.ModelAdmin):
     @staticmethod
     def save_seo(request, obj, form, change):
         # pylint: disable=W0613
-        obj._save_seo_url(form.cleaned_data)
+        obj.save_seo_url(form.cleaned_data)
 
     def delete_model(self, request, obj):
         '''
@@ -150,12 +152,12 @@ class StatusObjectFilter(admin.SimpleListFilter):
         if self.value() == 'off':
             return queryset.filter(status__in=['deleted', 'pause'])
 
-    def choices(self, cl):
+    def choices(self, chs):
         '''
         переопределил метод, который возвращает список пунктов меню фильтра
         и убрал от туда первый 'все'
         '''
-        return list(super(StatusObjectFilter, self).choices(cl))[1:]
+        return list(super(StatusObjectFilter, self).choices(chs))[1:]
 
 
 class IsObjectRelateFilter(admin.SimpleListFilter):
@@ -201,8 +203,10 @@ class TagObjectFilter(admin.SimpleListFilter):
         # нужно из модели получить имя модели
         # не знаю способ кроме такого:
         # str(model_admin.opts.concrete_model._meta).split('.')[-1]
+        # обращаюсь к мета - это плохо
+        # pylint: disable=W0212
         tmp = set()
-        ids =  [
+        ids = [
             tagitem.tag_id
             for tagitem in TaggedItem.objects.filter(
                 content_type__model=str(
@@ -214,4 +218,3 @@ class TagObjectFilter(admin.SimpleListFilter):
             (tag.name,) * 2
             for tag in Tag.objects.filter(pk__in=ids)
         ]
-

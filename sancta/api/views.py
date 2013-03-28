@@ -41,8 +41,6 @@ def get_articles_by_tag(request, article_tag, format):
     return Response(prepare_articles(articles))
 
 
-
-
 class Calendar(APIView):
     @staticmethod
     def prepare_day_data(events, day):

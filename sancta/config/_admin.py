@@ -11,7 +11,6 @@ BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 CELERY_IMPORTS = "hell.sabnac", "hell.azazel", "hell.anubis"
 
 INSTALLED_APPS += (
-    #'admin_tools.dashboard',
     'grappelli.dashboard',
     'grappelli',
     'filebrowser',
@@ -37,9 +36,6 @@ INSTALLED_APPS += (
     'south',
     'taggit',
     'tinymce',
-    #'file_picker',
-    #'file_picker.uploads', # file and image Django app
-    #'file_picker.wymeditor', # optional WYMeditor plugin
 )
 
 FILEBROWSER_DIRECTORY = 'origin'
@@ -68,8 +64,6 @@ MIDDLEWARE_CLASSES += (
 SMART_FUNCTION_YEAR_BEGIN = 1900
 SMART_FUNCTION_YEAR_END = 2100
 
-ADMIN_TOOLS_INDEX_DASHBOARD = 'sancta.dashboard.CustomIndexDashboard'
-ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'sancta.dashboard.CustomAppIndexDashboard'
 GRAPPELLI_INDEX_DASHBOARD = 'sancta.dashboard_grappelli.CustomIndexDashboard'
 
 
@@ -84,18 +78,15 @@ REST_FRAMEWORK = {
 REST_SUFFIX_ALLOWED = ['json', 'xml', 'api']
 
 
-#TINYMCE_JS_URL = 'http://debug.example.org/tiny_mce/tiny_mce_src.js'
 TINYMCE_DEFAULT_CONFIG = {
-    'content_css' : "/static/css/tinymce_content.css",
+    'content_css': "/static/css/tinymce_content.css",
     'plugins': "table,spellchecker,paste,searchreplace",
     'theme': "advanced",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
-    #'font_size_style_values': "xx-large",
-    #'theme_advanced_font_sizes': "20px",
-    'style_formats' : [
-        {'title' : 'Тест 1', 'block' : 'p', 'classes' : 'test1' },
-        {'title' : 'Тест 2', 'inline' : 'span', 'classes' : 'test2'},
+    'style_formats': [
+        {'title': 'Тест 1', 'block': 'p', 'classes': 'test1'},
+        {'title': 'Тест 2', 'inline': 'span', 'classes': 'test2'},
     ],
 }
 TINYMCE_SPELLCHECKER = True
@@ -112,15 +103,14 @@ FILEBROWSER_MAX_UPLOAD_SIZE = 2097152
 FILEBROWSER_SAVE_FULL_URL = False
 FILEBROWSER_VERSIONS_BASEDIR = "versions"
 FILEBROWSER_ADMIN_VERSIONS = {
-    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'}, }
-FILEBROWSER_ADMIN_VERSIONS = []
-
+    'admin_thumbnail': {
+        'verbose_name': 'Admin Thumbnail',
+        'width': 60,
+        'height': 60,
+        'opts': 'crop'
+    },
+}
 
 # Grappelli
 GRAPPELLI_ADMIN_TITLE = 'АдмЫнка.'
 GRAPPELLI_ADMIN_URL = 'admin/'
-
-# TODO
-# Test for and create a dashboard file
-
-#GRAPPELLI_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'

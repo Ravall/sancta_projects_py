@@ -5,6 +5,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter
 def url_parts(url, part):
     return url.split('/')[part]

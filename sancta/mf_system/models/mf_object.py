@@ -74,7 +74,7 @@ class MfSystemObject(models.Model):
         system_object_text.save()
         return system_object_text
 
-    def _save_seo_url(self, params, **kargs):
+    def save_seo_url(self, params, **kargs):
         """
         сохраняет seo_url из словаря params
         params = {'seo_url':'', 'title':"}
