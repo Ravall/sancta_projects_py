@@ -81,7 +81,7 @@ REST_SUFFIX_ALLOWED = ['json', 'xml', 'api']
 TINYMCE_DEFAULT_CONFIG = {
 
     'content_css': "/static/css/tinymce_content.css",
-    'plugins': "table,spellchecker,paste,searchreplace",
+    'plugins': "table,spellchecker,paste,searchreplace,advhr,insertdatetime",
     'theme': "advanced",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
@@ -90,6 +90,38 @@ TINYMCE_DEFAULT_CONFIG = {
         {'title': 'Тест 2', 'inline': 'span', 'classes': 'test2'},
     ],
     'verify_html' : False,
+    'height': '800px',
+    "theme_advanced_buttons1" : "addArticle,addEvent,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect,|,spellchecker",
+    "theme_advanced_buttons2" : "cut,copy,paste,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,cleanup,code,|,forecolor,backcolor,|,insertfile,insertimage",
+    "theme_advanced_buttons3" : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr",
+    'language' : 'ru',
+    'setup': """function(ed) {
+        // Add a custom button
+        ed.addButton('addArticle', {
+            title : 'add article',
+            image : '/media/upload/article_icon.png',
+            onclick : function() {
+                ed.focus();
+                cnt = ed.selection.getContent()
+                ed.selection.setContent(
+                    '<sacticle name="" id="">'+cnt+'</sacticle>'
+                );
+            }
+        });
+        ed.addButton('addEvent', {
+            title : 'add event',
+            image : '/media/upload/calendar_new.png',
+            onclick : function() {
+                ed.focus();
+                cnt = ed.selection.getContent()
+                ed.selection.setContent(
+                    '<sevent name="" id="">'+cnt+'</sevent>'
+                );
+            }
+        });
+    }"""
+
+
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_FILEBROWSER = True

@@ -41,6 +41,8 @@ class ArticleForm(ObjectForm):
         model = MfSystemArticle
 
 
+
+
 class MfSystemArticleAdmin(ObjectAdmin):
     list_display = 'id', 'get_title'
     list_filter = (

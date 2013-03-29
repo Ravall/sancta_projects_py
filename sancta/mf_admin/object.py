@@ -6,8 +6,7 @@ from mf_calendar import models as calendar_model
 from mf_system import widget
 from taggit.models import Tag, TaggedItem
 from mf_system.models.mf_object_text import MfSystemObjectText
-from mf_admin.widgets import ObjectLinkWidget
-from tinymce.widgets import TinyMCE
+from mf_admin.widgets import ObjectLinkWidget, myTinyMCE
 
 
 class ObjectForm(forms.ModelForm):
@@ -23,7 +22,9 @@ class ObjectForm(forms.ModelForm):
     annonce = forms.CharField(widget=forms.Textarea, required=False)
     #content = forms.CharField(widget=forms.Textarea, required=False)
     content = forms.CharField(
-        widget=TinyMCE(attrs={'cols': 400, 'rows': 30}),
+        widget=myTinyMCE.Widget(
+            attrs={'cols': 800, 'rows': 30},
+        ),
         required=False
     )
     image = forms.ImageField(widget=widget.ImageWidget, required=False)
