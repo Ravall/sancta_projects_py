@@ -11,13 +11,13 @@ div.block_content,div.block_head {
 {% block user-nav %}
 <ul class='nav'>
     <li {% if request.get_full_path == '/' %} class='active' {% endif %}>
-        <a href='{% url index %}'>API</a>
+        <a href='{% url "index" %}'>API</a>
     </li>
     <li {% if request.get_full_path|url_parts:1 == 'docs' %} class='active' {% endif %}>
-      <a href="{% url docs %}">Документация</a>
+      <a href="{% url "docs" %}">Документация</a>
     </li>
     <li {% if request.get_full_path == '/smartdate/' %} class='active' {% endif %}>
-      <a href="{% url smartdate %}">smart_date</a>
+      <a href="{% url "smartdate" %}">smart_date</a>
     </li>
 </ul>
 {% endblock user-nav %}
@@ -29,8 +29,8 @@ div.block_content,div.block_head {
     </div>
     <div class='span3'>
         <ul class="nav nav-pills">
-            <li {% if request.get_full_path|url_parts:1 == 'requires' %} class='active' {% endif %}><a href="{% url requires %}">требования</a></li>
-            <li {% if request.get_full_path|url_parts:1 == 'contacts' %} class='active' {% endif %}><a href="{% url contacts %}">контакты</a></li>
+            <li {% if request.get_full_path|url_parts:1 == 'requires' %} class='active' {% endif %}><a href="{% url "requires" %}">требования</a></li>
+            <li {% if request.get_full_path|url_parts:1 == 'contacts' %} class='active' {% endif %}><a href="{% url "contacts" %}">контакты</a></li>
         </li>
     </div>
 </div>

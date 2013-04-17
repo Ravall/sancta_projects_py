@@ -5,7 +5,7 @@ clear cache
 """
 import os
 import logging
-from md5 import md5
+from hashlib import md5
 from django.conf import settings
 from rest_framework.reverse import reverse
 from smart_date.smartfunction import smart_function
