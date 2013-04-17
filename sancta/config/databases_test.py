@@ -4,16 +4,18 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mindfly',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'prana',
         'HOST': '',
         'PORT': '',
+        'TEST_DEPENDENCIES': []
     },
     'sancta_db': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mindfly',
+        'NAME': 'sancta_dj',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'prana',
         'HOST': '',
         'PORT': '',
+        'TEST_DEPENDENCIES': []
     }
 }

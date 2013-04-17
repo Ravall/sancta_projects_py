@@ -10,7 +10,6 @@
 
 import os
 import re
-from sets import Set
 from django.conf import settings
 import celery
 import logging
@@ -84,7 +83,7 @@ class AzazelDaemon():
         # файлы в папке
         folder_image_list = os.listdir(folder)
         # файлы которые есть в origin_image_list но нет в folder_image_list
-        new_files = Set(self.origin_image_list) - Set(folder_image_list)
+        new_files = set(self.origin_image_list) - set(folder_image_list)
         self.logger.info("новые файлы :" + str(new_files))
         # добавляем
         for file_to_sync in new_files:
@@ -100,7 +99,7 @@ class AzazelDaemon():
             result = os.system(command)
             self.logger.info(result)
         # файлы которые есть в folder_image_list но нет в origin_image_list
-        delte_files = Set(folder_image_list) - Set(self.origin_image_list)
+        delte_files = set(folder_image_list) - set(self.origin_image_list)
         self.logger.info("устаревшие файлы:" + str(delte_files))
         # удаляем
         for file_to_sync in delte_files:
