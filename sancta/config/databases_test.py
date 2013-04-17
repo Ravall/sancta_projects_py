@@ -4,7 +4,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mindfly',
         'USER': 'root',
-        'PASSWORD': 'prana',
+        'PASSWORD': '',
         'HOST': '',
         'PORT': '',
         'TEST_DEPENDENCIES': []
@@ -13,7 +13,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sancta_dj',
         'USER': 'root',
-        'PASSWORD': 'prana',
+        'PASSWORD': '',
         'HOST': '',
         'PORT': '',
         'TEST_DEPENDENCIES': []
