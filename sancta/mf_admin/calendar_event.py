@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=E1002, E1101
 from django import forms
 from django.contrib import admin
 from smart_date.smartfunction import FormulaException, formula_factory
@@ -79,6 +80,7 @@ class EventRelatedInline(admin.TabularInline):
     extra = 0
 
     def queryset(self, request):
+        # pylint: disable=E1002, E1101
         query_set = super(EventRelatedInline, self).queryset(request)
         return query_set.filter(mf_object__status="active")
 

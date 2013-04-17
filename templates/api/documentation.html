@@ -4,16 +4,16 @@
   <li
     {% if request.get_full_path == '/docs/' %}
        class='active'
-    {% endif %}><a href="{% url docs %}">События</a></li>
+    {% endif %}><a href="{% url "docs" %}">События</a></li>
   <li
     {% if request.get_full_path == '/docs/articles' %}
        class='active'
-    {% endif %}><a href="{% url docs_articles %}">Статьи</a></li>
+    {% endif %}><a href="{% url "docs_articles" %}">Статьи</a></li>
   <li
     {% if request.get_full_path == '/docs/calendar' %}
        class='active'
     {% endif %}
-  ><a href="{% url docs_calendar %}">Календарь</a></li>
+  ><a href="{% url "docs_calendar" %}">Календарь</a></li>
 </ul>
 <h4>Методы православного API</h4>
 <div class='alert alert-info'>
