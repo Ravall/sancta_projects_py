@@ -3,4 +3,5 @@ install:
   - pip install -r files/pip.freeze --use-mirrors
 before_script:
   - mysql -e 'create database mindfly;'
+  - mysql -e 'create database sancta_dj;'
 script: make integrate
