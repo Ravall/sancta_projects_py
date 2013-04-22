@@ -9,3 +9,5 @@ WSGI_APPLICATION = 'sancta.wsgi.application'
 
 # переопределим на бою урл, чтобы смотрел на сервер изображений
 FILEBROWSER_MEDIA_URL = 'http://img.sancta.ru/'
+
+ALLOWED_HOSTS = 'admin2.sancta.ru'
