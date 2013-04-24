@@ -100,13 +100,15 @@ class ObjectAdmin(admin.ModelAdmin):
             ).system_text
             text.title = form.cleaned_data['title']
             text.annonce = form.cleaned_data['annonce']
+            text.content = form.cleaned_data['content']
             text.save()
         else:
             # если создается новый объект
             # создаем текст
             obj.create_text(dict(
                 title=form.cleaned_data['title'],
-                annonce=form.cleaned_data['annonce']
+                annonce=form.cleaned_data['annonce'],
+                content = form.cleaned_data['content']
             ))
 
     @staticmethod
