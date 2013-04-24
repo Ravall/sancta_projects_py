@@ -19,8 +19,8 @@ def deploy(tag=None):
             run("python sancta/manage.py syncdb  --settings=config.admin")
             run("python sancta/manage.py syncdb  --settings=config.admin --database=sancta_db")
             run("python sancta/manage.py migrate --settings=config.admin --merge")
-            run("python sancta/manage.py collectstatic  --settings=config.admin")
-            run("python sancta/manage.py collectstatic  --settings=config.api")
+            run("python sancta/manage.py collectstatic  --settings=config.admin --noinput")
+            run("python sancta/manage.py collectstatic  --settings=config.api --noinput")
             restart()
 
 
