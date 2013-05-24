@@ -15,14 +15,15 @@ from smart_date.date import is_date_correct
 
 
 @api_view(['GET'])
-def get_articles(request, article_id, format):
+def get_articles(request, article_id, site_id, format):
     """
     возвращает информацию о статьях
     """
     try:
         params = {
             'status': 'active',
-            'id' if article_id.isdigit() else 'url': article_id
+            'id' if article_id.isdigit() else 'url': article_id,
+            'site_id': site_id
         }
         article = MfSystemArticle.objects.get(**params)
     except ObjectDoesNotExist:
@@ -31,10 +32,11 @@ def get_articles(request, article_id, format):
 
 
 @api_view(['GET'])
-def get_articles_by_tag(request, article_tag, format):
+def get_articles_by_tag(request, article_tag, site_id, format):
     articles = MfSystemArticle.objects.filter(
         tags__name__in=[article_tag],
-        status='active'
+        status='active',
+        site_id=site_id
     )
     if not articles:
         return Response(status=status.HTTP_404_NOT_FOUND)

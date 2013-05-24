@@ -1,15 +1,26 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+import urllib, urllib2
+
+
+def typograf(text):
+    if not len(text):
+        return ''
+    url = "http://www.typograf.ru/webservice/"
+    params = urllib.urlencode({"text":urllib.quote(text.encode('cp1251'))})
+    f = urllib.urlopen(url, params)
+    return urllib2.unquote(str(f.read()))
 
 
 def prepare_text(obj):
     """
     вывод текста
     """
+
     return dict(
-        title=obj.title,
-        annonce=obj.annonce,
-        content=obj.content,
+        title=typograf(obj.title),
+        annonce=typograf(obj.annonce),
+        content=typograf(obj.content),
     )
 
 

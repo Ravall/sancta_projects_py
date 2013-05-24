@@ -18,16 +18,29 @@ urlpatterns = patterns(
     ),
     url(
         r'^/article/(?P<article_id>[0-9a-z_]+)$', 'get_articles',
+        {'site_id': settings.SITE_ID},
         name='article-api'
     ),
     url(
         r'^/article/tag/(?P<article_tag>[0-9a-z_]+)$', 'get_articles_by_tag',
+        {'site_id': settings.SITE_ID},
         name='articletag-api'
     ),
     url(
         r'^/calendar/(?P<day>[0-9]{4}-[0-9]{2}-[0-9]{2})$',
         Calendar.as_view(), name='calendar-api'
-    )
+    ),
+    #foreign language
+    url(
+        r'^/foreign/article/(?P<article_id>[0-9a-z_]+)$', 'get_articles',
+        {'site_id': settings.FOREIGN_SITE_ID},
+        name='foreign-article-api',
+    ),
+    url(
+        r'^/foreign/article/tag/(?P<article_tag>[0-9a-z_]+)$', 'get_articles_by_tag',
+        {'site_id': settings.FOREIGN_SITE_ID},
+        name='foreign-articletag-api'
+    ),
 )
 
 urlpatterns = format_suffix_patterns(

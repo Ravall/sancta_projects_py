@@ -27,6 +27,8 @@ TIME_ZONE = 'Europe/Moscow'
 LANGUAGE_CODE = 'ru-RU'
 
 SITE_ID = 1
+# сайт изучения иностранного языка
+FOREIGN_SITE_ID = 0
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
