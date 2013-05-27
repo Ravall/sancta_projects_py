@@ -21,3 +21,5 @@ smart-date==2.0.3
 django-template-bootstrap==0.2.14
 django-filebrowser==3.5.2
 django-tinymce==1.5.1b4
+django-ckeditor==4.0.2
+Pillow==1.7.8

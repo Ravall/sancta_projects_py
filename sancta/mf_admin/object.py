@@ -7,6 +7,7 @@ from mf_system import widget
 from taggit.models import Tag, TaggedItem
 from mf_system.models.mf_object_text import MfSystemObjectText
 from mf_admin.widgets import ObjectLinkWidget, MyTinyMCE
+from ckeditor.widgets import CKEditorWidget
 
 
 class ObjectForm(forms.ModelForm):
@@ -20,13 +21,13 @@ class ObjectForm(forms.ModelForm):
         required=False
     )
     annonce = forms.CharField(widget=forms.Textarea, required=False)
-    #content = forms.CharField(widget=forms.Textarea, required=False)
-    content = forms.CharField(
-        widget=MyTinyMCE.Widget(
-            attrs={'cols': 800, 'rows': 30},
-        ),
-        required=False
-    )
+    content = forms.CharField(widget=CKEditorWidget(), required=True)
+    #content = forms.CharField(
+    #    widget=MyTinyMCE.Widget(
+    #        attrs={'cols': 800, 'rows': 30},
+    #    ),
+    #    required=False
+    #)
     image = forms.ImageField(widget=widget.ImageWidget, required=False)
     exclude = 'created_class',
 

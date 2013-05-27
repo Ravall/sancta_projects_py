@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     # default template context processors
     'django.core.context_processors.media',
+    'django.core.context_processors.static',
 )
 
 INSTALLED_APPS = (
