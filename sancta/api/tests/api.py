@@ -9,6 +9,7 @@ import ast
 from django.test import TestCase, Client
 from mf_system.models import MfSystemArticle
 from mf_calendar.models import MfCalendarEvent
+from django.contrib.contenttypes.models import ContentType
 
 
 class ApiTest(TestCase):
@@ -24,6 +25,14 @@ class ApiTest(TestCase):
         'mf_system_relation.yaml',
         'mf_calendar_net.yaml'
     ]
+
+    # pylint: disable=C0103
+    def setUp(self):
+        '''
+        почему-то сонтент-тайпа на нижесозданные объекты не было. бля.
+        '''
+        ContentType.objects.get_for_model(MfSystemArticle).save()
+        ContentType.objects.get_for_model(MfCalendarEvent).save()
 
 
 class SmokTest(ApiTest):

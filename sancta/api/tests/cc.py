@@ -4,6 +4,7 @@ from mock import patch, call
 from hell import sabnac
 from mf_system.models.mf_article import MfSystemArticle
 from mf_calendar.models import MfCalendarEvent, MfCalendarIcon
+from django.contrib.contenttypes.models import ContentType
 
 
 class CcCase(TestCase):
@@ -19,6 +20,14 @@ class CcCase(TestCase):
         'mf_system_relation.yaml',
         'mf_calendar_net.yaml'
     ]
+
+    # pylint: disable=C0103
+    def setUp(self):
+        '''
+        почему-то сонтент-тайпа на нижесозданные объекты не было. бля.
+        '''
+        ContentType.objects.get_for_model(MfSystemArticle).save()
+        ContentType.objects.get_for_model(MfCalendarEvent).save()
 
 
 class CcArticleTest(CcCase):

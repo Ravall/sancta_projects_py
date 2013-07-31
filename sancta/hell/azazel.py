@@ -93,8 +93,9 @@ class AzazelDaemon():
             command = 'convert "{0}" -resize "{1}^"  -gravity center ' \
                       ' -extent {1} -filter Blackman -modulate 110,102,100' \
                       ' -sharpen 1x1 -enhance  "{2}"'.format(
-                      self.origin_folder + '/' + file_to_sync,
-                      size, folder + '/' + file_to_sync)
+                          self.origin_folder + '/' + file_to_sync,
+                          size, folder + '/' + file_to_sync
+                      )
             self.logger.info(command)
             result = os.system(command)
             self.logger.info(result)

@@ -108,7 +108,7 @@ class ObjectAdmin(admin.ModelAdmin):
             obj.create_text(dict(
                 title=form.cleaned_data['title'],
                 annonce=form.cleaned_data['annonce'],
-                content = form.cleaned_data['content']
+                content=form.cleaned_data['content']
             ))
 
     @staticmethod
