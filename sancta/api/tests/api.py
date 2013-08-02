@@ -14,6 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class ApiTest(TestCase):
     fixtures = [
+        'django_site.yaml',
         'mf_system_relation_type.yaml',
         'mf_calendar_smart_function.yaml',
         'mf_system_object.yaml',
@@ -63,13 +64,17 @@ class ArticleTest(ApiTest):
 
         api_client = Client()
         response = api_client.get(
-            '/api/article/{0}.{1}'.format(373, 'json')
+            '/api/{0}/article/{1}.{2}'.format(
+                'test_orthodoxy', 373, 'json'
+            )
         )
         self.assertEquals(response.status_code, 200)
         content = ast.literal_eval(response.content)
         assert_article373(content)
         response = api_client.get(
-            '/api/article/{0}.{1}'.format('article_14_1', 'json')
+            '/api/{0}/article/{1}.{2}'.format(
+                'test_orthodoxy', 'article_14_1', 'json'
+            )
         )
         self.assertEquals(response.status_code, 200)
         content = ast.literal_eval(response.content)
@@ -84,7 +89,9 @@ class ArticleTest(ApiTest):
         """
         api_client = Client()
         response = api_client.get(
-            '/api/article/tag/{0}.{1}'.format('xxx', 'json')
+            '/api/{0}/article/tag/{1}.{2}'.format(
+                'test_orthodoxy', 'xxx', 'json'
+            )
         )
         self.assertEquals(response.status_code, 404)
 
@@ -95,14 +102,18 @@ class ArticleTest(ApiTest):
         article = MfSystemArticle.objects.get(pk=375)
         article.tags.add('tag1', 'tag3')
         response = api_client.get(
-            '/api/article/{0}.{1}'.format(374, 'json')
+            '/api/{0}/article/{1}.{2}'.format(
+                'test_orthodoxy', 374, 'json'
+            )
         )
         content = ast.literal_eval(response.content)
         self.assertTrue('tags' in content)
         self.assertEquals(['tag2', 'tag3'], content['tags'])
 
         response = api_client.get(
-            '/api/article/tag/{0}.{1}'.format('tag1', 'json')
+            '/api/{0}/article/tag/{1}.{2}'.format(
+                'test_orthodoxy', 'tag1', 'json'
+            )
         )
         content = ast.literal_eval(response.content)
         self.assertEquals(2, len(content))

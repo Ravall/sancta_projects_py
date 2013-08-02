@@ -1,7 +1,7 @@
 from rest_framework.urlpatterns import format_suffix_patterns
 from django.conf.urls import patterns, url
 from django.conf import settings
-from api.views import Calendar
+from api.views import Calendar, article
 
 # pylint: disable=C0103
 urlpatterns = patterns(
@@ -17,11 +17,15 @@ urlpatterns = patterns(
         name='event-api'
     ),
     url(
-        r'^/article/(?P<article_id>[0-9a-z_]+)$', 'get_articles',
+        r'^/(?P<site_name>[0-9a-z_]+)/'
+        'article/(?P<article_id>[0-9a-z_]+)$',
+        article.get_articles,
         name='article-api'
     ),
     url(
-        r'^/article/tag/(?P<article_tag>[0-9a-z_]+)$', 'get_articles_by_tag',
+        r'^/(?P<site_name>[0-9a-z_]+)/'
+        'article/tag/(?P<article_tag>[0-9a-z_]+)$',
+        article.get_articles_by_tag,
         name='articletag-api'
     ),
     url(

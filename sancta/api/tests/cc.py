@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class CcCase(TestCase):
     fixtures = [
+        'django_site.yaml',
         'mf_system_relation_type.yaml',
         'mf_calendar_smart_function.yaml',
         'mf_system_object.yaml',
@@ -42,7 +43,7 @@ class CcArticleTest(CcCase):
             'created': '',
             'updated': '',
             'created_class': 'MfSystemArticle',
-            'site': 1,
+            'id_site': 2,
             'seo_url': 'seo_url'
         }
 
@@ -53,8 +54,8 @@ class CcArticleTest(CcCase):
         ) as mock_cc:
             sabnac.update_article(MfSystemArticle(), cleaned_data)
             self.assertEquals(mock_cc.mock_calls, [
-                call('/api/article/seo_url.json'),
-                call('/api/article/seo_url.xml')
+                call('/api/somesite/article/seo_url.json'),
+                call('/api/somesite/article/seo_url.xml')
             ])
         #проверим теги
         cleaned_data['tags'] = 'xxx, yyy,'
@@ -63,12 +64,12 @@ class CcArticleTest(CcCase):
         ) as mock_cc:
             sabnac.update_article(MfSystemArticle(), cleaned_data)
             self.assertEquals(mock_cc.mock_calls, [
-                call('/api/article/tag/xxx.json'),
-                call('/api/article/tag/xxx.xml'),
-                call('/api/article/tag/yyy.json'),
-                call('/api/article/tag/yyy.xml'),
-                call('/api/article/seo_url.json'),
-                call('/api/article/seo_url.xml')
+                call('/api/somesite/article/tag/xxx.json'),
+                call('/api/somesite/article/tag/xxx.xml'),
+                call('/api/somesite/article/tag/yyy.json'),
+                call('/api/somesite/article/tag/yyy.xml'),
+                call('/api/somesite/article/seo_url.json'),
+                call('/api/somesite/article/seo_url.xml')
             ])
 
     def test_upd_ex_unrelated_article(self):
@@ -84,21 +85,21 @@ class CcArticleTest(CcCase):
         ) as mock_cc:
             sabnac.update_article(article, cleaned_data)
             self.assertEquals(mock_cc.mock_calls, [
-                call('/api/article/article_50_1.json'),
-                call('/api/article/article_50_1.xml'),
-                call('/api/article/377.json'),
-                call('/api/article/377.xml'),
+                call('/api/test_orthodoxy/article/article_50_1.json'),
+                call('/api/test_orthodoxy/article/article_50_1.xml'),
+                call('/api/test_orthodoxy/article/377.json'),
+                call('/api/test_orthodoxy/article/377.xml'),
                 #почему-то такой порядок
-                call('/api/article/tag/old_tag2.json'),
-                call('/api/article/tag/old_tag2.xml'),
-                call('/api/article/tag/old_tag1.json'),
-                call('/api/article/tag/old_tag1.xml'),
-                call('/api/article/tag/tag1.json'),
-                call('/api/article/tag/tag1.xml'),
-                call('/api/article/tag/tag2.json'),
-                call('/api/article/tag/tag2.xml'),
-                call('/api/article/seo_url.json'),
-                call('/api/article/seo_url.xml'),
+                call('/api/test_orthodoxy/article/tag/old_tag2.json'),
+                call('/api/test_orthodoxy/article/tag/old_tag2.xml'),
+                call('/api/test_orthodoxy/article/tag/old_tag1.json'),
+                call('/api/test_orthodoxy/article/tag/old_tag1.xml'),
+                call('/api/somesite/article/tag/tag1.json'),
+                call('/api/somesite/article/tag/tag1.xml'),
+                call('/api/somesite/article/tag/tag2.json'),
+                call('/api/somesite/article/tag/tag2.xml'),
+                call('/api/somesite/article/seo_url.json'),
+                call('/api/somesite/article/seo_url.xml'),
             ])
 
     def test_upd_ex_related_article(self):
@@ -112,11 +113,11 @@ class CcArticleTest(CcCase):
             sabnac.update_article(article, self.get_cleaned_data())
             self.assertEquals(mock_cc.mock_calls, [
                 # урл старый
-                call('/api/article/article_14_2.json'),
-                call('/api/article/article_14_2.xml'),
+                call('/api/test_orthodoxy/article/article_14_2.json'),
+                call('/api/test_orthodoxy/article/article_14_2.xml'),
                 # id статьи
-                call('/api/article/374.json'),
-                call('/api/article/374.xml'),
+                call('/api/test_orthodoxy/article/374.json'),
+                call('/api/test_orthodoxy/article/374.xml'),
                 # calendar/(все даты по smart_function события,
                 # к которому привязана статья)
                 call('/api/calendar/2010-04-07.json'),
@@ -130,8 +131,8 @@ class CcArticleTest(CcCase):
                 call('/api/event/blagoveshenie_presvyatoy_bogorodicy.json'),
                 call('/api/event/blagoveshenie_presvyatoy_bogorodicy.xml'),
                 # урл новый
-                call('/api/article/seo_url.json'),
-                call('/api/article/seo_url.xml')
+                call('/api/somesite/article/seo_url.json'),
+                call('/api/somesite/article/seo_url.xml')
             ])
 
 
@@ -200,6 +201,7 @@ class CcEventTest(CcCase):
 
     def test_event_with_articles(self):
         cleaned_data = self.get_cleaned_data()
+        cleaned_data['id_site'] = 1
         event = MfCalendarEvent.objects.get(pk=14)
         with patch(
             "api.cc._remove_cach_file_by_url", return_value=1
@@ -220,18 +222,18 @@ class CcEventTest(CcCase):
                 call('/api/calendar/2010-01-01.xml'),
                 call('/api/calendar/2011-01-01.json'),
                 call('/api/calendar/2011-01-01.xml'),
-                call('/api/article/article_14_1.json'),
-                call('/api/article/article_14_1.xml'),
-                call('/api/article/373.json'),
-                call('/api/article/373.xml'),
-                call('/api/article/article_14_2.json'),
-                call('/api/article/article_14_2.xml'),
-                call('/api/article/374.json'),
-                call('/api/article/374.xml'),
-                call('/api/article/article_14_3.json'),
-                call('/api/article/article_14_3.xml'),
-                call('/api/article/375.json'),
-                call('/api/article/375.xml')
+                call('/api/test_orthodoxy/article/article_14_1.json'),
+                call('/api/test_orthodoxy/article/article_14_1.xml'),
+                call('/api/test_orthodoxy/article/373.json'),
+                call('/api/test_orthodoxy/article/373.xml'),
+                call('/api/test_orthodoxy/article/article_14_2.json'),
+                call('/api/test_orthodoxy/article/article_14_2.xml'),
+                call('/api/test_orthodoxy/article/374.json'),
+                call('/api/test_orthodoxy/article/374.xml'),
+                call('/api/test_orthodoxy/article/article_14_3.json'),
+                call('/api/test_orthodoxy/article/article_14_3.xml'),
+                call('/api/test_orthodoxy/article/375.json'),
+                call('/api/test_orthodoxy/article/375.xml')
             ])
 
 

@@ -32,3 +32,8 @@ REST_FRAMEWORK = {
     )
 }
 REST_SUFFIX_ALLOWED = ['json', 'xml']
+
+SITE_HASH = {
+    '8euz2cpm': 1,
+    'x3qb5hh6': 2
+}

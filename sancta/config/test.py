@@ -23,3 +23,8 @@ INSTALLED_APPS = (
 )
 REST_SUFFIX_ALLOWED = ['json', 'xml']
 TEST_UTILS_NO_TRUNCATE = ('django_content_type',)
+
+SITE_HASH = {
+    'orthodoxy': 1,
+    'somesite': 2
+}

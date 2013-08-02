@@ -7,6 +7,7 @@ import os
 import logging
 from hashlib import md5
 from django.conf import settings
+from django.contrib.sites.models import Site
 from rest_framework.reverse import reverse
 from smart_date.smartfunction import smart_function
 from smart_date.date import yyyy_mm_dd
@@ -16,16 +17,34 @@ def by_event_id(event_id):
     _remove_cach_file_by_route('event-api', {'event_id': event_id})
 
 
-def by_article_id(article_id):
-    _remove_cach_file_by_route('article-api', {'article_id': article_id})
+def by_article_id(article_id, site_id):
+    site = Site.objects.get(pk=site_id)
+    _remove_cach_file_by_route(
+        'article-api', {
+            'article_id': article_id,
+            'site_name': site.name
+        }
+    )
 
 
-def by_article_tag(tag):
-    _remove_cach_file_by_route('articletag-api', {'article_tag': tag})
+def by_article_tag(tag, site_id):
+    site = Site.objects.get(pk=site_id)
+    _remove_cach_file_by_route(
+        'articletag-api', {
+            'article_tag': tag,
+            'site_name': site.name
+        }
+    )
 
 
-def by_article_url(url):
-    _remove_cach_file_by_route('article-api', {'article_id': url})
+def by_article_url(url, site_id):
+    site = Site.objects.get(pk=site_id)
+    _remove_cach_file_by_route(
+        'article-api', {
+            'article_id': url,
+            'site_name': site.name
+        }
+    )
 
 
 def by_event_url(url):

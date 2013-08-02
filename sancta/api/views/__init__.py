@@ -8,37 +8,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from mf_calendar.models import MfCalendarNet, MfCalendarEvent
-from mf_system.models import MfSystemArticle
 from api.models import prepare_event, prepare_events, \
     prepare_article, prepare_articles
 from smart_date.date import is_date_correct
-
-
-@api_view(['GET'])
-def get_articles(request, article_id, format):
-    """
-    возвращает информацию о статьях
-    """
-    try:
-        params = {
-            'status': 'active',
-            'id' if article_id.isdigit() else 'url': article_id
-        }
-        article = MfSystemArticle.objects.get(**params)
-    except ObjectDoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    return Response(prepare_article(article, add_related=True))
-
-
-@api_view(['GET'])
-def get_articles_by_tag(request, article_tag, format):
-    articles = MfSystemArticle.objects.filter(
-        tags__name__in=[article_tag],
-        status='active'
-    )
-    if not articles:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    return Response(prepare_articles(articles))
 
 
 class Calendar(APIView):
@@ -115,11 +87,21 @@ def get_example(request, format):
             request=request
         ),
         reverse(
-            'article-api', kwargs={'article_id': 231, 'format': 'json'},
+            'article-api',
+            kwargs={
+                'site_name': 'orthodoxy',
+                'article_id': 231,
+                'format': 'json'
+            },
             request=request
         ),
         reverse(
-            'articletag-api', kwargs={'article_tag': 'post', 'format': 'json'},
+            'articletag-api',
+            kwargs={
+                'site_name': 'orthodoxy',
+                'article_tag': 'post',
+                'format': 'json'
+            },
             request=request
         ),
         reverse(
