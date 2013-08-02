@@ -51,6 +51,13 @@ class ArticleTest(TestCase):
         article.save()
         count_articles = MfSystemArticle.objects.count()
         count_objects = MfSystemObject.objects.count()
+
+        text = MfSystemText(
+            title='1',
+            annonce='2',
+            content='3'
+        )
+        text.save()
         count_texts = MfSystemText.objects.count()
         with patch.object(
             MfSystemArticle, '_relate_with_text', side_effect=TestException()

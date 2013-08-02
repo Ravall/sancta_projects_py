@@ -1,0 +1,10 @@
+- model: sites.site
+  pk: 1
+  fields:
+    domain: 'orthodoxy.ru'
+    name: 'test_orthodoxy'
+- model: sites.site
+  pk: 2
+  fields:
+    domain: 'somesite.ru'
+    name: 'somesite'

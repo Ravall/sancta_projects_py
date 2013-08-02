@@ -11,4 +11,4 @@ WSGI_APPLICATION = 'sancta.wsgi.application'
 FILEBROWSER_MEDIA_URL = 'http://img.sancta.ru/'
 
 ALLOWED_HOSTS = ['admin2.sancta.ru']
-#FOREIGN_SITE_ID = 0
+FOREIGN_SITE_ID = 0

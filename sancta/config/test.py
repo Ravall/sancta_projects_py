@@ -12,13 +12,19 @@ FIXTURE_DIRS = os.path.join(_PATH, '/sancta/fixtures/'),
 SMART_FUNCTION_YEAR_BEGIN = 2010
 SMART_FUNCTION_YEAR_END = 2011
 INSTALLED_APPS = (
+    'django.contrib.contenttypes',
     'django.contrib.sites',
     'south',
     'sancta',
-    'django.contrib.contenttypes',
     'taggit',
     'mf_system',
     'api',
     'tools',
 )
 REST_SUFFIX_ALLOWED = ['json', 'xml']
+TEST_UTILS_NO_TRUNCATE = ('django_content_type',)
+
+SITE_HASH = {
+    'orthodoxy': 1,
+    'somesite': 2
+}

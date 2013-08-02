@@ -34,7 +34,7 @@ class MfCalendarIcon(MfSystemObject):
         db_table = u'mf_calendar_icon'
         managed = False
         app_label = 'sancta'
-        verbose_name = 'икона'
+        verbose_name = 'icon'
         verbose_name_plural = 'Иконы'
 
 
@@ -112,7 +112,7 @@ class MfCalendarEvent(MfSystemObject):
         db_table = u'mf_calendar_event'
         managed = False
         app_label = 'sancta'
-        verbose_name = 'событие календаря'
+        verbose_name = u'calendar event'
         verbose_name_plural = 'События календаря'
 
 

@@ -62,13 +62,13 @@ def update_event(obj, cleaned_data):
         article = MfSystemArticle.objects.get(
             pk=cleaned_data['add_article']
         )
-        cc.by_article_url(article.url)
-        cc.by_article_id(article.id)
+        cc.by_article_url(article.url, article.site.id)
+        cc.by_article_id(article.id, article.site.id)
     #чистим привязанные статьи
     if obj.id:
         for obj_art in obj.get_articles():
-            cc.by_article_url(obj_art.url)
-            cc.by_article_id(obj_art.id)
+            cc.by_article_url(obj_art.url, obj_art.site.id)
+            cc.by_article_id(obj_art.id, obj_art.site.id)
     logger.info('save_model end')
 
 
@@ -77,11 +77,12 @@ def update_article(obj, cleaned_data):
     assert isinstance(obj, MfSystemArticle)
     if obj.id:
         # основные параметры
-        cc.by_article_url(obj.url)
-        cc.by_article_id(obj.id)
+        cc.by_article_url(obj.url, obj.site.id)
+        cc.by_article_id(obj.id, obj.site.id)
         # пройдемся по существующим тегам
+
         for tag in obj.tags.all():
-            cc.by_article_tag(tag.name)
+            cc.by_article_tag(tag.name, obj.site.id)
         # пройдемся по привязанным статьям
         parent_relateds = obj.get_relate_to()
         for rel_obj in parent_relateds:
@@ -96,9 +97,9 @@ def update_article(obj, cleaned_data):
         in cleaned_data['tags'].split(',')
         if art_tag.strip()
     ]:
-        cc.by_article_tag(tag)
+        cc.by_article_tag(tag, cleaned_data['id_site'])
     # новый seo_url
-    cc.by_article_url(cleaned_data['seo_url'])
+    cc.by_article_url(cleaned_data['seo_url'], cleaned_data['id_site'])
 
 
 @celery.task()

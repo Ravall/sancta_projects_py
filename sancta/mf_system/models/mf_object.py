@@ -87,7 +87,7 @@ class MfSystemObject(models.Model):
         if not kargs.get('commit', False):
             self.save()
 
-    @transaction.commit_on_success
+    @transaction.commit_manually
     def create_text(self, text_content, status='active'):
         """
         создает текст и привязывает его к объекту
@@ -96,15 +96,22 @@ class MfSystemObject(models.Model):
         status - черновик, чистовик
 
         """
-        # сохраняем сам текст
-        text = MfSystemText(
-            title=text_content.get('title', ''),
-            annonce=text_content.get('annonce', ''),
-            content=text_content.get('content', ''),
-        )
-        text.save()
-        # привязываем текст к объекту
-        self._relate_with_text(text, status)
+        try:
+            # сохраняем сам текст
+            text = MfSystemText(
+                title=text_content.get('title', ''),
+                annonce=text_content.get('annonce', ''),
+                content=text_content.get('content', ''),
+            )
+            text.save()
+            # привязываем текст к объекту
+            self._relate_with_text(text, status)
+        except Exception, e:
+            transaction.rollback()
+            text.delete()
+            raise e
+        else:
+            transaction.commit()
 
     def update_text(self, text_content, status='active'):
         self.texts.filter(mfsystemobjecttext__status=status).update(

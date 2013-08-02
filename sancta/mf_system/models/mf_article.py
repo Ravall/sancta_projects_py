@@ -17,7 +17,7 @@ class MfSystemArticle(MfSystemObject):
         db_table = u'mf_system_article'
         managed = False
         app_label = 'sancta'
-        verbose_name = 'статья'
+        verbose_name = 'article'
         verbose_name_plural = 'Статьи'
 
     @staticmethod
