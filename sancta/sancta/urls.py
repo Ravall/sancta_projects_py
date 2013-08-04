@@ -15,11 +15,13 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin_tools/', include('admin_tools.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
+    #url(r'^tinymce/', include('tinymce.urls')),
+
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/filebrowser/', include(site.urls)),
+    #url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^ckeditor/', include('ckeditor.urls')),
 )
 
 if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-        urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += staticfiles_urlpatterns()

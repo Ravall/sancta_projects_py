@@ -6,8 +6,8 @@ from django.conf import settings
 
 class Migration(SchemaMigration):
     def forwards(self, orm):
-        if settings.IS_TESTING:
-            return
+        #if settings.IS_TESTING:
+        #    return
         dbs['sancta_db'].start_transaction()
         try:
             if not ('django_content_type',)\

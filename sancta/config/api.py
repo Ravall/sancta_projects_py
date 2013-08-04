@@ -7,3 +7,4 @@ TEMPLATE_DEBUG = False
 WSGI_APPLICATION = 'sancta.wsgi_api.application'
 MEDIA_HOST = 'http://img.sancta.ru/'
 ALLOWED_HOSTS = ['api.sancta.ru']
+FOREIGN_SITE_ID = 3

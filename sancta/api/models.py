@@ -1,5 +1,24 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+import requests
 from django.db import models
+from django.conf import settings
+
+
+def typograf(text):
+    # в режиме тестирования - не запрашиваем удаленный типограф
+    if settings.IS_TESTING:
+        return text
+    if not len(text):
+        return ''
+    try:
+        url = "http://www.typograf.ru/webservice/"
+        request = requests.post(url, {"text": text, "chr": 'UTF-8'})
+        request.raise_for_status()
+        result = request.content
+    except requests.exceptions.RequestException:
+        result = text
+    return result
 
 
 def prepare_text(obj):
@@ -8,8 +27,8 @@ def prepare_text(obj):
     """
     return dict(
         title=obj.title,
-        annonce=obj.annonce,
-        content=obj.content,
+        annonce=typograf(obj.annonce),
+        content=typograf(obj.content),
     )
 
 
