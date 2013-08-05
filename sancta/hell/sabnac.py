@@ -91,15 +91,16 @@ def update_article(obj, cleaned_data):
                 cc.by_smart_function(event.smart_function)
                 cc.by_event_id(event.id)
                 cc.by_event_url(event.url)
+
     # пройдемся по новым тегам
     for tag in [
         art_tag.strip() for art_tag
-        in cleaned_data['tags'].split(',')
+        in cleaned_data['tags']
         if art_tag.strip()
     ]:
-        cc.by_article_tag(tag, cleaned_data['id_site'])
+        cc.by_article_tag(tag, cleaned_data['site'].id)
     # новый seo_url
-    cc.by_article_url(cleaned_data['seo_url'], cleaned_data['id_site'])
+    cc.by_article_url(cleaned_data['seo_url'], cleaned_data['site'].id)
 
 
 @celery.task()
