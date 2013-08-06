@@ -80,7 +80,7 @@ def _remove_cach_file_by_url(url):
     logger = logging.getLogger('sancta_log')
     logger.info('clear cache by url {0}'.format(url))
     file_name = md5(url).hexdigest()
-    file_path = os.path.abspath(os.path.join(settings.NGINX_CACHE, file_name))
+    file_path = os.path.abspath(os.path.join(settings.API_CACHE, file_name))
     try:
         os.remove(file_path)
     except OSError:
