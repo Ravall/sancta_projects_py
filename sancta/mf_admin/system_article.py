@@ -22,6 +22,8 @@ class ArticleForm(ObjectForm):
         # проверим seo_url
         if MfSystemArticle.objects.filter(
             url=translite(self.cleaned_data.get('title'))
+        ).exclude(
+            pk=self.instance.id
         ).count():
             raise forms.ValidationError(
                 'url, порожденный по имени статьи не уникальный'
