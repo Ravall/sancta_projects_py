@@ -106,7 +106,6 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Full',
         'height': 400,
-        'width': 600,
         'forcePasteAsPlainText': True,
     },
 }
