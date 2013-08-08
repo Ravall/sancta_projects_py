@@ -93,7 +93,7 @@ class MfSystemArticle(MfSystemObject):
                     up_file['image_title']
                 )
             self.create_text(params)
-        except Exception:
+        except Exception, ext:
             transaction.rollback()
             # если успели загрузить файл и откатываем по ошибке,
             # то файл можно убить
@@ -101,7 +101,7 @@ class MfSystemArticle(MfSystemObject):
                 load_file.delete_file(filename)
             #прокидываем ошибку дальше
             raise MfSystemArticleException(
-                'ошибка при создании статьи'
+                'ошибка при создании статьи. {0}'.format(ext)
             )
         else:
             transaction.commit()

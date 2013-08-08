@@ -3,11 +3,9 @@
 clear cache
 тут собраны методы для правильной очистки кэша
 """
-import os
-import logging
-from hashlib import md5
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.core.cache import get_cache
 from rest_framework.reverse import reverse
 from smart_date.smartfunction import smart_function
 from smart_date.date import yyyy_mm_dd
@@ -70,18 +68,10 @@ def by_smart_function(function):
 def _remove_cach_file_by_route(route_name, kwargs):
     for frm in settings.REST_SUFFIX_ALLOWED:
         kwargs['format'] = frm
-        _remove_cach_file_by_url(
-            reverse(route_name, kwargs=kwargs)
-        )
+        _remove_cach_file_by_url(reverse(route_name, kwargs=kwargs))
 
 
 def _remove_cach_file_by_url(url):
-    # проходимся по суффиксам
-    logger = logging.getLogger('sancta_log')
-    logger.info('clear cache by url {0}'.format(url))
-    file_name = md5(url).hexdigest()
-    file_path = os.path.abspath(os.path.join(settings.NGINX_CACHE, file_name))
-    try:
-        os.remove(file_path)
-    except OSError:
-        pass
+    print url
+    cache = get_cache('api')
+    cache.delete(url)

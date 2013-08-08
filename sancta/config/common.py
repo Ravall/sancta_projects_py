@@ -119,7 +119,6 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 100,
 }
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -167,6 +166,16 @@ LOGGING = {
     }
 }
 
-
-NGINX_CACHE = '/home/var/cache/'
 IS_TESTING = 0
+
+API_CACHE = '/home/var/cache/'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/home/var/cache_/'
+    },
+    'api': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': API_CACHE,
+    }
+}

@@ -208,8 +208,8 @@ class EventTest(ApiTest):
         )
         content = ast.literal_eval(response.content)
         self.assertEquals(2, len(content))
-        self.assertEquals(14, content[0]['id'])
-        self.assertEquals(27, content[1]['id'])
+        self.assertEquals(14, content[1]['id'])
+        self.assertEquals(27, content[0]['id'])
 
     def test_get_all_events(self):
         api_client = Client()

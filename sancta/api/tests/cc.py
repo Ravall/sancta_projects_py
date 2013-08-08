@@ -5,6 +5,7 @@ from hell import sabnac
 from mf_system.models.mf_article import MfSystemArticle
 from mf_calendar.models import MfCalendarEvent, MfCalendarIcon
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
 
 
 class CcCase(TestCase):
@@ -43,22 +44,14 @@ class CcArticleTest(CcCase):
             'created': '',
             'updated': '',
             'created_class': 'MfSystemArticle',
-            'id_site': 2,
+            'site': Site.objects.get(pk=2),
             'seo_url': 'seo_url'
         }
 
     def test_create_article(self):
         cleaned_data = self.get_cleaned_data()
-        with patch(
-            "api.cc._remove_cach_file_by_url", return_value=1
-        ) as mock_cc:
-            sabnac.update_article(MfSystemArticle(), cleaned_data)
-            self.assertEquals(mock_cc.mock_calls, [
-                call('/api/somesite/article/seo_url.json'),
-                call('/api/somesite/article/seo_url.xml')
-            ])
         #проверим теги
-        cleaned_data['tags'] = 'xxx, yyy,'
+        cleaned_data['tags'] = ['xxx', 'yyy']
         with patch(
             "api.cc._remove_cach_file_by_url", return_value=1
         ) as mock_cc:
@@ -68,8 +61,6 @@ class CcArticleTest(CcCase):
                 call('/api/somesite/article/tag/xxx.xml'),
                 call('/api/somesite/article/tag/yyy.json'),
                 call('/api/somesite/article/tag/yyy.xml'),
-                call('/api/somesite/article/seo_url.json'),
-                call('/api/somesite/article/seo_url.xml')
             ])
 
     def test_upd_ex_unrelated_article(self):
@@ -77,7 +68,7 @@ class CcArticleTest(CcCase):
         обновляем непривязанную статью
         """
         cleaned_data = self.get_cleaned_data()
-        cleaned_data['tags'] = 'tag1, tag2'
+        cleaned_data['tags'] = ['tag1', 'tag2']
         article = MfSystemArticle.objects.get(pk=377)
         article.tags.add('old_tag1', 'old_tag2')
         with patch(
@@ -98,8 +89,6 @@ class CcArticleTest(CcCase):
                 call('/api/somesite/article/tag/tag1.xml'),
                 call('/api/somesite/article/tag/tag2.json'),
                 call('/api/somesite/article/tag/tag2.xml'),
-                call('/api/somesite/article/seo_url.json'),
-                call('/api/somesite/article/seo_url.xml'),
             ])
 
     def test_upd_ex_related_article(self):
@@ -130,9 +119,6 @@ class CcArticleTest(CcCase):
                 # event/[url к которому привязана статья]
                 call('/api/event/blagoveshenie_presvyatoy_bogorodicy.json'),
                 call('/api/event/blagoveshenie_presvyatoy_bogorodicy.xml'),
-                # урл новый
-                call('/api/somesite/article/seo_url.json'),
-                call('/api/somesite/article/seo_url.xml')
             ])
 
 
@@ -151,7 +137,7 @@ class CcEventTest(CcCase):
             'created': '',
             'updated': '',
             'created_class': 'MfSystemArticle',
-            'site': 1,
+            'site': Site.objects.get(pk=1),
             'seo_url': 'seo_url',
             'icon_title': ''
         }
