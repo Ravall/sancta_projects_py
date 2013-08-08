@@ -2,6 +2,7 @@
 # pylint: disable=W0613, W0622
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.cache import get_cache
+from django.conf import settings
 from mf_system.models import MfSystemArticle
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -15,15 +16,18 @@ def get_articles(request, site_name, article_id, format):
     """
     возвращает информацию о статьях
     """
-    cache = get_cache('api')
-    cache_key = reverse(
-        'article-api', kwargs={
-            'site_name': site_name,
-            'article_id': article_id,
-            'format': format
-        }
-    )
-    result = cache.get(cache_key)
+    if settings.IS_TESTING:
+        result = False
+    else:
+        cache = get_cache('api')
+        cache_key = reverse(
+            'article-api', kwargs={
+                'site_name': site_name,
+                'article_id': article_id,
+                'format': format
+            }
+        )
+        result = cache.get(cache_key)
     if not result:
         try:
             params = {
@@ -36,8 +40,10 @@ def get_articles(request, site_name, article_id, format):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         result = prepare_article(article, add_related=True)
-        cache.set(cache_key, result, 30)
+        if not settings.IS_TESTING:
+            cache.set(cache_key, result, 30)
     return Response(result)
+
 
 @api_view(['GET'])
 def get_articles_by_tag(request, site_name, article_tag, format):
@@ -48,6 +54,4 @@ def get_articles_by_tag(request, site_name, article_tag, format):
     )
     if not articles:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
-
     return Response(prepare_articles(articles))

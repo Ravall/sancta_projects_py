@@ -6,6 +6,7 @@ from mf_admin.object import ObjectAdmin, StatusObjectFilter, \
 from mf_system.models.mf_article import MfSystemArticle
 from hell import sabnac
 from tinymce.widgets import TinyMCE
+from tools.grammar import translite
 
 
 class ArticleForm(ObjectForm):
@@ -16,6 +17,16 @@ class ArticleForm(ObjectForm):
         super(ArticleForm, self).__init__(*args, **kwargs)
         instance = kwargs.get('instance', None)
         self.set_initial(instance)
+
+    def clean_title(self):
+        # проверим seo_url
+        if MfSystemArticle.objects.filter(
+            url=translite(self.cleaned_data.get('title'))
+        ).count():
+            raise forms.ValidationError(
+                'url, порожденный по имени статьи не уникальный'
+            )
+        return self.cleaned_data.get('title')
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -42,7 +53,7 @@ class ArticleForm(ObjectForm):
 
 
 class MfSystemArticleAdmin(ObjectAdmin):
-    list_display = 'id', 'get_title'
+    list_display = 'id', 'get_title', 'site'
     list_filter = (
         StatusObjectFilter, IsObjectRelateFilter, TagObjectFilter, 'site'
     )
@@ -51,11 +62,11 @@ class MfSystemArticleAdmin(ObjectAdmin):
     fieldsets = (
         (None, {'fields': ('title', 'content', 'tags', 'image_file')}),
         ('Настройки', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('status', 'created', 'updated', 'created_class', 'site')
         }),
         ('SEO', {
-            'classes': ('collapse',),
+            'classes': ('grp-collapse grp-closed',),
             'fields': ('seo_url', 'annonce')
         }),
     )

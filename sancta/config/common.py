@@ -119,7 +119,6 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 100,
 }
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -166,8 +165,6 @@ LOGGING = {
         }
     }
 }
-
-
 
 IS_TESTING = 0
 
