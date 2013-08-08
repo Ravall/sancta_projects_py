@@ -33,7 +33,7 @@ class MfSystemObject(models.Model):
         "self", through=MfSystemRelation,
         symmetrical=False, related_name='related'
     )
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, default=1)
     tags = TaggableManager(blank=True)
 
     def get_title(self):
