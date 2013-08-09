@@ -174,11 +174,11 @@ LOGGING = {
 
 IS_TESTING = 0
 
-API_CACHE = '/var/cache/'
+API_CACHE = '/home/var/cache/'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/cache/'
+        'LOCATION': '/home/var/cache/'
     },
     'api': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
