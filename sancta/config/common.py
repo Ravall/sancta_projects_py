@@ -115,10 +115,7 @@ INSTALLED_APPS = (
     'django_graceful'
 )
 
-# В папке GRACEFUL_STATEDIR будет создана символическая ссылка «fastcgi.socket»,
-# путь к которой нужно прописать в конфигурации веб-сервера.
-# Например «FastCGI_pass unix:/home/web/project/var/run/fastcgi.socket» в nginx.
-GRACEFUL_STATEDIR = '/home/var/run'
+
 # Также в settings.py можно добавить словарь GRACEFUL_OPTIONS,
 # указав в нём дополнительные опции для команды «./manage.py runfcgi».
 # GRACEFUL_OPTIONS
