@@ -37,3 +37,4 @@ SITE_HASH = {
     '8euz2cpm': 1,
     'x3qb5hh6': 2
 }
+GRACEFUL_STATEDIR = '/home/var/run/api/'
