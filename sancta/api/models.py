@@ -21,6 +21,23 @@ def typograf(text):
     return result
 
 
+def prepare_day_data(events, day):
+    day_events = []
+    for event in events:
+        day_events.append(
+            prepare_event(
+                event,
+                show_text=True,
+                show_icons=True,
+                show_articles=True
+            )
+        )
+    return dict(
+        date=day,
+        events=day_events,
+    )
+
+
 def prepare_text(obj):
     """
     вывод текста
