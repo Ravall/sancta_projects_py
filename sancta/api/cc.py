@@ -72,6 +72,5 @@ def _remove_cach_file_by_route(route_name, kwargs):
 
 
 def _remove_cach_file_by_url(url):
-    print url
     cache = get_cache('api')
     cache.delete(url)
