@@ -38,3 +38,4 @@ SITE_HASH = {
     'x3qb5hh6': 2
 }
 GRACEFUL_STATEDIR = '/home/var/run/api/'
+API_CACHE_TIME = 60 * 60 * 24 * 7

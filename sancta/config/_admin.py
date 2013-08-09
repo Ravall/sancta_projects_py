@@ -115,3 +115,4 @@ CKEDITOR_CONFIGS = {
 # путь к которой нужно прописать в конфигурации веб-сервера.
 # Например «FastCGI_pass unix:/home/web/project/var/run/fastcgi.socket» в nginx.
 GRACEFUL_STATEDIR = '/home/var/run/admin/'
+API_CACHE_TIME = 60
