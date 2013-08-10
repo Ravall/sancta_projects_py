@@ -2,7 +2,7 @@
 # pylint: disable=W0613, W0622
 from rest_framework.decorators import api_view
 from mf_calendar.models import MfCalendarNet, MfCalendarEvent
-from api.models import prepare_day
+from api.models import resp_day
 from api.decorator import responsed, cached_result
 from smart_date.date import is_date_correct
 
@@ -21,4 +21,4 @@ def get_day(request, day, format):
     events = MfCalendarEvent.objects.filter(
         pk__in=event_ids, status='active'
     )
-    return prepare_day(events, day)
+    return resp_day(events, day)
