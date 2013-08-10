@@ -2,9 +2,25 @@
 # pylint: disable=W0613, W0622
 from rest_framework.decorators import api_view
 from mf_calendar.models import MfCalendarNet, MfCalendarEvent
-from api.models import resp_day
 from api.decorator import responsed, cached_result
 from smart_date.date import is_date_correct
+
+
+def resp_day(events, day):
+    day_events = []
+    for event in events:
+        day_events.append(
+            prepare_event(
+                event,
+                show_text=True,
+                show_icons=True,
+                show_articles=True
+            )
+        )
+    return dict(
+        date=day,
+        events=day_events,
+    )
 
 
 @api_view(['GET'])
