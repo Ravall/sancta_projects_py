@@ -21,7 +21,7 @@ def typograf(text):
     return result
 
 
-def prepare_day_data(events, day):
+def prepare_day(events, day):
     day_events = []
     for event in events:
         day_events.append(
