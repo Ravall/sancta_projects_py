@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from mf_calendar.models import MfCalendarNet, MfCalendarEvent
 from api.decorator import responsed, cached_result
 from smart_date.date import is_date_correct
+from api.models import prepare_event
 
 
 def resp_day(events, day):

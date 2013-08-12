@@ -11,6 +11,7 @@ BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 CELERY_IMPORTS = "hell.sabnac", "hell.azazel", "hell.anubis"
 
 INSTALLED_APPS += (
+    'gunicorn',
     'grappelli.dashboard',
     'grappelli',
     'filebrowser',
@@ -110,9 +111,4 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-
-# В папке GRACEFUL_STATEDIR будет создана символическая ссылка «fastcgi.socket»,
-# путь к которой нужно прописать в конфигурации веб-сервера.
-# Например «FastCGI_pass unix:/home/web/project/var/run/fastcgi.socket» в nginx.
-GRACEFUL_STATEDIR = '/home/var/run/admin/'
 API_CACHE_TIME = 60
