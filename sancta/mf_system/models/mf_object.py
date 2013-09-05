@@ -12,7 +12,10 @@ from django.contrib.sites.models import Site
 from taggit_autocomplete_modified.managers \
     import TaggableManagerAutocomplete as TaggableManager
 
-class MfSystemObject(models.Model):
+from ordered_model.models import OrderedModel
+
+
+class MfSystemObject(OrderedModel):
     status = models.CharField(
         max_length=21,
         choices=(
@@ -154,3 +157,4 @@ class MfSystemObject(models.Model):
         db_table = u'mf_system_object'
         managed = False
         app_label = 'sancta'
+        ordering = ('order',)

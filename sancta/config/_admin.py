@@ -36,7 +36,8 @@ INSTALLED_APPS += (
     'south',
     'taggit',
     'ckeditor',
-    'taggit_autocomplete_modified'
+    'taggit_autocomplete_modified',
+    'ordered_model'
 )
 
 FILEBROWSER_DIRECTORY = 'origin'

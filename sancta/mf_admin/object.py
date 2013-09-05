@@ -8,6 +8,8 @@ from taggit.models import Tag, TaggedItem
 from mf_system.models.mf_object_text import MfSystemObjectText
 from mf_admin.widgets import ObjectLinkWidget
 from ckeditor.widgets import CKEditorWidget
+from ordered_model.admin import OrderedModelAdmin
+from django.http import HttpResponseRedirect
 
 
 class ObjectForm(forms.ModelForm):
@@ -76,11 +78,11 @@ class RelatedInlineObject(admin.TabularInline):
         return False
 
 
-class ObjectAdmin(admin.ModelAdmin):
+class ObjectAdmin(OrderedModelAdmin):
     '''
     общее для admin.ModelAdmin для моделей, основанных на object
     '''
-    list_display = 'id', 'get_title'
+    list_display = 'id', 'get_title',
     readonly_fields = 'created', 'updated', 'created_class'
     inlines = RelatedInlineObject,
 
@@ -122,6 +124,13 @@ class ObjectAdmin(admin.ModelAdmin):
     def get_title(self, object):
         # pylint: disable=W0622,R0201
         return object.title
+
+    def move_view(self, request, object_id, direction):
+        '''
+        Переопределим фунцию сортировки. нужно делать правильный редирект
+        '''
+        super(ObjectAdmin, self).move_view(request, object_id, direction)
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
     class Media:
         # pylint: disable=W0232
