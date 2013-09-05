@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
     #url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^taggit_autocomplete_modified/', include('taggit_autocomplete_modified.urls')),
 )
 
 if settings.DEBUG:
