@@ -9,8 +9,8 @@ from .mf_relation import MfSystemRelation
 from tools import load_file
 from tools.grammar import translite
 from django.contrib.sites.models import Site
-from taggit.managers import TaggableManager
-
+from taggit_autocomplete_modified.managers \
+    import TaggableManagerAutocomplete as TaggableManager
 
 class MfSystemObject(models.Model):
     status = models.CharField(
