@@ -12,3 +12,4 @@ admin.site.register(MfCalendarIcon, IconAdmin)
 admin.site.register(MfSystemRelationType, MfSystemRelationTypeAdmin)
 admin.site.register(MfCalendarEvent, MfCalendarEventAdmin)
 admin.site.register(MfSystemArticle, MfSystemArticleAdmin)
+

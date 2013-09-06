@@ -10,6 +10,8 @@ from mf_admin.widgets import ObjectLinkWidget
 from ckeditor.widgets import CKEditorWidget
 from ordered_model.admin import OrderedModelAdmin
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.contrib.admin.util import unquote
 
 
 class ObjectForm(forms.ModelForm):
@@ -125,12 +127,16 @@ class ObjectAdmin(OrderedModelAdmin):
         # pylint: disable=W0622,R0201
         return object.title
 
+
     def move_view(self, request, object_id, direction):
-        '''
-        Переопределим фунцию сортировки. нужно делать правильный редирект
-        '''
-        super(ObjectAdmin, self).move_view(request, object_id, direction)
-        return HttpResponseRedirect(request.META['HTTP_REFERER'])
+        obj = get_object_or_404(self.model, pk=unquote(object_id))
+        if direction == 'up':
+            obj.move_up(request)
+        else:
+            obj.move_down(request)
+        return HttpResponseRedirect(
+            request.META.get('HTTP_REFERER', '../../')
+        )
 
     class Media:
         # pylint: disable=W0232

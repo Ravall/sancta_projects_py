@@ -79,8 +79,9 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+
     #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -112,7 +113,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'sancta',
     'rest_framework',
-    'django_graceful'
+    #'django_graceful'
 )
 
 
