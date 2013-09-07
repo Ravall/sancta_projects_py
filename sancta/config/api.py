@@ -8,5 +8,5 @@ TEMPLATE_DEBUG = False
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'sancta.wsgi_api.application'
 MEDIA_HOST = 'http://img.sancta.ru/'
-ALLOWED_HOSTS = ['api.sancta.ru']
+ALLOWED_HOSTS = ['api.sancta.ru', 'api.sancta.local']
 FOREIGN_SITE_ID = 3
