@@ -7,23 +7,17 @@ import os.path
 
 DEBUG = platform.node() != 'sancta'
 CONF_ROOT = os.path.dirname(__file__)
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'sentry',
-            'USER': 'sancta_user',
-            'PASSWORD': 'sancta_user_password',
-            'HOST': '127.0.0.1',
-            'PORT': '',
-        },
-    }
-else:
-    from databases import DATABASES as DB
-    DATABASES = {
-        'default' = DB['default']
-    }
-    DATABASES['default']['NAME'] = 'sentry'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sentry',
+        'USER': 'sancta_user',
+        'PASSWORD': 'sancta_user_password',
+        'HOST': '127.0.0.1',
+        'PORT': '',
+    },
+}
+
 
 
 # If you're expecting any kind of real traffic on Sentry, we highly recommend
