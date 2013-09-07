@@ -15,11 +15,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin_tools/', include('admin_tools.urls')),
-    #url(r'^tinymce/', include('tinymce.urls')),
-
     url(r'^grappelli/', include('grappelli.urls')),
-    #url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^taggit_autocomplete_modified/', include('taggit_autocomplete_modified.urls')),
 )
 
 if settings.DEBUG:

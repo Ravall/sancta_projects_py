@@ -55,7 +55,7 @@ class ArticleForm(ObjectForm):
 
 
 class MfSystemArticleAdmin(ObjectAdmin):
-    list_display = 'id', 'get_title', 'site'
+    list_display = 'id', 'get_title', 'site', 'order', 'move_up_down_links'
     list_filter = (
         StatusObjectFilter, IsObjectRelateFilter, TagObjectFilter, 'site'
     )

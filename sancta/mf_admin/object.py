@@ -8,6 +8,10 @@ from taggit.models import Tag, TaggedItem
 from mf_system.models.mf_object_text import MfSystemObjectText
 from mf_admin.widgets import ObjectLinkWidget
 from ckeditor.widgets import CKEditorWidget
+from ordered_model.admin import OrderedModelAdmin
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.contrib.admin.util import unquote
 
 
 class ObjectForm(forms.ModelForm):
@@ -76,11 +80,11 @@ class RelatedInlineObject(admin.TabularInline):
         return False
 
 
-class ObjectAdmin(admin.ModelAdmin):
+class ObjectAdmin(OrderedModelAdmin):
     '''
     общее для admin.ModelAdmin для моделей, основанных на object
     '''
-    list_display = 'id', 'get_title'
+    list_display = 'id', 'get_title',
     readonly_fields = 'created', 'updated', 'created_class'
     inlines = RelatedInlineObject,
 
@@ -122,6 +126,17 @@ class ObjectAdmin(admin.ModelAdmin):
     def get_title(self, object):
         # pylint: disable=W0622,R0201
         return object.title
+
+
+    def move_view(self, request, object_id, direction):
+        obj = get_object_or_404(self.model, pk=unquote(object_id))
+        if direction == 'up':
+            obj.move_up(request)
+        else:
+            obj.move_down(request)
+        return HttpResponseRedirect(
+            request.META.get('HTTP_REFERER', '../../')
+        )
 
     class Media:
         # pylint: disable=W0232
