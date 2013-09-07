@@ -192,3 +192,7 @@ if DEBUG:
     RAVEN_CONFIG = {
         'dsn': 'http://d8269d2266544e8cba773709c27cfcd8:a6aa0e1c95d444729b810d2ee8648420@0.0.0.0:9000/2',
     }
+else:
+    RAVEN_CONFIG = {
+        'dsn': 'http://87778d736daa4b03a26ee1624f927e58:00601052c0804d3098bf4f2d874d1a59@sentry.sancta.ru/3',
+    }
