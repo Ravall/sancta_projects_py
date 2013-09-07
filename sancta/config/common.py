@@ -110,6 +110,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
+    'gunicorn',
     'django.contrib.staticfiles',
     'sancta',
     'rest_framework',
