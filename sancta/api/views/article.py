@@ -31,7 +31,7 @@ def get_articles_by_tag(request, site_name, article_tag, format):
         tags__name__in=[article_tag],
         status='active',
         site__name=site_name
-    )
+    ).order_by('order')
     if not articles:
         return False
     return prepare_articles(articles)

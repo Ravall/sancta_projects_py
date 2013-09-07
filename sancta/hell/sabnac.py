@@ -73,7 +73,7 @@ def update_event(obj, cleaned_data):
 
 
 @celery.task()
-def update_article(obj, cleaned_data):
+def update_article(obj, cleaned_data={}):
     assert isinstance(obj, MfSystemArticle)
     if obj.id:
         # основные параметры
@@ -93,7 +93,7 @@ def update_article(obj, cleaned_data):
                 cc.by_event_url(event.url)
 
     # пройдемся по новым тегам
-    if cleaned_data['tags']:
+    if cleaned_data and cleaned_data['tags']:
         for tag in [
             art_tag.strip() for art_tag
             in cleaned_data['tags']

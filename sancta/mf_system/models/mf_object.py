@@ -11,8 +11,10 @@ from tools.grammar import translite
 from django.contrib.sites.models import Site
 from taggit_autocomplete_modified.managers \
     import TaggableManagerAutocomplete as TaggableManager
+from ordered_model.models import OrderedModel
+from urlparse import urlparse, parse_qs
 
-class MfSystemObject(models.Model):
+class MfSystemObject(OrderedModel):
     status = models.CharField(
         max_length=21,
         choices=(
@@ -149,8 +151,66 @@ class MfSystemObject(models.Model):
             factory_obj = MfCalendarIcon.objects.get(pk=obj.id)
         return factory_obj
 
+    def _move(self, up, request):
+        """
+        Переопределяем фунцию _move для модуля django-ordered-model
+        Добавляем учет тегов:
+          если список статей выдан с фильтром по тегу - то фильтруем с учетом тега
+        """
+        params = {}
+        try:
+            get_params =  parse_qs(
+                urlparse(
+                    request.META['HTTP_REFERER']
+                ).query
+            )
+            if 'tag' in get_params:
+                # фильтр идет по одному тегу обычно
+                params['tags__name__in'] = get_params['tag']
+            if 'site__id__exact' in get_params:
+                params['site'] = get_params['site__id__exact'][0]
+        except Exception:
+            pass
+
+        qs = self.__class__._default_manager
+        if up:
+            params['order__lt'] = self.order
+            qs = qs.order_by('-order').filter(**params)
+        else:
+            params['order__gt'] = self.order
+            qs = qs.filter(**params)
+        try:
+            replacement = qs[0]
+        except IndexError:
+            # already first/last
+            return
+        self.order, replacement.order = replacement.order, self.order
+        self.save()
+        replacement.save()
+        from hell import sabnac
+        sabnac.update_article.delay(self)
+        sabnac.update_article.delay(replacement)
+
+    def move_down(self, request):
+        """
+        Move this object down one position.
+        """
+        return self._move(False, request)
+
+    def move_up(self, request):
+        """
+        Move this object up one position.
+        """
+        return self._move(True, request)
+
 
     class Meta:
         db_table = u'mf_system_object'
         managed = False
         app_label = 'sancta'
+        ordering = ('order',)
+
+
+# south не пропускает кастомные поля
+from south.modelsinspector import add_ignored_fields
+add_ignored_fields(["^taggit_autocomplete_modified\.managers"])

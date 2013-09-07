@@ -37,7 +37,8 @@ INSTALLED_APPS += (
     'south',
     'taggit',
     'ckeditor',
-    'taggit_autocomplete_modified'
+    'taggit_autocomplete_modified',
+    'ordered_model'
 )
 
 FILEBROWSER_DIRECTORY = 'origin'
@@ -98,7 +99,7 @@ FILEBROWSER_ADMIN_VERSIONS = {
 }
 
 # Grappelli
-GRAPPELLI_ADMIN_TITLE = 'АдмЫнка.'
+GRAPPELLI_ADMIN_TITLE = 'Православная админка'
 GRAPPELLI_ADMIN_URL = 'admin/'
 
 
