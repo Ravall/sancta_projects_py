@@ -6,7 +6,6 @@ from api.decorator import responsed, cached_result
 from smart_date.date import is_date_correct
 from api.models import prepare_event
 
-
 def resp_day(events, day):
     day_events = []
     for event in events:
