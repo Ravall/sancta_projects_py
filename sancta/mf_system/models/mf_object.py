@@ -11,7 +11,6 @@ from tools.grammar import translite
 from django.contrib.sites.models import Site
 from taggit_autocomplete_modified.managers \
     import TaggableManagerAutocomplete as TaggableManager
-
 from ordered_model.models import OrderedModel
 from urlparse import urlparse, parse_qs
 
@@ -188,6 +187,9 @@ class MfSystemObject(OrderedModel):
         self.order, replacement.order = replacement.order, self.order
         self.save()
         replacement.save()
+        from hell import sabnac
+        sabnac.update_article.delay(self)
+        sabnac.update_article.delay(replacement)
 
     def move_down(self, request):
         """

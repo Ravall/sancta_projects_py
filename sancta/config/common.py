@@ -113,7 +113,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'sancta',
     'rest_framework',
-    #'django_graceful'
+    'raven.contrib.django.raven_compat'
 )
 
 
@@ -186,3 +186,7 @@ CACHES = {
         'LOCATION': API_CACHE,
     }
 }
+if DEBUG:
+    RAVEN_CONFIG = {
+        'dsn': 'http://d8269d2266544e8cba773709c27cfcd8:a6aa0e1c95d444729b810d2ee8648420@0.0.0.0:9000/2',
+    }
