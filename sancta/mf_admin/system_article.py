@@ -28,7 +28,10 @@ class ArticleForm(ObjectForm):
             raise forms.ValidationError(
                 'url, порожденный по имени статьи не уникальный'
             )
-        return self.cleaned_data.get('title')
+        title = self.cleaned_data.get('title')
+        # Первая буква заглавная
+        return title[0].upper()+title[1:]
+
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -62,14 +65,14 @@ class MfSystemArticleAdmin(ObjectAdmin):
     form = ArticleForm
     change_form_template = 'admin/imaged_object_change_form.html'
     fieldsets = (
-        (None, {'fields': ('title', 'content', 'tags', 'image_file')}),
+        (None, {'fields': ('title', 'content', 'tags', 'image_file', 'site')}),
         ('Настройки', {
             'classes': ('grp-collapse grp-closed',),
-            'fields': ('status', 'created', 'updated', 'created_class', 'site')
+            'fields': ('status', 'created', 'updated', 'created_class')
         }),
         ('SEO', {
             'classes': ('grp-collapse grp-closed',),
-            'fields': ('seo_url', 'annonce')
+            'fields': ('seo_url', 'annonce', 'keywords')
         }),
     )
 
