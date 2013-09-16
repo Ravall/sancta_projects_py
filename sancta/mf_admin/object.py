@@ -26,6 +26,7 @@ class ObjectForm(forms.ModelForm):
     )
     annonce = forms.CharField(widget=forms.Textarea, required=False)
     content = forms.CharField(widget=CKEditorWidget(), required=True)
+    keywords = forms.CharField(widget=forms.Textarea, required=False)
     image = forms.ImageField(widget=widget.ImageWidget, required=False)
     exclude = 'created_class',
 
