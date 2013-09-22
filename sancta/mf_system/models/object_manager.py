@@ -14,6 +14,7 @@ class SystemObjectManager(models.Manager):
                 'title': 'mf_system_text.title',
                 'annonce': 'mf_system_text.annonce',
                 'content': 'mf_system_text.content',
+                'keywords': 'mf_system_text.keywords',
             },
             'tables': [
                 'mf_system_text',
