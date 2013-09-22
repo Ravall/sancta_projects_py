@@ -28,8 +28,9 @@ def prepare_text(obj):
     """
     return dict(
         title=obj.title,
-        annonce=typograf(obj.annonce),
+        annonce=obj.annonce,
         content=typograf(obj.content),
+        keywords=obj.keywords
     )
 
 
