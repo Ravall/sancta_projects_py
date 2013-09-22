@@ -105,6 +105,7 @@ class MfSystemObject(OrderedModel):
                 title=text_content.get('title', ''),
                 annonce=text_content.get('annonce', ''),
                 content=text_content.get('content', ''),
+                keywords=text_content.get('keywords', '')
             )
             text.save()
             # привязываем текст к объекту
@@ -120,6 +121,7 @@ class MfSystemObject(OrderedModel):
         self.texts.filter(mfsystemobjecttext__status=status).update(
             title=text_content.get('title', ''),
             annonce=text_content.get('annonce', ''),
+            keywords=text_content.get('keywords', ''),
             content=text_content.get('content', '')
         )
 

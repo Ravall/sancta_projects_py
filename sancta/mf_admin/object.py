@@ -38,6 +38,7 @@ class ObjectForm(forms.ModelForm):
             ).system_text
             self.initial['title'] = text.title
             self.initial['annonce'] = text.annonce
+            self.initial['keywords'] = text.keywords
             self.initial['content'] = text.content
             self.initial['seo_url'] = instance.url
 
