@@ -29,7 +29,7 @@ urlpatterns = patterns(
     ),
     url(
         r'^/(?P<site_name>[0-9a-z_]+)/'
-        'article/tag/(?P<article_tag>[0-9a-z_]+)$',
+        'article/tag/(?P<article_tag>[0-9a-z_&]+)$',
         article.get_articles_by_tag,
         name='articletag-api'
     ),

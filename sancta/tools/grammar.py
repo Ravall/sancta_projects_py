@@ -13,8 +13,9 @@ def translite(string):
         return string.encode('utf-8')
     if string[-1] == '.':
         string = string[0:-1]
-    return eu8(
-        unicode(
-            re.sub('[^0-9a-z_]', '_', string.lower())
-        ).encode('trans')
+    return re.sub(
+        '[^0-9a-z_]', '_',
+        eu8(unicode(string.lower()).encode('trans'))
     )
+
+
