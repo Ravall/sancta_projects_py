@@ -3,14 +3,19 @@ import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
+from django.conf import settings
 
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        if settings.IS_TESTING:
+            return
         db.create_index('taggit_tag', ['name'], unique=True)
 
     def backwards(self, orm):
+        if settings.IS_TESTING:
+            return
         db.delete_index('taggit_tag', ['name'])
 
     models = {

@@ -120,6 +120,16 @@ class ArticleTest(ApiTest):
         self.assertEquals(373, content[0]['id'])
         self.assertEquals(375, content[1]['id'])
 
+        response = api_client.get(
+            '/api/{0}/article/tag/{1}&{2}.{3}'.format(
+                'test_orthodoxy', 'tag1', 'tag3', 'json'
+            )
+        )
+        content = ast.literal_eval(response.content)
+        self.assertEquals(1, len(content))
+        self.assertEquals(375, content[0]['id'])
+
+
     def test_get_aricles_by_event(self):
         api_client = Client()
         response = api_client.get(
@@ -300,29 +310,29 @@ class CalendarTest(ApiTest):
         self.assertEquals('2013-04-07', content['date'])
         self.assertEquals(3, len(content['events']))
 
-        self.assertFalse(content['events'][0].get('icons', False))
+        self.assertFalse(content['events'][1].get('icons', False))
 
         self.assertEquals(
             'ikona-blagoveshenie-presvyatoy-bogorodicy.jpg',
-            content['events'][1]['icons'][0]['image']
+            content['events'][0]['icons'][0]['image']
         )
         self.assertEquals(
-            14, content['events'][1]['id']
+            14, content['events'][0]['id']
         )
         self.assertEquals(
-            'icon', content['events'][1]['icons'][0]['type']
+            'icon', content['events'][0]['icons'][0]['type']
         )
         self.assertEquals(
-            369, content['events'][1]['icons'][0]['id']
+            369, content['events'][0]['icons'][0]['id']
         )
         self.assertEquals(
-            'icon 2 tilte', content['events'][1]['icons'][0]['text']['title']
+            'icon 2 tilte', content['events'][0]['icons'][0]['text']['title']
         )
         self.assertEquals(
-            'icon', content['events'][1]['icons'][1]['type']
+            'icon', content['events'][0]['icons'][1]['type']
         )
         self.assertEquals(
-            371, content['events'][1]['icons'][1]['id']
+            371, content['events'][0]['icons'][1]['id']
         )
         self.assertEquals(
             50, content['events'][2]['id']

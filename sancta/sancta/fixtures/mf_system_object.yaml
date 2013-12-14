@@ -8,6 +8,7 @@
     image: 1322918540_327.jpg
     url: blagoveshenie_presvyatoy_bogorodicy
     site: 1
+    order: 14
 - model: sancta.MfSystemObject
   pk: 50
   fields:
@@ -18,6 +19,7 @@
     image: 1321823855_410.jpg
     url: nedelya_krestopoklonnaya
     site: 1
+    order: 50
 - model: sancta.MfSystemObject
   pk: 27
   fields:
@@ -28,6 +30,7 @@
     image: 1321257599_787.jpg
     url: velikiy_post
     site: 1
+    order: 27
 - model: sancta.MfSystemObject
   pk: 361
   fields:
@@ -37,6 +40,7 @@
     created_class: MfCalendarIcon
     image: 1347444480_641.jpg
     site: 1
+    order: 361
 - model: sancta.MfSystemObject
   pk: 369
   fields:
@@ -46,6 +50,7 @@
     created_class: MfCalendarIcon
     image: ikona-blagoveshenie-presvyatoy-bogorodicy.jpg
     site: 1
+    order: 369
 - model: sancta.MfSystemObject
   pk: 370
   fields:
@@ -54,6 +59,7 @@
     updated: 2012-11-08 08:48:18
     created_class: MfCalendarIcon
     site: 1
+    order: 370
 - model: sancta.MfSystemObject
   pk: 371
   fields:
@@ -63,6 +69,7 @@
     created_class: MfCalendarIcon
     image: ikona-blagoveshenie-presvyatoy-bogorodicy1.jpg
     site: 1
+    order: 371
 - model: sancta.MfSystemObject
   pk: 372
   fields:
@@ -72,6 +79,7 @@
     created_class: MfCalendarIcon
     image: ikona-nedelya_krestopoklonnaya.jpg
     site: 1
+    order: 372
 - model: sancta.MfSystemObject
   pk: 99
   fields:
@@ -82,6 +90,7 @@
     image: xxxx.jpg
     url: xxxx
     site: 1
+    order: 99
 - model: sancta.MfSystemObject
   pk: 373
   fields:
@@ -92,6 +101,7 @@
     image: img_article_14_1.jpg
     url: article_14_1
     site: 1
+    order: 373
 - model: sancta.MfSystemObject
   pk: 374
   fields:
@@ -102,6 +112,7 @@
     image: img_article_14_2.jpg
     url: article_14_2
     site: 1
+    order: 374
 - model: sancta.MfSystemObject
   pk: 375
   fields:
@@ -112,6 +123,7 @@
     image: img_article_14_3.jpg
     url: article_14_3
     site: 1
+    order: 375
 - model: sancta.MfSystemObject
   pk: 376
   fields:
@@ -122,6 +134,7 @@
     image: img_article_14_4.jpg
     url: article_14_4
     site: 1
+    order: 376
 - model: sancta.MfSystemObject
   pk: 377
   fields:
@@ -132,6 +145,7 @@
     image: img_article_50_1.jpg
     url: article_50_1
     site: 1
+    order: 377
 - model: sancta.MfSystemObject
   pk: 378
   fields:
@@ -142,6 +156,7 @@
     image: img_article_50_2.jpg
     url: article_50_2
     site: 1
+    order: 378
 - model: sancta.MfSystemObject
   pk: 379
   fields:
@@ -152,3 +167,4 @@
     image: img_article_50_3.jpg
     url: article_50_3
     site: 1
+    order: 379

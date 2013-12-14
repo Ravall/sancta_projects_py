@@ -180,11 +180,11 @@ API_CACHE = '/home/var/cache'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/home/var/cache_'
+        'LOCATION': '/home/var/cache_' if not DEBUG else '/tmp/'
     },
     'api': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': API_CACHE,
+        'LOCATION': API_CACHE if not DEBUG else '/tmp/'
     }
 }
 if DEBUG:

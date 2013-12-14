@@ -5,6 +5,8 @@ from rest_framework.decorators import api_view
 from mf_system.models import MfSystemArticle
 from api.models import prepare_article, prepare_articles
 from api.decorator import responsed, cached_result
+from django.db.models import Q
+import operator
 
 
 @api_view(['GET'])
@@ -28,10 +30,11 @@ def get_articles(request, site_name, article_id, format):
 @cached_result('articletag-api')
 def get_articles_by_tag(request, site_name, article_tag, format):
     articles = MfSystemArticle.objects.filter(
-        tags__name__in=[article_tag],
-        status='active',
-        site__name=site_name
-    ).order_by('order')
+        status='active', site__name=site_name
+    )
+    for tag in article_tag.split('&'):
+        articles = articles.filter(tags__name=tag)
+    articles.order_by('order')
     if not articles:
         return False
     return prepare_articles(articles)
